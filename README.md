@@ -26,7 +26,7 @@ dependencyResolutionManagement {
 Add this to your module-level `build.gradle` file:
 ```groovy
 dependencies {
-    implementation 'com.github.akanshSirohi:QRSmith:v0.1.0'
+    implementation 'com.github.akanshSirohi:QRSmith:0.1.3'
 }
 ```
 
@@ -36,14 +36,13 @@ Here’s how you can use QRSmith to generate a QR code:
 ### Basic Example
 ```java
 import com.akansh.qrsmith.QRSmith;
-import com.akansh.qrsmith.QRSmith.QRCodeOptions;
 import android.graphics.Bitmap;
 
 // Define the QR code content
 String content = "https://example.com";
 
 // Create QR code options
-QRCodeOptions options = new QRCodeOptions();
+QRSmith.QRCodeOptions options = new QRSmith.QRCodeOptions();
 options.width = 500;
 options.height = 500;
 options.foregroundColor = Color.BLACK;
@@ -62,7 +61,6 @@ try {
 ### Advanced Example with Logo
 ```java
 import com.akansh.qrsmith.QRSmith;
-import com.akansh.qrsmith.QRSmith.QRCodeOptions;
 import android.graphics.Bitmap;
 
 // Define the QR code content
@@ -72,7 +70,7 @@ String content = "https://example.com";
 Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
 
 // Create QR code options
-QRCodeOptions options = new QRCodeOptions();
+QRSmith.QRCodeOptions options = new QRSmith.QRCodeOptions();
 options.width = 600;
 options.height = 600;
 options.foregroundColor = Color.BLACK;
