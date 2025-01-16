@@ -9,6 +9,16 @@ QRSmith is an Android library for generating customizable QR codes with advanced
 - Support for different error correction levels (L, M, Q, H).
 - Adjustable dot size for rounded QR codes.
 
+## Sample QR Codes
+<table>
+    <tr>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-1.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-2.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-3.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-4.jpg?raw=true" width="200" /></td>
+    </tr>
+</table>
+
 ## Installation
 ### Step 1: Add Repositories
 Add the following to your root `settings.gradle`:
