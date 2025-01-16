@@ -9,7 +9,6 @@ import android.graphics.RectF;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.google.zxing.qrcode.encoder.ByteMatrix;
@@ -72,7 +71,7 @@ public class QRSmith {
                 hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
                 QRCode qrCode = Encoder.encode(content, errorCorrectionLevel, hints);
                 options.dotSizeFactor = (options.dotSizeFactor < 0.5f ? 0.5f : (Math.min(options.dotSizeFactor, 1f)));
-                bitmap = renderRoundedQRImage(qrCode, options.width, options.height, options.quiteZone, options.dotSizeFactor);
+                bitmap = renderRoundedQRImage(qrCode, options.width, options.height, options.quiteZone, options.dotSizeFactor, options.foregroundColor, options.backgroundColor);
             }
 
             // Add logo if provided
@@ -121,14 +120,14 @@ public class QRSmith {
         return bitmap;
     }
 
-    private static Bitmap renderRoundedQRImage(QRCode code, int width, int height, int quietZone, float dotSizeFactor) {
+    private static Bitmap renderRoundedQRImage(QRCode code, int width, int height, int quietZone, float dotSizeFactor, int foregroundColor, int backgroundColor) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
         // Set up paint for background
         Paint backgroundPaint = new Paint();
         backgroundPaint.setStyle(Paint.Style.FILL);
-        backgroundPaint.setColor(Color.WHITE);
+        backgroundPaint.setColor(backgroundColor);
 
         // Draw the white background
         canvas.drawRect(0, 0, width, height, backgroundPaint);
@@ -136,7 +135,7 @@ public class QRSmith {
         // Set up paint for drawing the QR code
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.BLACK);
+        paint.setColor(foregroundColor);
 
         // Get the QR code matrix
         ByteMatrix input = code.getMatrix();
@@ -184,20 +183,24 @@ public class QRSmith {
 
         // Draw finder patterns
         int circleDiameter = multiple * FINDER_PATTERN_SIZE;
-        drawFinderPatternCircleStyle(canvas, paint, leftPadding, topPadding, circleDiameter);
+        drawFinderPatternCircleStyle(canvas, paint, leftPadding, topPadding, circleDiameter, backgroundColor, foregroundColor);
         drawFinderPatternCircleStyle(
                 canvas,
                 paint,
                 leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple,
                 topPadding,
-                circleDiameter
+                circleDiameter,
+                backgroundColor,
+                foregroundColor
         );
         drawFinderPatternCircleStyle(
                 canvas,
                 paint,
                 leftPadding,
                 topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple,
-                circleDiameter
+                circleDiameter,
+                backgroundColor,
+                foregroundColor
         );
 
         return bitmap;
@@ -208,7 +211,9 @@ public class QRSmith {
             Paint paint,
             int x,
             int y,
-            int circleDiameter
+            int circleDiameter,
+            int backgroundColor,
+            int foregroundColor
     ) {
         int WHITE_CIRCLE_DIAMETER = circleDiameter * 5 / 7;
         int WHITE_CIRCLE_OFFSET = circleDiameter / 7;
@@ -216,7 +221,7 @@ public class QRSmith {
         int MIDDLE_DOT_OFFSET = circleDiameter * 2 / 7;
 
         // Draw the outer black circle
-        paint.setColor(Color.BLACK);
+        paint.setColor(foregroundColor);
         canvas.drawOval(
                 new RectF(
                         (float) x,
@@ -228,7 +233,7 @@ public class QRSmith {
         );
 
         // Draw the white circle
-        paint.setColor(Color.WHITE);
+        paint.setColor(backgroundColor);
         canvas.drawOval(
                 new RectF(
                         (float) (x + WHITE_CIRCLE_OFFSET),
@@ -240,7 +245,7 @@ public class QRSmith {
         );
 
         // Draw the middle black dot
-        paint.setColor(Color.BLACK);
+        paint.setColor(foregroundColor);
         canvas.drawOval(
                 new RectF(
                         (float) (x + MIDDLE_DOT_OFFSET),

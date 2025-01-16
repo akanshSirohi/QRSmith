@@ -1,6 +1,7 @@
 package com.akansh.qrsmith;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView qrView = findViewById(R.id.qrView);
 
-
+//        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_android);
         QRSmith.QRCodeOptions options = new QRSmith.QRCodeOptions();
         options.width = 500;
         options.height = 500;
@@ -36,9 +37,10 @@ public class MainActivity extends AppCompatActivity {
         options.foregroundColor = Color.BLACK;
         options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
         options.style = QRSmith.QRCodeStyle.DOTS;
+//        options.logo = logo;
         options.dotSizeFactor = 0.8f;
 
-        Bitmap bitmap = QRSmith.generateQRCode("Hello World!", options);
+        Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         dr.setCornerRadius(15f);
         qrView.setImageDrawable(dr);
