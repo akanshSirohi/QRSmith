@@ -30,28 +30,28 @@ dependencies {
     implementation "com.google.zxing:core:3.5.3"
 }
 
+// Task to generate sources JAR
+def sourceJarTask = tasks.register("sourceJar", Jar) {
+    archiveClassifier.set("sources")
+    from android.sourceSets.main.java.srcDirs
+}
+
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 groupId "com.github.akanshSirohi"
                 artifactId "QRSmith"
-                version "0.1.2"
+                version "0.1.3"
 
-                // Include the AAR artifact
-                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+                // Explicitly include the AAR artifact
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar") {
+                    builtBy tasks.named("bundleReleaseAar") // Ensure the AAR is built before publishing
+                }
 
                 // Include sources JAR
-                artifact(sourceJarTask())
+                artifact(sourceJarTask)
             }
         }
-    }
-}
-
-// Task to generate sources JAR
-def sourceJarTask() {
-    tasks.create("sourceJar", Jar) {
-        archiveClassifier.set("sources")
-        from android.sourceSets.main.java.srcDirs
     }
 }
