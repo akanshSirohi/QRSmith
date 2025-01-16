@@ -9,7 +9,6 @@ android {
 
     defaultConfig {
         minSdk 24
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -20,9 +19,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -38,17 +38,17 @@ afterEvaluate {
                 artifactId "QRSmith"
                 version "0.1.0"
 
-                // Explicitly add the AAR artifact
+                // Include the AAR artifact
                 artifact("$buildDir/outputs/aar/${project.name}-release.aar")
 
-                // Optionally add sources if needed
+                // Include sources JAR
                 artifact(sourceJarTask())
             }
         }
     }
 }
 
-// Task to generate a sources JAR
+// Task to generate sources JAR
 def sourceJarTask() {
     tasks.create("sourceJar", Jar) {
         archiveClassifier.set("sources")
