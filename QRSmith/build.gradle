@@ -42,7 +42,7 @@ afterEvaluate {
             release(MavenPublication) {
                 groupId "com.github.akanshSirohi"
                 artifactId "QRSmith"
-                version "0.1.4"
+                version "0.1.5"
 
                 // Explicitly include the AAR artifact
                 artifact("$buildDir/outputs/aar/${project.name}-release.aar") {
@@ -61,7 +61,7 @@ afterEvaluate {
                     withXml {
                         def dependenciesNode = asNode().appendNode('dependencies')
 
-                        // Add ZXing dependency information
+                        // ZXing dependency information
                         def zxingDependency = dependenciesNode.appendNode('dependency')
                         zxingDependency.appendNode('groupId', 'com.google.zxing')
                         zxingDependency.appendNode('artifactId', 'core')
