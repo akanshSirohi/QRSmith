@@ -36,7 +36,7 @@ dependencyResolutionManagement {
 Add this to your module-level `build.gradle` file:
 ```groovy
 dependencies {
-    implementation 'com.github.akanshSirohi:QRSmith:0.1.3'
+    implementation 'com.github.akanshSirohi:QRSmith:0.1.6'
 }
 ```
 
