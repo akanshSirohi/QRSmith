@@ -46,11 +46,29 @@ afterEvaluate {
 
                 // Explicitly include the AAR artifact
                 artifact("$buildDir/outputs/aar/${project.name}-release.aar") {
-                    builtBy tasks.named("bundleReleaseAar") // Ensure the AAR is built before publishing
+                    builtBy tasks.named("bundleReleaseAar")
                 }
 
                 // Include sources JAR
                 artifact(sourceJarTask)
+
+                // Add POM file configuration
+                pom {
+                    name = "QRSmith"
+                    description = "Android library for QR code generation"
+
+                    // This is the crucial part that was missing - declaring dependencies
+                    withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+
+                        // Add ZXing dependency information
+                        def zxingDependency = dependenciesNode.appendNode('dependency')
+                        zxingDependency.appendNode('groupId', 'com.google.zxing')
+                        zxingDependency.appendNode('artifactId', 'core')
+                        zxingDependency.appendNode('version', '3.5.3')
+                        zxingDependency.appendNode('scope', 'compile')
+                    }
+                }
             }
         }
         repositories {
