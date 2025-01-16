@@ -1,0 +1,57 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.akansh.qrsmith'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 24
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation "com.google.zxing:core:3.5.3"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId "com.github.akanshSirohi"
+                artifactId "QRSmith"
+                version "0.1.0"
+
+                // Explicitly add the AAR artifact
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+
+                // Optionally add sources if needed
+                artifact(sourceJarTask())
+            }
+        }
+    }
+}
+
+// Task to generate a sources JAR
+def sourceJarTask() {
+    tasks.create("sourceJar", Jar) {
+        archiveClassifier.set("sources")
+        from android.sourceSets.main.java.srcDirs
+    }
+}

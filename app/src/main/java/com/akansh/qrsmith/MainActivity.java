@@ -1,0 +1,46 @@
+package com.akansh.qrsmith;
+
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.widget.ImageView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        ImageView qrView = findViewById(R.id.qrView);
+
+
+        QRSmith.QRCodeOptions options = new QRSmith.QRCodeOptions();
+        options.width = 500;
+        options.height = 500;
+        options.backgroundColor = Color.WHITE;
+        options.foregroundColor = Color.BLACK;
+        options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
+        options.style = QRSmith.QRCodeStyle.DOTS;
+        options.dotSizeFactor = 0.8f;
+
+        Bitmap bitmap = QRSmith.generateQRCode("Hello World!", options);
+        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+        dr.setCornerRadius(15f);
+        qrView.setImageDrawable(dr);
+    }
+}
