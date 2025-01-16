@@ -27,18 +27,7 @@ android {
 }
 
 dependencies {
-    implementation "com.google.zxing:core:3.5.3" // Keep as implementation for internal use
-}
-
-androidComponents {
-    onVariants(selector().all()) { variant ->
-        variant.packagedDependencies {
-            // Ensure dependencies are packaged with the AAR
-            artifact(
-                    file("$buildDir/outputs/aar/${project.name}-${variant.name}.aar")
-            )
-        }
-    }
+    implementation "com.google.zxing:core:3.5.3"
 }
 
 // Task to generate sources JAR
@@ -62,6 +51,11 @@ afterEvaluate {
 
                 // Include sources JAR
                 artifact(sourceJarTask)
+            }
+        }
+        repositories {
+            maven {
+                url 'https://jitpack.io'
             }
         }
     }
