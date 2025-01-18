@@ -1,6 +1,7 @@
 package com.akansh.qrsmith;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.google.zxing.BarcodeFormat;
@@ -27,22 +28,36 @@ class NormalQR {
                 hints
         );
 
-        Bitmap bitmap = Bitmap.createBitmap(qrOptions.width, qrOptions.height, Bitmap.Config.ARGB_8888);
+        // Create a new bitmap to draw the QR code over the background
+        Bitmap qrCodeBitmap = Bitmap.createBitmap(qrOptions.width, qrOptions.height, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(qrCodeBitmap);
+
+        if(qrOptions.background != null) {
+            // Load or create the background bitmap
+            Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.background, qrOptions.width, qrOptions.height, true);
+
+            // Draw the background image
+            canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+        }
+
+        // Paint to draw the QR code
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(qrOptions.foregroundColor);
 
+        // Draw the QR code over the background
         for (int x = 0; x < bitMatrix.getWidth(); x++) {
             for (int y = 0; y < bitMatrix.getHeight(); y++) {
                 if (bitMatrix.get(x, y)) {
-                    bitmap.setPixel(x, y, qrOptions.foregroundColor);
-                } else {
-                    bitmap.setPixel(x, y, qrOptions.backgroundColor);
+                    qrCodeBitmap.setPixel(x, y, qrOptions.foregroundColor);
+                }else if(qrOptions.background == null){
+                    qrCodeBitmap.setPixel(x, y, qrOptions.backgroundColor);
                 }
             }
         }
 
-        return bitmap;
+        return qrCodeBitmap;
     }
 }

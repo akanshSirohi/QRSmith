@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -25,13 +26,19 @@ class HexagonalQR {
         Bitmap bitmap = Bitmap.createBitmap(qrOptions.width, qrOptions.height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
-        // Set up paint for background
-        Paint backgroundPaint = new Paint();
-        backgroundPaint.setStyle(Paint.Style.FILL);
-        backgroundPaint.setColor(qrOptions.backgroundColor);
+        if (qrOptions.background != null) {
+            // Draw background image
+            Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.background, qrOptions.width, qrOptions.height, true);
+            canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+        }else{
+            // Set up paint for background
+            Paint backgroundPaint = new Paint();
+            backgroundPaint.setStyle(Paint.Style.FILL);
+            backgroundPaint.setColor(qrOptions.backgroundColor);
 
-        // Draw the background
-        canvas.drawRect(0, 0, qrOptions.width, qrOptions.height, backgroundPaint);
+            // Draw the background
+            canvas.drawRect(0, 0, qrOptions.width, qrOptions.height, backgroundPaint);
+        }
 
         // Set up paint for drawing the QR code
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -76,15 +83,13 @@ class HexagonalQR {
 
         // Draw finder patterns
         int patternDiameter = multiple * FINDER_PATTERN_SIZE;
-        drawFinderPatternHexStyle(canvas, paint, leftPadding, topPadding, patternDiameter,
-                qrOptions.backgroundColor, qrOptions.foregroundColor);
+        drawFinderPatternHexStyle(canvas, paint, leftPadding, topPadding, patternDiameter, qrOptions.foregroundColor);
         drawFinderPatternHexStyle(canvas, paint,
                 leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple,
-                topPadding, patternDiameter,
-                qrOptions.backgroundColor, qrOptions.foregroundColor);
+                topPadding, patternDiameter, qrOptions.foregroundColor);
         drawFinderPatternHexStyle(canvas, paint, leftPadding,
                 topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple,
-                patternDiameter, qrOptions.backgroundColor, qrOptions.foregroundColor);
+                patternDiameter, qrOptions.foregroundColor);
 
         return bitmap;
     }
@@ -111,7 +116,6 @@ class HexagonalQR {
             int x,
             int y,
             int size,
-            int backgroundColor,
             int foregroundColor
     ) {
         float centerX = x + size/2f;
@@ -119,14 +123,14 @@ class HexagonalQR {
 
         // Draw outer hexagon
         paint.setColor(foregroundColor);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(size/8f);
         drawHexagon(canvas, paint, centerX, centerY, size/2f);
-
-        // Draw middle hexagon (white)
-        paint.setColor(backgroundColor);
-        drawHexagon(canvas, paint, centerX, centerY, size/2.8f);
 
         // Draw inner hexagon
         paint.setColor(foregroundColor);
+        paint.setStyle(Paint.Style.FILL);
         drawHexagon(canvas, paint, centerX, centerY, size/4.8f);
     }
 }

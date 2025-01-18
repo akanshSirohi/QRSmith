@@ -8,6 +8,7 @@ public class QRCodeOptions {
     public int height = 500;
     public int quiteZone = 1;
     public Bitmap logo = null;
+    public Bitmap background = null;
     public int backgroundColor = Color.WHITE;
     public int foregroundColor = Color.BLACK;
     public QRSmith.QRErrorCorrectionLevel errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H; // Default error correction level

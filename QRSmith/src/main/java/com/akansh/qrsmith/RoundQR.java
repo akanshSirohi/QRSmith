@@ -2,7 +2,9 @@ package com.akansh.qrsmith;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 
 import com.google.zxing.EncodeHintType;
@@ -15,7 +17,7 @@ import com.google.zxing.qrcode.encoder.QRCode;
 import java.util.HashMap;
 import java.util.Map;
 
-class RoundDottedQR {
+class RoundQR {
     public static Bitmap renderQRImage(String content, QRCodeOptions qrOptions, ErrorCorrectionLevel errorCorrectionLevel) throws WriterException {
         Map<EncodeHintType, Object> hints = new HashMap<>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
@@ -25,13 +27,19 @@ class RoundDottedQR {
         Bitmap bitmap = Bitmap.createBitmap(qrOptions.width, qrOptions.height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
-        // Set up paint for background
-        Paint backgroundPaint = new Paint();
-        backgroundPaint.setStyle(Paint.Style.FILL);
-        backgroundPaint.setColor(qrOptions.backgroundColor);
+        if (qrOptions.background != null) {
+            // Draw background image
+            Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.background, qrOptions.width, qrOptions.height, true);
+            canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+        }else{
+            // Set up paint for background
+            Paint backgroundPaint = new Paint();
+            backgroundPaint.setStyle(Paint.Style.FILL);
+            backgroundPaint.setColor(qrOptions.backgroundColor);
 
-        // Draw the white background
-        canvas.drawRect(0, 0, qrOptions.width, qrOptions.height, backgroundPaint);
+            // Draw the background
+            canvas.drawRect(0, 0, qrOptions.width, qrOptions.height, backgroundPaint);
+        }
 
         // Set up paint for drawing the QR code
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -84,14 +92,13 @@ class RoundDottedQR {
 
         // Draw finder patterns
         int circleDiameter = multiple * FINDER_PATTERN_SIZE;
-        drawFinderPatternCircleStyle(canvas, paint, leftPadding, topPadding, circleDiameter, qrOptions.backgroundColor, qrOptions.foregroundColor);
+        drawFinderPatternCircleStyle(canvas, paint, leftPadding, topPadding, circleDiameter, qrOptions.foregroundColor);
         drawFinderPatternCircleStyle(
                 canvas,
                 paint,
                 leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple,
                 topPadding,
                 circleDiameter,
-                qrOptions.backgroundColor,
                 qrOptions.foregroundColor
         );
         drawFinderPatternCircleStyle(
@@ -100,7 +107,6 @@ class RoundDottedQR {
                 leftPadding,
                 topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple,
                 circleDiameter,
-                qrOptions.backgroundColor,
                 qrOptions.foregroundColor
         );
 
@@ -113,16 +119,19 @@ class RoundDottedQR {
             int x,
             int y,
             int circleDiameter,
-            int backgroundColor,
             int foregroundColor
     ) {
-        int WHITE_CIRCLE_DIAMETER = circleDiameter * 5 / 7;
+
         int WHITE_CIRCLE_OFFSET = circleDiameter / 7;
         int MIDDLE_DOT_DIAMETER = circleDiameter * 3 / 7;
         int MIDDLE_DOT_OFFSET = circleDiameter * 2 / 7;
 
-        // Draw the outer black circle
+        // Draw the outer circle
         paint.setColor(foregroundColor);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE); // Set style to STROKE for a hollow effect
+        paint.setStrokeWidth(WHITE_CIRCLE_OFFSET); // Adjust the stroke width as needed
+
         canvas.drawOval(
                 new RectF(
                         (float) x,
@@ -133,20 +142,9 @@ class RoundDottedQR {
                 paint
         );
 
-        // Draw the white circle
-        paint.setColor(backgroundColor);
-        canvas.drawOval(
-                new RectF(
-                        (float) (x + WHITE_CIRCLE_OFFSET),
-                        (float) (y + WHITE_CIRCLE_OFFSET),
-                        (float) (x + WHITE_CIRCLE_OFFSET + WHITE_CIRCLE_DIAMETER),
-                        (float) (y + WHITE_CIRCLE_OFFSET + WHITE_CIRCLE_DIAMETER)
-                ),
-                paint
-        );
-
-        // Draw the middle black dot
+        // Draw the middle dot
         paint.setColor(foregroundColor);
+        paint.setStyle(Paint.Style.FILL);
         canvas.drawOval(
                 new RectF(
                         (float) (x + MIDDLE_DOT_OFFSET),
