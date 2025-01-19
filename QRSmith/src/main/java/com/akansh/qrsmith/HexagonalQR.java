@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -30,7 +29,7 @@ class HexagonalQR {
             // Draw background image
             Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.background, qrOptions.width, qrOptions.height, true);
             canvas.drawBitmap(backgroundBitmap, 0, 0, null);
-        }else{
+        } else {
             // Set up paint for background
             Paint backgroundPaint = new Paint();
             backgroundPaint.setStyle(Paint.Style.FILL);
@@ -66,15 +65,37 @@ class HexagonalQR {
         int FINDER_PATTERN_SIZE = 7;
         float hexSize = (multiple * qrOptions.dotSizeFactor) / 2f;
 
+        // Calculate logo dimensions and position
+        Bitmap logo = qrOptions.logo;
+        int logoWidth = qrOptions.width / 5;
+        int logoHeight = qrOptions.height / 5;
+        int logoX = (qrOptions.width - logoWidth) / 2;
+        int logoY = (qrOptions.height - logoHeight) / 2;
+
+        // Only clear logo background if there's no background image and clearLogoBackground is true
+        if (logo != null && qrOptions.clearLogoBackground && qrOptions.background == null) {
+            Paint clearPaint = new Paint();
+            clearPaint.setStyle(Paint.Style.FILL);
+            clearPaint.setColor(qrOptions.backgroundColor);
+            canvas.drawRect(logoX, logoY, logoX + logoWidth, logoY + logoHeight, clearPaint);
+        }
+
         // Iterate through each QR code module
         for (int inputY = 0; inputY < inputHeight; inputY++) {
             int outputY = topPadding + (multiple * inputY);
             for (int inputX = 0; inputX < inputWidth; inputX++) {
                 int outputX = leftPadding + (multiple * inputX);
                 if (input.get(inputX, inputY) == 1) {
-                    if (!(inputX <= FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
+                    // Skip if in finder pattern area or logo area
+                    boolean isInFinderPattern = (inputX <= FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
                             inputX >= inputWidth - FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
-                            inputX <= FINDER_PATTERN_SIZE && inputY >= inputHeight - FINDER_PATTERN_SIZE)) {
+                            inputX <= FINDER_PATTERN_SIZE && inputY >= inputHeight - FINDER_PATTERN_SIZE);
+
+                    boolean isInLogoArea = logo != null &&
+                            outputX >= logoX && outputX < (logoX + logoWidth) - hexSize &&
+                            outputY >= logoY && outputY < (logoY + logoHeight) - hexSize;
+
+                    if (!isInFinderPattern && (!isInLogoArea || !qrOptions.clearLogoBackground)) {
                         drawHexagon(canvas, paint, outputX + multiple/2f, outputY + multiple/2f, hexSize);
                     }
                 }
@@ -90,6 +111,12 @@ class HexagonalQR {
         drawFinderPatternHexStyle(canvas, paint, leftPadding,
                 topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple,
                 patternDiameter, qrOptions.foregroundColor);
+
+        // Draw logo last
+        if (logo != null) {
+            Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
+            canvas.drawBitmap(scaledLogo, logoX, logoY, null);
+        }
 
         return bitmap;
     }

@@ -14,4 +14,6 @@ public class QRCodeOptions {
     public QRSmith.QRErrorCorrectionLevel errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H; // Default error correction level
     public QRSmith.QRCodeStyle style = QRSmith.QRCodeStyle.SQUARED;
     public float dotSizeFactor = 0.8f;
+    public boolean clearLogoBackground = true;
+    public int logoPadding = 0;
 }

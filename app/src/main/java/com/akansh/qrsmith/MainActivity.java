@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView qrView = findViewById(R.id.qrView);
 
-//        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_android);
+        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
 //        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.bg_img);
         QRCodeOptions options = new QRCodeOptions();
         options.width = 500;
@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         options.foregroundColor = Color.BLACK;
         options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
         options.style = QRSmith.QRCodeStyle.HEXAGONAL;
-//        options.logo = logo;
+        options.logo = logo;
 //        options.background = bg;
+//        options.clearLogoBackground = true;
+//        options.quiteZone = 1;
         options.dotSizeFactor = 1f;
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);

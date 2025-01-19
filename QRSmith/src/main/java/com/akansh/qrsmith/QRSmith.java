@@ -2,13 +2,15 @@ package com.akansh.qrsmith;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QRSmith {
 
     public enum QRCodeStyle {
-        SQUARED, DOTS, HEXAGONAL
+        SQUARED, ROUNDED, HEXAGONAL
     }
 
     public enum QRErrorCorrectionLevel {
@@ -25,18 +27,15 @@ public class QRSmith {
         ErrorCorrectionLevel errorCorrectionLevel = getErrorCorrectionLevel(options);
 
         try {
-
+            if(options.logoPadding != 0) {
+                options.logo = addPaddingToBitmap(options.logo, options.logoPadding);
+            }
             if (options.style == QRCodeStyle.SQUARED) {
                 qrBitmap = NormalQR.renderQRImage(content, options, errorCorrectionLevel);
-            } else if (options.style == QRCodeStyle.DOTS) {
+            } else if (options.style == QRCodeStyle.ROUNDED) {
                 qrBitmap = RoundQR.renderQRImage(content, options, errorCorrectionLevel);
             }else if (options.style == QRCodeStyle.HEXAGONAL) {
                 qrBitmap = HexagonalQR.renderQRImage(content, options, errorCorrectionLevel);
-            }
-
-            // Add logo if provided
-            if (options.logo != null && qrBitmap != null) {
-                qrBitmap = addLogo(qrBitmap, options.logo);
             }
         }catch (Exception e) {}
         return qrBitmap;
@@ -60,19 +59,45 @@ public class QRSmith {
         return errorCorrectionLevel;
     }
 
-    private static Bitmap addLogo(Bitmap qrCode, Bitmap logo) {
-        Bitmap combinedBitmap = Bitmap.createBitmap(qrCode.getWidth(), qrCode.getHeight(), qrCode.getConfig());
-        Canvas canvas = new Canvas(combinedBitmap);
-        canvas.drawBitmap(qrCode, 0, 0, null);
+    /**
+     * Adds equal padding (in pixels) around a given Bitmap.
+     * @param originalBitmap The original Bitmap.
+     * @param paddingPx The padding size in pixels to add on each side.
+     * @return A new Bitmap with the specified padding, or null if originalBitmap is null.
+     */
+    public static Bitmap addPaddingToBitmap(
+            Bitmap originalBitmap,
+            int paddingPx
+    ) {
+        if (originalBitmap == null) {
+            return null;
+        }
 
-        // Calculate logo placement
-        int overlayWidth = qrCode.getWidth() / 5;
-        int overlayHeight = qrCode.getHeight() / 5;
-        int left = (qrCode.getWidth() - overlayWidth) / 2;
-        int top = (qrCode.getHeight() - overlayHeight) / 2;
+        paddingPx = paddingPx * 100;
 
-        Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, overlayWidth, overlayHeight, true);
-        canvas.drawBitmap(scaledLogo, left, top, null);
-        return combinedBitmap;
+        // Calculate the size of the new bitmap
+        int newWidth = originalBitmap.getWidth() + paddingPx * 2;
+        int newHeight = originalBitmap.getHeight() + paddingPx * 2;
+
+        // Fallback to ARGB_8888 if the original config is null
+        Bitmap.Config bitmapConfig = originalBitmap.getConfig();
+        if (bitmapConfig == null) {
+            bitmapConfig = Bitmap.Config.ARGB_8888;
+        }
+
+        // Create a new bitmap
+        Bitmap paddedBitmap = Bitmap.createBitmap(newWidth, newHeight, bitmapConfig);
+
+        // Important: match the density, in case you use the density for scaling
+        paddedBitmap.setDensity(originalBitmap.getDensity());
+
+        // Create a canvas to draw onto the new bitmap
+        Canvas canvas = new Canvas(paddedBitmap);
+
+        // Draw the original bitmap onto the new bitmap, offset by 'paddingPx'
+        canvas.drawBitmap(originalBitmap, paddingPx, paddingPx, null);
+
+        return paddedBitmap;
     }
+
 }
