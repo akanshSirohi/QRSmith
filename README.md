@@ -133,7 +133,7 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
-| `logoPadding`          | Padding around the logo in pixels                 | `0`           |
+| `logoPadding`          | Padding around the logo                           | `0`           |
 | `quiteZone`            | Quiet zone size around the QR code                | `1`           |
 
 ## Supported QR Code Styles
