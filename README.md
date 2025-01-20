@@ -1,27 +1,36 @@
 # QRSmith - Android QR Code Library
 
-QRSmith is an Android library for generating customizable QR codes with advanced styling and features, including support for logos and different QR code styles. It leverages the ZXing library to provide an easy-to-use interface for developers.
+QRSmith is a powerful and versatile Android library for generating advanced, customizable QR codes. It supports multiple styles, logos, backgrounds, and various error correction levels, making it an essential tool for developers looking to add unique QR code functionalities to their apps.
 
-## Features
-- Generate QR codes with square or dot styles.
-- Customize size, colors, and error correction levels.
-- Add logos to the center of the QR codes.
-- Support for different error correction levels (L, M, Q, H).
-- Adjustable dot size for rounded QR codes.
+## Key Features
+
+- **Multiple Styles**: Generate QR codes in **square**, **rounded**, or **hexagonal** styles.
+- **Logo Integration**: Add logos with optional padding and background clearing.
+- **Custom Backgrounds**: Use custom images or colors as QR code backgrounds.
+- **Full Customization**: Adjust size, colors, dot size factors, quiet zones, and more.
+- **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
+- **Developer-Friendly API**: Easy-to-use interface with robust customization options.
 
 ## Sample QR Codes
 <table>
     <tr>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-1.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-2.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-3.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/screenshots/QR-4.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-1.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-2.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-3.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-4.jpg?raw=true" width="200" /></td>
+    </tr>
+    <tr>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-5.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-6.png?raw=true" width="200" /></td>
     </tr>
 </table>
 
 ## Installation
+
 ### Step 1: Add Repositories
+
 Add the following to your root `settings.gradle`:
+
 ```groovy
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -33,93 +42,115 @@ dependencyResolutionManagement {
 ```
 
 ### Step 2: Add the Dependency
-Add this to your module-level `build.gradle` file:
+
+Include this in your module-level `build.gradle` file:
+
 ```groovy
 dependencies {
-    implementation 'com.github.akanshSirohi:QRSmith:1.0.0'
+    implementation 'com.github.akanshSirohi:QRSmith:0.1.6'
 }
 ```
 
-## Usage
-Here’s how you can use QRSmith to generate a QR code:
+## Getting Started
 
 ### Basic Example
+
 ```java
 import com.akansh.qrsmith.QRSmith;
+import com.akansh.qrsmith.QRCodeOptions;
 import android.graphics.Bitmap;
 
 // Define the QR code content
 String content = "https://example.com";
 
 // Create QR code options
-QRSmith.QRCodeOptions options = new QRSmith.QRCodeOptions();
+QRCodeOptions options = new QRCodeOptions();
 options.width = 500;
 options.height = 500;
 options.foregroundColor = Color.BLACK;
 options.backgroundColor = Color.WHITE;
 options.style = QRSmith.QRCodeStyle.SQUARED;
+options.quiteZone = 1; // Set quiet zone size
 
 try {
     // Generate the QR code
     Bitmap qrCode = QRSmith.generateQRCode(content, options);
     // Use the generated QR code Bitmap as needed
-} catch (WriterException e) {
+} catch (Exception e) {
     e.printStackTrace();
 }
 ```
 
-### Advanced Example with Logo
+### Advanced Example with Logo, Background, and Customizations
+
 ```java
 import com.akansh.qrsmith.QRSmith;
+import com.akansh.qrsmith.QRCodeOptions;
 import android.graphics.Bitmap;
 
 // Define the QR code content
 String content = "https://example.com";
 
-// Load your logo bitmap
+// Load your logo and background bitmaps
 Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.background);
 
 // Create QR code options
-QRSmith.QRCodeOptions options = new QRSmith.QRCodeOptions();
+QRCodeOptions options = new QRCodeOptions();
 options.width = 600;
 options.height = 600;
 options.foregroundColor = Color.BLACK;
 options.backgroundColor = Color.WHITE;
-options.style = QRSmith.QRCodeStyle.DOTS;
+options.style = QRSmith.QRCodeStyle.HEXAGONAL;
 options.logo = logo;
+options.background = background; // Set custom background
 options.dotSizeFactor = 0.8f;
-options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
+options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.Q;
+options.quiteZone = 2; // Set quiet zone size
 
 try {
     // Generate the QR code
     Bitmap qrCode = QRSmith.generateQRCode(content, options);
     // Use the generated QR code Bitmap as needed
-} catch (WriterException e) {
+} catch (Exception e) {
     e.printStackTrace();
 }
 ```
 
 ## Customization Options
-QRSmith allows you to customize various parameters through the `QRCodeOptions` class:
 
-| Option                | Description                                      | Default Value         |
-|-----------------------|--------------------------------------------------|-----------------------|
-| `width`               | Width of the QR code in pixels                  | 500                   |
-| `height`              | Height of the QR code in pixels                 | 500                   |
-| `foregroundColor`     | Color of the QR code foreground                 | `Color.BLACK`         |
-| `backgroundColor`     | Color of the QR code background                 | `Color.WHITE`         |
-| `style`               | Style of the QR code (`SQUARED`, `DOTS`)        | `SQUARED`            |
-| `logo`                | Bitmap for the logo to overlay on the QR code   | `null`                |
-| `dotSizeFactor`       | Adjusts the size of dots for the `DOTS` style   | `0.8f`                |
-| `errorCorrectionLevel`| Error correction level (`L`, `M`, `Q`, `H`)     | `H`                   |
+QRSmith offers extensive customization through the `QRCodeOptions` class:
+
+| Option                 | Description                                       | Default Value |
+| ---------------------- | ------------------------------------------------- | ------------- |
+| `width`                | Width of the QR code in pixels                    | 500           |
+| `height`               | Height of the QR code in pixels                   | 500           |
+| `foregroundColor`      | Color of the QR code foreground                   | `Color.BLACK` |
+| `backgroundColor`      | Color of the QR code background                   | `Color.WHITE` |
+| `style`                | QR code style (`SQUARED`, `ROUNDED`, `HEXAGONAL`) | `SQUARED`     |
+| `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
+| `dotSizeFactor`        | Adjusts the size of dots                          | `0.8f`        |
+| `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
+| `clearLogoBackground`  | Clears the background under the logo              | `true`        |
+| `background`           | Bitmap for the QR code background                 | `null`        |
+| `logoPadding`          | Padding around the logo in pixels                 | `0`           |
+| `quiteZone`            | Quiet zone size around the QR code                | `1`           |
+
+## Supported QR Code Styles
+
+1. **Square Style**: The traditional QR code style.
+2. **Rounded Style**: Uses circular dots for a softer appearance.
+3. **Hexagonal Style**: Creates a hexagonal pattern for a unique, modern design.
 
 ## Contributing
-Feel free to open issues or contribute to this library by submitting pull requests.
+
+We welcome contributions! Feel free to open issues or submit pull requests to improve this library.
 
 ## License
+
 QRSmith is licensed under the MIT License. See `LICENSE` for details.
 
 ---
 
-Start generating stunning QR codes with QRSmith today!
+Start generating stunning, customizable QR codes with QRSmith today and elevate your app's capabilities!
 
