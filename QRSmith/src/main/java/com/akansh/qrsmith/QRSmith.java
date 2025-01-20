@@ -2,8 +2,6 @@ package com.akansh.qrsmith;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
