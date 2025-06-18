@@ -16,11 +16,5 @@ public class QRCodeOptions {
     public float dotSizeFactor = 0.8f;
     public boolean clearLogoBackground = true;
     public int logoPadding = 0;
-
-    /**
-     * Radius for rounding the corners of modules when using the
-     * {@link QRSmith.QRCodeStyle#SQUARED} style. The value should be in the
-     * range {@code 0} (sharp corners) to {@code 10} (fully rounded).
-     */
-    public int radius = 0;
+    public boolean fluid = false;
 }

@@ -53,7 +53,7 @@ class NormalQR {
         int topPadding = (outputHeight - (inputHeight * multiple)) / 2;
         int FINDER_PATTERN_SIZE = 7;
 
-        float radiusFactor = Math.max(0, Math.min(10, qrOptions.radius)) / 10f;
+        float radiusFactor = qrOptions.fluid ? 1.0f : 0.0f;
         float cornerRadiusPx = (multiple / 2f) * radiusFactor;
 
         Bitmap logo = qrOptions.logo;
@@ -83,8 +83,40 @@ class NormalQR {
                             outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
 
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.clearLogoBackground)) {
-                        canvas.drawRoundRect(new RectF(outputX, outputY, outputX + multiple, outputY + multiple),
-                                cornerRadiusPx, cornerRadiusPx, paint);
+                        if(qrOptions.fluid) {
+                            boolean left = inputX > 0 && input.get(inputX - 1, inputY) == 1;
+                            boolean right = inputX < inputWidth - 1 && input.get(inputX + 1, inputY) == 1;
+                            boolean top = inputY > 0 && input.get(inputX, inputY - 1) == 1;
+                            boolean bottom = inputY < inputHeight - 1 && input.get(inputX, inputY + 1) == 1;
+
+                            // Center coordinates
+                            float cx = outputX + multiple / 2f;
+                            float cy = outputY + multiple / 2f;
+                            float radius = multiple / 2.1f;
+
+                            // Draw center circle
+                            canvas.drawCircle(cx, cy, radius, paint);
+
+                            // Draw connecting rectangles
+                            if (right) {
+                                float nx = outputX + multiple + multiple / 2f;
+                                canvas.drawRect(cx, cy - radius, nx, cy + radius, paint);
+                            }
+                            if (left) {
+                                float nx = outputX - multiple / 2f;
+                                canvas.drawRect(nx, cy - radius, cx, cy + radius, paint);
+                            }
+                            if (top) {
+                                float ny = outputY - multiple / 2f;
+                                canvas.drawRect(cx - radius, ny, cx + radius, cy, paint);
+                            }
+                            if (bottom) {
+                                float ny = outputY + multiple + multiple / 2f;
+                                canvas.drawRect(cx - radius, cy, cx + radius, ny, paint);
+                            }
+                        }else{
+                            canvas.drawRoundRect(new RectF(outputX, outputY, outputX + multiple, outputY + multiple), cornerRadiusPx, cornerRadiusPx, paint);
+                        }
                     }
                 }
             }
@@ -107,6 +139,8 @@ class NormalQR {
 
         return bitmap;
     }
+
+
 
     private static void drawFinderPatternRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, float radius, int color) {
         int stroke = size / 7;
