@@ -27,6 +27,11 @@ class NormalQR {
         if (qrOptions.background != null) {
             Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.background, qrOptions.width, qrOptions.height, true);
             canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+        } else {
+            Paint bgPaint = new Paint();
+            bgPaint.setStyle(Paint.Style.FILL);
+            bgPaint.setColor(qrOptions.backgroundColor);
+            canvas.drawRect(0, 0, qrOptions.width, qrOptions.height, bgPaint);
         }
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
