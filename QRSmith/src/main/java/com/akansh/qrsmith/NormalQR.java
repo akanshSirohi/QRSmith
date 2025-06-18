@@ -78,9 +78,14 @@ class NormalQR {
                             inputX >= inputWidth - FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
                             inputX <= FINDER_PATTERN_SIZE && inputY >= inputHeight - FINDER_PATTERN_SIZE);
 
-                    boolean isInLogoArea = logo != null &&
-                            outputX >= logoX && outputX < (logoX + logoWidth) - multiple &&
-                            outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
+    private static void drawFinderPatternRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, float moduleRadius, int color) {
+        float outerRadius = moduleRadius * 7f;
+        float innerRadius = moduleRadius * 3f;
+
+        canvas.drawRoundRect(new RectF(x, y, x + size, y + size),
+                Math.min(outerRadius, size / 2f), Math.min(outerRadius, size / 2f), paint);
+                x + innerOffset + innerSize, y + innerOffset + innerSize),
+                Math.min(innerRadius, innerSize / 2f), Math.min(innerRadius, innerSize / 2f), paint);
 
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.clearLogoBackground)) {
                         canvas.drawRoundRect(new RectF(outputX, outputY, outputX + multiple, outputY + multiple),
