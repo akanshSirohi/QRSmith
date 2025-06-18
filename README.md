@@ -8,6 +8,7 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 - **Logo Integration**: Add logos with optional padding and background clearing.
 - **Custom Backgrounds**: Use custom images or colors as QR code backgrounds.
 - **Full Customization**: Adjust size, colors, dot size factors, quiet zones, and more.
+- **Fluid Modules**: Enable smooth connections between modules for a more organic look.
 - **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
 - **Developer-Friendly API**: Easy-to-use interface with robust customization options.
 
@@ -70,7 +71,7 @@ options.height = 500;
 options.foregroundColor = Color.BLACK;
 options.backgroundColor = Color.WHITE;
 options.style = QRSmith.QRCodeStyle.SQUARED;
-options.radius = 5; // Rounded corners
+options.fluid = true; // Smoothly connect square modules
 options.quietZone = 1; // Set quiet zone size
 
 try {
@@ -103,7 +104,6 @@ options.height = 600;
 options.foregroundColor = Color.BLACK;
 options.backgroundColor = Color.WHITE;
 options.style = QRSmith.QRCodeStyle.HEXAGONAL;
-options.radius = 0; // Radius only affects SQUARED style
 options.logo = logo;
 options.background = background; // Set custom background
 options.dotSizeFactor = 0.8f;
@@ -132,7 +132,7 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `style`                | QR code style (`SQUARED`, `ROUNDED`, `HEXAGONAL`) | `SQUARED`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
 | `dotSizeFactor`        | Adjusts the size of dots                          | `0.8f`        |
-| `radius`              | Corner radius for SQUARED style modules (`0` = sharp, `10` = fully round) | `0` |
+| `fluid`                | Smoothly connect modules in the SQUARED style      | `false`       |
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
