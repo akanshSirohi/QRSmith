@@ -3,6 +3,7 @@ package com.akansh.qrsmith;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 
 import com.google.zxing.EncodeHintType;
@@ -53,9 +54,54 @@ class NormalQR {
         int topPadding = (outputHeight - (inputHeight * multiple)) / 2;
         int FINDER_PATTERN_SIZE = 7;
 
-        float radiusFactor = Math.max(0, Math.min(10, qrOptions.radius)) / 10f;
-        float cornerRadiusPx = (multiple / 2f) * radiusFactor;
+                        boolean left = isModuleFilled(input, inputX - 1, inputY, logo, logoX, logoY, logoWidth, logoHeight,
+                                qrOptions.clearLogoBackground, FINDER_PATTERN_SIZE, inputWidth, inputHeight, multiple, leftPadding, topPadding);
+                        boolean right = isModuleFilled(input, inputX + 1, inputY, logo, logoX, logoY, logoWidth, logoHeight,
+                                qrOptions.clearLogoBackground, FINDER_PATTERN_SIZE, inputWidth, inputHeight, multiple, leftPadding, topPadding);
+                        boolean top = isModuleFilled(input, inputX, inputY - 1, logo, logoX, logoY, logoWidth, logoHeight,
+                                qrOptions.clearLogoBackground, FINDER_PATTERN_SIZE, inputWidth, inputHeight, multiple, leftPadding, topPadding);
+                        boolean bottom = isModuleFilled(input, inputX, inputY + 1, logo, logoX, logoY, logoWidth, logoHeight,
+                                qrOptions.clearLogoBackground, FINDER_PATTERN_SIZE, inputWidth, inputHeight, multiple, leftPadding, topPadding);
 
+                        drawFluidModule(canvas, paint, outputX, outputY, multiple, cornerRadiusPx,
+                                left, top, right, bottom);
+
+
+    private static boolean isModuleFilled(ByteMatrix matrix, int x, int y, Bitmap logo,
+                                          int logoX, int logoY, int logoW, int logoH,
+                                          boolean clearLogo, int finderSize,
+                                          int width, int height, int multiple, int leftPadding, int topPadding) {
+        if (x < 0 || y < 0 || x >= width || y >= height) return false;
+        if (matrix.get(x, y) != 1) return false;
+        boolean inFinder = (x <= finderSize && y <= finderSize) ||
+                (x >= width - finderSize && y <= finderSize) ||
+                (x <= finderSize && y >= height - finderSize);
+        if (inFinder) return false;
+
+        if (logo != null && clearLogo) {
+            int outX = leftPadding + (x * multiple);
+            int outY = topPadding + (y * multiple);
+            boolean inLogo = outX >= logoX && outX < (logoX + logoW) - multiple &&
+                    outY >= logoY && outY < (logoY + logoH) - multiple;
+            if (inLogo) return false;
+        }
+        return true;
+    }
+
+    private static void drawFluidModule(Canvas canvas, Paint paint, float x, float y, float size,
+                                        float radius, boolean left, boolean top,
+                                        boolean right, boolean bottom) {
+        float tl = (!top && !left) ? radius : 0f;
+        float tr = (!top && !right) ? radius : 0f;
+        float br = (!bottom && !right) ? radius : 0f;
+        float bl = (!bottom && !left) ? radius : 0f;
+
+        Path path = new Path();
+        float[] radii = {tl, tl, tr, tr, br, br, bl, bl};
+        RectF r = new RectF(x, y, x + size, y + size);
+        path.addRoundRect(r, radii, Path.Direction.CW);
+        canvas.drawPath(path, paint);
+    }
         Bitmap logo = qrOptions.logo;
         int logoWidth = qrOptions.width / 5;
         int logoHeight = qrOptions.height / 5;
