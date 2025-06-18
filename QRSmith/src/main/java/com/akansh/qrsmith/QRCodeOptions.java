@@ -6,7 +6,7 @@ import android.graphics.Color;
 public class QRCodeOptions {
     public int width = 500;
     public int height = 500;
-    public int quiteZone = 1;
+    public int quietZone = 1;
     public Bitmap logo = null;
     public Bitmap background = null;
     public int backgroundColor = Color.WHITE;

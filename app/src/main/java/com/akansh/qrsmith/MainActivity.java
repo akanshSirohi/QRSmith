@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 //        options.logo = logo;
 //        options.background = bg;
         options.clearLogoBackground = true;
-        options.quiteZone = 1;
+        options.quietZone = 1;
         options.dotSizeFactor = 1f;
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);
