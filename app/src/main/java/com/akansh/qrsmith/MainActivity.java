@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         options.backgroundColor = Color.WHITE;
         options.foregroundColor = Color.BLACK;
         options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
-        options.style = QRSmith.QRCodeStyle.HEXAGONAL;
+        options.style = QRSmith.QRCodeStyle.SQUARED;
+        options.fluid = true;
 //        options.logo = logo;
 //        options.background = bg;
         options.clearLogoBackground = true;
