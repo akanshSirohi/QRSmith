@@ -53,8 +53,8 @@ class RoundQR {
         // Calculate dimensions
         int inputWidth = input.getWidth();
         int inputHeight = input.getHeight();
-        int qrWidth = inputWidth + (qrOptions.quiteZone * 2);
-        int qrHeight = inputHeight + (qrOptions.quiteZone * 2);
+        int qrWidth = inputWidth + (qrOptions.quietZone * 2);
+        int qrHeight = inputHeight + (qrOptions.quietZone * 2);
         int outputWidth = Math.max(qrOptions.width, qrWidth);
         int outputHeight = Math.max(qrOptions.height, qrHeight);
 

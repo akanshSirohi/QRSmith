@@ -17,7 +17,7 @@ import java.util.Map;
 class NormalQR {
     public static Bitmap renderQRImage(String content, QRCodeOptions qrOptions, ErrorCorrectionLevel errorCorrectionLevel) throws WriterException {
         Map<EncodeHintType, Object> hints = new HashMap<>();
-        hints.put(EncodeHintType.MARGIN, qrOptions.quiteZone);
+        hints.put(EncodeHintType.MARGIN, qrOptions.quietZone);
         hints.put(EncodeHintType.ERROR_CORRECTION, errorCorrectionLevel);
 
         BitMatrix bitMatrix = new MultiFormatWriter().encode(

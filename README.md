@@ -70,7 +70,7 @@ options.height = 500;
 options.foregroundColor = Color.BLACK;
 options.backgroundColor = Color.WHITE;
 options.style = QRSmith.QRCodeStyle.SQUARED;
-options.quiteZone = 1; // Set quiet zone size
+options.quietZone = 1; // Set quiet zone size
 
 try {
     // Generate the QR code
@@ -106,7 +106,7 @@ options.logo = logo;
 options.background = background; // Set custom background
 options.dotSizeFactor = 0.8f;
 options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.Q;
-options.quiteZone = 2; // Set quiet zone size
+options.quietZone = 2; // Set quiet zone size
 
 try {
     // Generate the QR code
@@ -134,7 +134,7 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
 | `logoPadding`          | Padding around the logo                           | `0`           |
-| `quiteZone`            | Quiet zone size around the QR code                | `1`           |
+| `quietZone`            | Quiet zone size around the QR code                | `1`           |
 
 ## Supported QR Code Styles
 
