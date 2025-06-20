@@ -3,7 +3,6 @@ package com.akansh.qrsmith;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -15,64 +14,51 @@ import com.google.zxing.qrcode.encoder.QRCode;
 import java.util.HashMap;
 import java.util.Map;
 
-class HexagonalQR {
+public class CustomQR {
+
     public static Bitmap renderQRImage(String content, QRCodeOptions qrOptions, ErrorCorrectionLevel errorCorrectionLevel) throws WriterException {
         Map<EncodeHintType, Object> hints = new HashMap<>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         QRCode qrCode = Encoder.encode(content, errorCorrectionLevel, hints);
-        qrOptions.dotSizeFactor = (qrOptions.dotSizeFactor < 0.5f ? 0.5f : (Math.min(qrOptions.dotSizeFactor, 1f)));
 
         Bitmap bitmap = Bitmap.createBitmap(qrOptions.width, qrOptions.height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
         if (qrOptions.background != null) {
-            // Draw background image
             Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.background, qrOptions.width, qrOptions.height, true);
             canvas.drawBitmap(backgroundBitmap, 0, 0, null);
         } else {
-            // Set up paint for background
-            Paint backgroundPaint = new Paint();
-            backgroundPaint.setStyle(Paint.Style.FILL);
-            backgroundPaint.setColor(qrOptions.backgroundColor);
-
-            // Draw the background
-            canvas.drawRect(0, 0, qrOptions.width, qrOptions.height, backgroundPaint);
+            Paint bgPaint = new Paint();
+            bgPaint.setStyle(Paint.Style.FILL);
+            bgPaint.setColor(qrOptions.backgroundColor);
+            canvas.drawRect(0, 0, qrOptions.width, qrOptions.height, bgPaint);
         }
 
-        // Set up paint for drawing the QR code
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(qrOptions.foregroundColor);
 
-        // Get the QR code matrix
         ByteMatrix input = qrCode.getMatrix();
-        if (input == null) {
-            throw new IllegalStateException();
-        }
+        if (input == null) throw new IllegalStateException();
 
-        // Calculate dimensions
         int inputWidth = input.getWidth();
         int inputHeight = input.getHeight();
-        int qrWidth = inputWidth + (qrOptions.quietZone * 2);
-        int qrHeight = inputHeight + (qrOptions.quietZone * 2);
+        int qrWidth = inputWidth + qrOptions.quietZone * 2;
+        int qrHeight = inputHeight + qrOptions.quietZone * 2;
         int outputWidth = Math.max(qrOptions.width, qrWidth);
         int outputHeight = Math.max(qrOptions.height, qrHeight);
 
-        // Calculate scaling factors and padding
         int multiple = Math.min(outputWidth / qrWidth, outputHeight / qrHeight);
         int leftPadding = (outputWidth - (inputWidth * multiple)) / 2;
         int topPadding = (outputHeight - (inputHeight * multiple)) / 2;
         int FINDER_PATTERN_SIZE = 7;
-        float hexSize = (multiple * qrOptions.dotSizeFactor) / 2f;
 
-        // Calculate logo dimensions and position
         Bitmap logo = qrOptions.logo;
         int logoWidth = qrOptions.width / 5;
         int logoHeight = qrOptions.height / 5;
         int logoX = (qrOptions.width - logoWidth) / 2;
         int logoY = (qrOptions.height - logoHeight) / 2;
 
-        // Only clear logo background if there's no background image and clearLogoBackground is true
         if (logo != null && qrOptions.clearLogoBackground && qrOptions.background == null) {
             Paint clearPaint = new Paint();
             clearPaint.setStyle(Paint.Style.FILL);
@@ -80,40 +66,47 @@ class HexagonalQR {
             canvas.drawRect(logoX, logoY, logoX + logoWidth, logoY + logoHeight, clearPaint);
         }
 
-        // Iterate through each QR code module
         for (int inputY = 0; inputY < inputHeight; inputY++) {
             int outputY = topPadding + (multiple * inputY);
             for (int inputX = 0; inputX < inputWidth; inputX++) {
                 int outputX = leftPadding + (multiple * inputX);
                 if (input.get(inputX, inputY) == 1) {
-                    // Skip if in finder pattern area or logo area
                     boolean isInFinderPattern = (inputX <= FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
                             inputX >= inputWidth - FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
                             inputX <= FINDER_PATTERN_SIZE && inputY >= inputHeight - FINDER_PATTERN_SIZE);
 
                     boolean isInLogoArea = logo != null &&
-                            outputX >= logoX && outputX < (logoX + logoWidth) - hexSize &&
-                            outputY >= logoY && outputY < (logoY + logoHeight) - hexSize;
+                            outputX >= logoX && outputX < (logoX + logoWidth) - multiple &&
+                            outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
 
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.clearLogoBackground)) {
-                        drawHexagon(canvas, paint, outputX + multiple/2f, outputY + multiple/2f, hexSize);
+                        if(qrOptions.customPatternStyle == QRStyles.CustomPatternStyle.Squared) {
+                            CustomPattern.drawInnerPatternNormalStyle(canvas, paint, outputX, outputY, multiple);
+                        }else if(qrOptions.customPatternStyle == QRStyles.CustomPatternStyle.Fluid) {
+                            CustomPattern.drawInnerPatternFluidStyle(canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                        }
                     }
                 }
             }
         }
 
-        // Draw finder patterns
         int patternSize = multiple * FINDER_PATTERN_SIZE;
 
-        drawFinderPatternHexStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.foregroundColor);
-        drawFinderPatternHexStyle(canvas, paint,
-                leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple,
-                topPadding, patternSize, qrOptions.foregroundColor);
-        drawFinderPatternHexStyle(canvas, paint, leftPadding,
-                topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple,
-                patternSize, qrOptions.foregroundColor);
+        if(qrOptions.customEyeShape == QRStyles.CustomEyeShape.Squared) {
+            CustomEyes.drawFinderPatternSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            CustomEyes.drawFinderPatternSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            CustomEyes.drawFinderPatternSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.foregroundColor);
+        }else if(qrOptions.customEyeShape == QRStyles.CustomEyeShape.RoundSquared) {
+            CustomEyes.drawFinderPatternRoundedStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            CustomEyes.drawFinderPatternRoundedStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            CustomEyes.drawFinderPatternRoundedStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.foregroundColor);
+        }else if(qrOptions.customEyeShape == QRStyles.CustomEyeShape.Hexagonal) {
+            CustomEyes.drawFinderPatternHexStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.foregroundColor);
+            CustomEyes.drawFinderPatternHexStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.foregroundColor);
+            CustomEyes.drawFinderPatternHexStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.foregroundColor);
+        }
 
-        // Draw logo last
+
         if (logo != null) {
             Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
             canvas.drawBitmap(scaledLogo, logoX, logoY, null);
@@ -122,43 +115,6 @@ class HexagonalQR {
         return bitmap;
     }
 
-    private static void drawHexagon(Canvas canvas, Paint paint, float centerX, float centerY, float size) {
-        Path hexagonPath = new Path();
-        for (int i = 0; i < 6; i++) {
-            float angle = (float) (2.0 * Math.PI * i / 6);
-            float x = centerX + size * (float) Math.cos(angle);
-            float y = centerY + size * (float) Math.sin(angle);
-            if (i == 0) {
-                hexagonPath.moveTo(x, y);
-            } else {
-                hexagonPath.lineTo(x, y);
-            }
-        }
-        hexagonPath.close();
-        canvas.drawPath(hexagonPath, paint);
-    }
 
-    private static void drawFinderPatternHexStyle(
-            Canvas canvas,
-            Paint paint,
-            int x,
-            int y,
-            int size,
-            int foregroundColor
-    ) {
-        float centerX = x + size/2f;
-        float centerY = y + size/2f;
 
-        // Draw outer hexagon
-        paint.setColor(foregroundColor);
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(size/8f);
-        drawHexagon(canvas, paint, centerX, centerY, size/2f);
-
-        // Draw inner hexagon
-        paint.setColor(foregroundColor);
-        paint.setStyle(Paint.Style.FILL);
-        drawHexagon(canvas, paint, centerX, centerY, size/4.8f);
-    }
 }

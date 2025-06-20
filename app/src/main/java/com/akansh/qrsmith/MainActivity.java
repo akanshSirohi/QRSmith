@@ -37,13 +37,15 @@ public class MainActivity extends AppCompatActivity {
         options.backgroundColor = Color.WHITE;
         options.foregroundColor = Color.BLACK;
         options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
-        options.style = QRSmith.QRCodeStyle.SQUARED;
+        options.style = QRSmith.QRCodeStyle.CUSTOM;
         options.fluid = true;
 //        options.logo = logo;
 //        options.background = bg;
         options.clearLogoBackground = true;
         options.quietZone = 1;
         options.dotSizeFactor = 1f;
+        options.customPatternStyle = QRStyles.CustomPatternStyle.Fluid;
+        options.customEyeShape = QRStyles.CustomEyeShape.Hexagonal;
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);

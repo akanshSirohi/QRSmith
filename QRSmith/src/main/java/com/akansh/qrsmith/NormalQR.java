@@ -123,11 +123,11 @@ class NormalQR {
         }
 
         int patternSize = multiple * FINDER_PATTERN_SIZE;
-        drawFinderPatternRoundedStyle(canvas, paint, leftPadding, topPadding, patternSize, cornerRadiusPx, qrOptions.foregroundColor);
-        drawFinderPatternRoundedStyle(canvas, paint,
+        drawFinderPattern(canvas, paint, leftPadding, topPadding, patternSize, cornerRadiusPx, qrOptions.foregroundColor);
+        drawFinderPattern(canvas, paint,
                 leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple,
                 topPadding, patternSize, cornerRadiusPx, qrOptions.foregroundColor);
-        drawFinderPatternRoundedStyle(canvas, paint,
+        drawFinderPattern(canvas, paint,
                 leftPadding,
                 topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple,
                 patternSize, cornerRadiusPx, qrOptions.foregroundColor);
@@ -142,7 +142,7 @@ class NormalQR {
 
 
 
-    private static void drawFinderPatternRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, float radius, int color) {
+    private static void drawFinderPattern(Canvas canvas, Paint paint, int x, int y, int size, float radius, int color) {
         int stroke = size / 7;
         int innerSize = size * 3 / 7;
         int innerOffset = size * 2 / 7;
