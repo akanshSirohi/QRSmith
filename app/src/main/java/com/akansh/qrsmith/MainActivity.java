@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,20 +33,18 @@ public class MainActivity extends AppCompatActivity {
 //        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
 //        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.bg_img);
         QRCodeOptions options = new QRCodeOptions();
-        options.width = 500;
-        options.height = 500;
+        options.width = 720;
+        options.height = 720;
         options.backgroundColor = Color.WHITE;
         options.foregroundColor = Color.BLACK;
         options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
-        options.style = QRSmith.QRCodeStyle.CUSTOM;
-        options.fluid = true;
 //        options.logo = logo;
 //        options.background = bg;
         options.clearLogoBackground = true;
         options.quietZone = 1;
         options.dotSizeFactor = 1f;
-        options.customPatternStyle = QRStyles.CustomPatternStyle.Fluid;
-        options.customEyeShape = QRStyles.CustomEyeShape.Hexagonal;
+        options.patternStyle = QRStyles.PatternStyle.Dotted;
+        options.eyeShape = QRStyles.EyeShape.Hexagonal;
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);

@@ -14,9 +14,12 @@ import com.google.zxing.qrcode.encoder.QRCode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomQR {
+class QRRenderer {
+    QRDataPatternRenderer qrDataPatternRenderer = new QRDataPatternRenderer();
+    QRFinderPatternRenderer qrFinderPatternRenderer = new QRFinderPatternRenderer();
 
-    public static Bitmap renderQRImage(String content, QRCodeOptions qrOptions, ErrorCorrectionLevel errorCorrectionLevel) throws WriterException {
+
+    public Bitmap renderQRImage(String content, QRCodeOptions qrOptions, ErrorCorrectionLevel errorCorrectionLevel) throws WriterException {
         Map<EncodeHintType, Object> hints = new HashMap<>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         QRCode qrCode = Encoder.encode(content, errorCorrectionLevel, hints);
@@ -80,10 +83,14 @@ public class CustomQR {
                             outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
 
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.clearLogoBackground)) {
-                        if(qrOptions.customPatternStyle == QRStyles.CustomPatternStyle.Squared) {
-                            CustomPattern.drawInnerPatternNormalStyle(canvas, paint, outputX, outputY, multiple);
-                        }else if(qrOptions.customPatternStyle == QRStyles.CustomPatternStyle.Fluid) {
-                            CustomPattern.drawInnerPatternFluidStyle(canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                        if(qrOptions.patternStyle == QRStyles.PatternStyle.Squared) {
+                            qrDataPatternRenderer.drawNormalStyle(canvas, paint, outputX, outputY, multiple);
+                        }else if(qrOptions.patternStyle == QRStyles.PatternStyle.Fluid) {
+                            qrDataPatternRenderer.drawFluidStyle(canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                        }else if(qrOptions.patternStyle == QRStyles.PatternStyle.Dotted) {
+                            qrDataPatternRenderer.drawDottedStyle(canvas, paint, outputX, outputY, multiple);
+                        }else if(qrOptions.patternStyle == QRStyles.PatternStyle.Hexagonal) {
+                            qrDataPatternRenderer.drawHexStyle(canvas, paint, outputX, outputY, multiple);
                         }
                     }
                 }
@@ -92,18 +99,22 @@ public class CustomQR {
 
         int patternSize = multiple * FINDER_PATTERN_SIZE;
 
-        if(qrOptions.customEyeShape == QRStyles.CustomEyeShape.Squared) {
-            CustomEyes.drawFinderPatternSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.foregroundColor);
-            CustomEyes.drawFinderPatternSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.foregroundColor);
-            CustomEyes.drawFinderPatternSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.foregroundColor);
-        }else if(qrOptions.customEyeShape == QRStyles.CustomEyeShape.RoundSquared) {
-            CustomEyes.drawFinderPatternRoundedStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.foregroundColor);
-            CustomEyes.drawFinderPatternRoundedStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.foregroundColor);
-            CustomEyes.drawFinderPatternRoundedStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.foregroundColor);
-        }else if(qrOptions.customEyeShape == QRStyles.CustomEyeShape.Hexagonal) {
-            CustomEyes.drawFinderPatternHexStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.foregroundColor);
-            CustomEyes.drawFinderPatternHexStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.foregroundColor);
-            CustomEyes.drawFinderPatternHexStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.foregroundColor);
+        if(qrOptions.eyeShape == QRStyles.EyeShape.Squared) {
+            qrFinderPatternRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.foregroundColor);
+        }else if(qrOptions.eyeShape == QRStyles.EyeShape.RoundSquared) {
+            qrFinderPatternRenderer.drawRoundedStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawRoundedStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawRoundedStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.foregroundColor);
+        }else if(qrOptions.eyeShape == QRStyles.EyeShape.Hexagonal) {
+            qrFinderPatternRenderer.drawHexStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawHexStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawHexStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.foregroundColor);
+        }else if(qrOptions.eyeShape == QRStyles.EyeShape.Rounded) {
+            qrFinderPatternRenderer.drawCircleStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawCircleStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.foregroundColor);
+            qrFinderPatternRenderer.drawCircleStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.foregroundColor);
         }
 
 
@@ -114,7 +125,4 @@ public class CustomQR {
 
         return bitmap;
     }
-
-
-
 }

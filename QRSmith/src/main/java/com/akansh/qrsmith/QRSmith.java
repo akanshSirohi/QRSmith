@@ -7,10 +7,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QRSmith {
 
-    public enum QRCodeStyle {
-        SQUARED, ROUNDED, HEXAGONAL, CUSTOM
-    }
-
     public enum QRErrorCorrectionLevel {
         L, M, Q, H
     }
@@ -28,15 +24,8 @@ public class QRSmith {
             if(options.logoPadding != 0) {
                 options.logo = addPaddingToBitmap(options.logo, options.logoPadding);
             }
-            if (options.style == QRCodeStyle.SQUARED) {
-                qrBitmap = NormalQR.renderQRImage(content, options, errorCorrectionLevel);
-            } else if (options.style == QRCodeStyle.ROUNDED) {
-                qrBitmap = RoundQR.renderQRImage(content, options, errorCorrectionLevel);
-            }else if (options.style == QRCodeStyle.HEXAGONAL) {
-                qrBitmap = HexagonalQR.renderQRImage(content, options, errorCorrectionLevel);
-            }else if (options.style == QRCodeStyle.CUSTOM) {
-                qrBitmap = CustomQR.renderQRImage(content, options, errorCorrectionLevel);
-            }
+            QRRenderer qrRenderer = new QRRenderer();
+            qrBitmap = qrRenderer.renderQRImage(content, options, errorCorrectionLevel);
         }catch (Exception e) {}
         return qrBitmap;
     }
