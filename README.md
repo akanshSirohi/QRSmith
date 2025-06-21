@@ -58,20 +58,24 @@ dependencies {
 ```java
 import com.akansh.qrsmith.QRSmith;
 import com.akansh.qrsmith.model.QRCodeOptions;
+import com.akansh.qrsmith.model.QRStyles;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 
 // Define the QR code content
 String content = "https://example.com";
 
 // Create QR code options
-QRCodeOptions options = new QRCodeOptions();
-options.width = 500;
-options.height = 500;
-options.foregroundColor = Color.BLACK;
-options.backgroundColor = Color.WHITE;
-options.style = QRSmith.QRCodeStyle.SQUARED;
-options.radius = 5; // Rounded corners
-options.quietZone = 1; // Set quiet zone size
+QRCodeOptions options = new QRCodeOptions.Builder()
+        .setWidth(500)
+        .setHeight(500)
+        .setForegroundColor(Color.BLACK)
+        .setBackgroundColor(Color.WHITE)
+        .setPatternStyle(QRStyles.PatternStyle.Squared)
+        .setEyeShape(QRStyles.EyeShape.Squared)
+        .setDotSizeFactor(0.8f)
+        .setQuietZone(1)
+        .build();
 
 try {
     // Generate the QR code
@@ -87,7 +91,10 @@ try {
 ```java
 import com.akansh.qrsmith.QRSmith;
 import com.akansh.qrsmith.model.QRCodeOptions;
+import com.akansh.qrsmith.model.QRStyles;
+import com.akansh.qrsmith.model.QRErrorCorrectionLevel;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 
 // Define the QR code content
 String content = "https://example.com";
@@ -97,18 +104,18 @@ Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
 Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.background);
 
 // Create QR code options
-QRCodeOptions options = new QRCodeOptions();
-options.width = 600;
-options.height = 600;
-options.foregroundColor = Color.BLACK;
-options.backgroundColor = Color.WHITE;
-options.style = QRSmith.QRCodeStyle.HEXAGONAL;
-options.radius = 0; // Radius only affects SQUARED style
-options.logo = logo;
-options.background = background; // Set custom background
-options.dotSizeFactor = 0.8f;
-options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.Q;
-options.quietZone = 2; // Set quiet zone size
+QRCodeOptions options = new QRCodeOptions.Builder()
+        .setWidth(600)
+        .setHeight(600)
+        .setForegroundColor(Color.BLACK)
+        .setBackgroundColor(Color.WHITE)
+        .setPatternStyle(QRStyles.PatternStyle.Hexagonal)
+        .setLogo(logo)
+        .setBackground(background) // Set custom background
+        .setDotSizeFactor(0.8f)
+        .setErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
+        .setQuietZone(2)
+        .build();
 
 try {
     // Generate the QR code

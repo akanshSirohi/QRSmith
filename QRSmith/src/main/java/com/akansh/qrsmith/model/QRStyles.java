@@ -1,10 +1,10 @@
 package com.akansh.qrsmith.model;
 
 public class QRStyles {
-    public static enum EyeShape {
+    public enum EyeShape {
         Squared, RoundSquared, Rounded, Hexagonal
     }
-    public static enum PatternStyle {
+    public enum PatternStyle {
         Squared, Fluid, Dotted, Hexagonal
     }
 }
