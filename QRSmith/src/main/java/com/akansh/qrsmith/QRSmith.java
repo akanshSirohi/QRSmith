@@ -2,6 +2,7 @@ package com.akansh.qrsmith;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
@@ -21,12 +22,14 @@ public class QRSmith {
         ErrorCorrectionLevel errorCorrectionLevel = getErrorCorrectionLevel(options);
 
         try {
-            if(options.logoPadding != 0) {
+            if (options.logoPadding != 0) {
                 options.logo = addPaddingToBitmap(options.logo, options.logoPadding);
             }
             QRRenderer qrRenderer = new QRRenderer();
             qrBitmap = qrRenderer.renderQRImage(content, options, errorCorrectionLevel);
-        }catch (Exception e) {}
+        } catch (Exception e) {
+            Log.e("QRSmith", "Error generating QR code", e);
+        }
         return qrBitmap;
     }
 
