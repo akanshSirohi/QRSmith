@@ -14,6 +14,9 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.akansh.qrsmith.model.QRCodeOptions;
+import com.akansh.qrsmith.model.QRStyles;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

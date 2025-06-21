@@ -1,4 +1,4 @@
-package com.akansh.qrsmith;
+package com.akansh.qrsmith.model;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

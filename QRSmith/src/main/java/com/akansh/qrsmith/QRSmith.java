@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import com.akansh.qrsmith.model.QRCodeOptions;
+import com.akansh.qrsmith.renderer.QRRenderer;
+
 public class QRSmith {
 
     public enum QRErrorCorrectionLevel {

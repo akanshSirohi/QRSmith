@@ -57,7 +57,7 @@ dependencies {
 
 ```java
 import com.akansh.qrsmith.QRSmith;
-import com.akansh.qrsmith.QRCodeOptions;
+import com.akansh.qrsmith.model.QRCodeOptions;
 import android.graphics.Bitmap;
 
 // Define the QR code content
@@ -86,7 +86,7 @@ try {
 
 ```java
 import com.akansh.qrsmith.QRSmith;
-import com.akansh.qrsmith.QRCodeOptions;
+import com.akansh.qrsmith.model.QRCodeOptions;
 import android.graphics.Bitmap;
 
 // Define the QR code content
