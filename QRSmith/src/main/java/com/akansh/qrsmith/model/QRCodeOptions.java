@@ -12,7 +12,7 @@ public class QRCodeOptions {
     public Bitmap background = null;
     public int backgroundColor = Color.WHITE;
     public int foregroundColor = Color.BLACK;
-    public QRSmith.QRErrorCorrectionLevel errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H; // Default error correction level
+    public QRErrorCorrectionLevel errorCorrectionLevel = QRErrorCorrectionLevel.H; // Default error correction level
     public float dotSizeFactor = 0.8f;
     public boolean clearLogoBackground = true;
     public int logoPadding = 0;

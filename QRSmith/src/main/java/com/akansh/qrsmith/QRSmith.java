@@ -10,10 +10,6 @@ import com.akansh.qrsmith.renderer.QRRenderer;
 
 public class QRSmith {
 
-    public enum QRErrorCorrectionLevel {
-        L, M, Q, H
-    }
-
     public static Bitmap generateQRCode(String content, QRCodeOptions options) {
         if (content == null || content.isEmpty()) {
             throw new IllegalArgumentException("Content cannot be null or empty");
