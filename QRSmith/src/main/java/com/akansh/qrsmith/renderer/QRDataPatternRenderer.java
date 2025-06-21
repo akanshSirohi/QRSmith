@@ -1,10 +1,12 @@
-package com.akansh.qrsmith;
+package com.akansh.qrsmith.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
 import com.google.zxing.qrcode.encoder.ByteMatrix;
+
+import com.akansh.qrsmith.util.CommonShapeUtils;
 
 class QRDataPatternRenderer {
     public void drawFluidStyle(Canvas canvas, Paint paint, int inputX, int inputY, ByteMatrix input, int inputWidth, int inputHeight, int outputX, int outputY, int multiple) {

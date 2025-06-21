@@ -14,6 +14,10 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.akansh.qrsmith.model.QRCodeOptions;
+import com.akansh.qrsmith.model.QRErrorCorrectionLevel;
+import com.akansh.qrsmith.model.QRStyles;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         options.height = 720;
         options.backgroundColor = Color.WHITE;
         options.foregroundColor = Color.BLACK;
-        options.errorCorrectionLevel = QRSmith.QRErrorCorrectionLevel.H;
+        options.errorCorrectionLevel = QRErrorCorrectionLevel.H;
 //        options.logo = logo;
 //        options.background = bg;
         options.clearLogoBackground = true;

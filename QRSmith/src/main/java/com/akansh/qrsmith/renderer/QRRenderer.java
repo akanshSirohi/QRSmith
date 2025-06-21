@@ -1,4 +1,4 @@
-package com.akansh.qrsmith;
+package com.akansh.qrsmith.renderer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,10 +11,13 @@ import com.google.zxing.qrcode.encoder.ByteMatrix;
 import com.google.zxing.qrcode.encoder.Encoder;
 import com.google.zxing.qrcode.encoder.QRCode;
 
+import com.akansh.qrsmith.model.QRCodeOptions;
+import com.akansh.qrsmith.model.QRStyles;
+
 import java.util.HashMap;
 import java.util.Map;
 
-class QRRenderer {
+public class QRRenderer {
     QRDataPatternRenderer qrDataPatternRenderer = new QRDataPatternRenderer();
     QRFinderPatternRenderer qrFinderPatternRenderer = new QRFinderPatternRenderer();
 

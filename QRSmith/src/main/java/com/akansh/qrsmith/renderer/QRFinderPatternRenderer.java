@@ -1,8 +1,10 @@
-package com.akansh.qrsmith;
+package com.akansh.qrsmith.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+
+import com.akansh.qrsmith.util.CommonShapeUtils;
 
 class QRFinderPatternRenderer {
 

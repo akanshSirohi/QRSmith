@@ -1,4 +1,4 @@
-package com.akansh.qrsmith;
+package com.akansh.qrsmith.model;
 
 public class QRStyles {
     public static enum EyeShape {

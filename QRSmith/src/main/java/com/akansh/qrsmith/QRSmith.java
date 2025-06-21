@@ -6,11 +6,10 @@ import android.util.Log;
 
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-public class QRSmith {
+import com.akansh.qrsmith.model.QRCodeOptions;
+import com.akansh.qrsmith.renderer.QRRenderer;
 
-    public enum QRErrorCorrectionLevel {
-        L, M, Q, H
-    }
+public class QRSmith {
 
     public static Bitmap generateQRCode(String content, QRCodeOptions options) {
         if (content == null || content.isEmpty()) {
