@@ -21,11 +21,15 @@ public class QRSmith {
         ErrorCorrectionLevel errorCorrectionLevel = getErrorCorrectionLevel(options);
 
         try {
-            if (options.logoPadding != 0) {
-                options.logo = addPaddingToBitmap(options.logo, options.logoPadding);
+            Bitmap logo = options.getLogo();
+            if (options.getLogoPadding() != 0) {
+                logo = addPaddingToBitmap(logo, options.getLogoPadding());
             }
+            QRCodeOptions paddedOptions = new QRCodeOptions.Builder(options)
+                    .setLogo(logo)
+                    .build();
             QRRenderer qrRenderer = new QRRenderer();
-            qrBitmap = qrRenderer.renderQRImage(content, options, errorCorrectionLevel);
+            qrBitmap = qrRenderer.renderQRImage(content, paddedOptions, errorCorrectionLevel);
         } catch (Exception e) {
             Log.e("QRSmith", "Error generating QR code", e);
         }
@@ -34,7 +38,7 @@ public class QRSmith {
 
     private static ErrorCorrectionLevel getErrorCorrectionLevel(QRCodeOptions options) {
         ErrorCorrectionLevel errorCorrectionLevel;
-        switch (options.errorCorrectionLevel) {
+        switch (options.getErrorCorrectionLevel()) {
             case L:
                 errorCorrectionLevel = ErrorCorrectionLevel.L;
                 break;

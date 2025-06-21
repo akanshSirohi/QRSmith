@@ -36,19 +36,20 @@ public class MainActivity extends AppCompatActivity {
 
 //        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
 //        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.bg_img);
-        QRCodeOptions options = new QRCodeOptions();
-        options.width = 720;
-        options.height = 720;
-        options.backgroundColor = Color.WHITE;
-        options.foregroundColor = Color.BLACK;
-        options.errorCorrectionLevel = QRErrorCorrectionLevel.H;
-//        options.logo = logo;
-//        options.background = bg;
-        options.clearLogoBackground = true;
-        options.quietZone = 1;
-        options.dotSizeFactor = 1f;
-        options.patternStyle = QRStyles.PatternStyle.Dotted;
-        options.eyeShape = QRStyles.EyeShape.Hexagonal;
+        QRCodeOptions options = new QRCodeOptions.Builder()
+                .setWidth(720)
+                .setHeight(720)
+                .setBackgroundColor(Color.WHITE)
+                .setForegroundColor(Color.BLACK)
+                .setErrorCorrectionLevel(QRErrorCorrectionLevel.H)
+//                .setLogo(logo)
+//                .setBackground(bg)
+                .setClearLogoBackground(true)
+                .setQuietZone(1)
+                .setDotSizeFactor(1f)
+                .setPatternStyle(QRStyles.PatternStyle.Dotted)
+                .setEyeShape(QRStyles.EyeShape.Hexagonal)
+                .build();
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
