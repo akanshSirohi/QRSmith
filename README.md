@@ -148,13 +148,6 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `logoPadding`          | Padding around the logo                           | `0`           |
 | `quietZone`            | Quiet zone size around the QR code                | `1`           |
 
-## Supported QR Code Styles
-
-1. **Square Style**: The traditional QR code style.
-2. **Fluid Style**: Organic modules for a smooth appearance.
-3. **Dotted Style**: Uses circular dots for a softer look.
-4. **Hexagon Style**: Creates a hexagonal pattern for a unique design.
-
 ## Contributing
 
 We welcome contributions! Feel free to open issues or submit pull requests to improve this library.
