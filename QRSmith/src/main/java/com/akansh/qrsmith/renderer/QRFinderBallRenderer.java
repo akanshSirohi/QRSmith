@@ -154,8 +154,7 @@ public class QRFinderBallRenderer {
     }
 
     public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
-
-        float gapModules  = 1.8f;               // same gap you use elsewhere
+        float gapModules  = 1.8f;
         float innerOffPx  = multiple * gapModules;
         float innerSizePx = size - 2f * innerOffPx;
 
@@ -171,13 +170,28 @@ public class QRFinderBallRenderer {
 
     public void drawBlobCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
 
-        float gapModules  = 1.8f;               // same gap you use elsewhere
+        float gapModules  = 1.8f;
         float innerOffPx  = multiple * gapModules;
         float innerSizePx = size - 2f * innerOffPx;
 
         int[] orientation = {1, 1, -1, 1, 1, -1};
 
         Path ball = CommonShapeUtils.makeFinderFramePath(pos, innerSizePx, x + innerOffPx, y + innerOffPx, CommonShapeUtils.BlobCorner_Ball_SVG, orientation);
+
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setAntiAlias(true);
+        canvas.drawPath(ball, paint);
+    }
+
+    public void drawCornerWarpStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
+        float gapModules  = 1.8f;
+        float innerOffPx  = multiple * gapModules;
+        float innerSizePx = size - 2f * innerOffPx;
+
+        int[] orientation = {1, 1, -1, 1, 1, -1};
+
+        Path ball = CommonShapeUtils.makeFinderFramePath(pos, innerSizePx, x + innerOffPx, y + innerOffPx, CommonShapeUtils.CornerWarp_Ball_SVG, orientation);
 
         paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);

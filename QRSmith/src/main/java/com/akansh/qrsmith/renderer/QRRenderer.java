@@ -140,6 +140,10 @@ public class QRRenderer {
             qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding, patternSize,  qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
             qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor(),CommonShapeUtils.CornerPosition.TOP_RIGHT);
             qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.CornerWarp) {
+            qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding, patternSize,  qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
+            qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor(),CommonShapeUtils.CornerPosition.TOP_RIGHT);
+            qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
         }
 
         // Finder ball renderer
@@ -179,6 +183,10 @@ public class QRRenderer {
             qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
             qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
             qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.CornerWarp) {
+            qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
+            qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
+            qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
         }
 
 

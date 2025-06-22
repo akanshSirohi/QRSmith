@@ -179,4 +179,15 @@ class QRFinderFrameRenderer {
         Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, CommonShapeUtils.BlobCorner_Frame_SVG, orientation);
         canvas.drawPath(finder, paint);
     }
+
+    public void drawCornerWarpStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setAntiAlias(true);
+
+        int[] orientation = {1, 1, -1, 1, 1, -1};
+
+        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, CommonShapeUtils.CornerWarp_Frame_SVG, orientation);
+        canvas.drawPath(finder, paint);
+    }
 }
