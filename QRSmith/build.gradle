@@ -28,6 +28,7 @@ android {
 
 dependencies {
     implementation "com.google.zxing:core:3.5.3"
+    implementation "androidx.core:core:1.16.0"
 }
 
 // Task to generate sources JAR
@@ -67,6 +68,12 @@ afterEvaluate {
                         zxingDependency.appendNode('artifactId', 'core')
                         zxingDependency.appendNode('version', '3.5.3')
                         zxingDependency.appendNode('scope', 'compile')
+
+                        // AndroidX dependency information
+                        def androidxDependency = dependenciesNode.appendNode('dependency')
+                        androidxDependency.appendNode('groupId', 'androidx.core')
+                        androidxDependency.appendNode('artifactId', 'core')
+                        androidxDependency.appendNode('version', '1.16.0')
                     }
                 }
             }

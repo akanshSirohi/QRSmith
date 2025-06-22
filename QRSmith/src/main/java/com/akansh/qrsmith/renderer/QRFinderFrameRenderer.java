@@ -5,16 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 
-import com.akansh.qrsmith.util.CommonShapeUtils;
-
 class QRFinderFrameRenderer {
-
-    public enum CornerPosition {
-        TOP_LEFT,
-        TOP_RIGHT,
-        BOTTOM_RIGHT,
-        BOTTOM_LEFT
-    }
 
     private void drawMultiRoundCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, float[] radii) {
         // stroke and radius follow the library’s own math
@@ -80,7 +71,7 @@ class QRFinderFrameRenderer {
 
 
 
-    public void drawOneSharpCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CornerPosition sharpCorner) {
+    public void drawOneSharpCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 5f;
 
         // start with all rounded
@@ -98,9 +89,6 @@ class QRFinderFrameRenderer {
             case TOP_RIGHT:
                 radii[6] = radii[7] = 0;
                 break;
-            case BOTTOM_RIGHT:
-                radii[0] = radii[1] = 0;
-                break;
             case BOTTOM_LEFT:
                 radii[2] = radii[3] = 0;
                 break;
@@ -109,7 +97,7 @@ class QRFinderFrameRenderer {
         drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
     }
 
-    public void drawTechEyeStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CornerPosition sharpCorner) {
+    public void drawTechEyeStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 5f;
 
         // start with all rounded
@@ -129,10 +117,6 @@ class QRFinderFrameRenderer {
                 radii[2] = radii[3] = 0;
                 radii[6] = radii[7] = 0;
                 break;
-            case BOTTOM_RIGHT:
-                radii[4] = radii[5] = 0;
-                radii[0] = radii[1] = 0;
-                break;
             case BOTTOM_LEFT:
                 radii[6] = radii[7] = 0;
                 radii[2] = radii[3] = 0;
@@ -142,7 +126,7 @@ class QRFinderFrameRenderer {
         drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
     }
 
-    public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CornerPosition sharpCorner) {
+    public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 5f;
 
         // start with all rounded
@@ -164,11 +148,6 @@ class QRFinderFrameRenderer {
                 radii[4] = radii[5] = 0;
                 radii[6] = radii[7] = 0;
                 break;
-            case BOTTOM_RIGHT:
-                radii[0] = radii[1] = 0;
-                radii[2] = radii[3] = 0;
-                radii[6] = radii[7] = 0;
-                break;
             case BOTTOM_LEFT:
                 radii[0] = radii[1] = 0;
                 radii[2] = radii[3] = 0;
@@ -179,5 +158,25 @@ class QRFinderFrameRenderer {
         drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
     }
 
+    public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setAntiAlias(true);
 
+        int[] orientation = {-1, 1, 1, 1, -1, -1};
+
+        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, CommonShapeUtils.PinchedSquircle_Frame_SVG, orientation);
+        canvas.drawPath(finder, paint);
+    }
+
+    public void drawBlobCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setAntiAlias(true);
+
+        int[] orientation = {1, 1, -1, 1, 1, -1};
+
+        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, CommonShapeUtils.BlobCorner_Frame_SVG, orientation);
+        canvas.drawPath(finder, paint);
+    }
 }
