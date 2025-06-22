@@ -42,7 +42,7 @@ afterEvaluate {
             release(MavenPublication) {
                 groupId "com.github.akanshSirohi"
                 artifactId "QRSmith"
-                version "1.0.0"
+                version "2.0.0"
 
                 // Explicitly include the AAR artifact
                 artifact("$buildDir/outputs/aar/${project.name}-release.aar") {
