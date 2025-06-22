@@ -7,7 +7,7 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 - **Multiple Styles**: Generate QR codes in **square**, **fluid**, **dotted**, or **hexagon** styles.
 - **Logo Integration**: Add logos with optional padding and background clearing.
 - **Custom Backgrounds**: Use custom images or colors as QR code backgrounds.
-- **Full Customization**: Adjust size, colors, dot size factors, quiet zones, and more.
+- **Full Customization**: Adjust size, colors, quiet zones, and more.
 - **Customizable Finder Patterns**: Choose separate shapes for the finder frame and ball.
 - **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
 - **Developer-Friendly API**: Easy-to-use interface with robust customization options.
@@ -75,7 +75,6 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .setPatternStyle(QRStyles.PatternStyle.Square)
         .setEyeFrameShape(QRStyles.EyeFrameShape.Square)
         .setEyeBallShape(QRStyles.EyeBallShape.Square)
-        .setDotSizeFactor(0.8f)
         .setQuietZone(1)
         .build();
 
@@ -116,7 +115,6 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .setEyeBallShape(QRStyles.EyeBallShape.Hexagon)
         .setLogo(logo)
         .setBackground(background) // Set custom background
-        .setDotSizeFactor(0.8f)
         .setErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
         .setQuietZone(2)
         .build();
@@ -142,7 +140,6 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `backgroundColor`      | Color of the QR code background                   | `Color.WHITE` |
 | `patternStyle` | Pattern style (`Square`, `Fluid`, `Dotted`, `Hexagon`) | `Square`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
-| `dotSizeFactor`        | Adjusts the size of dots                          | `0.8f`        |
 | `eyeFrameShape`      | Shape of the finder frame (`Square`, `RoundSquare`, `Circle`, `Hexagon`) | `Square`     |
 | `eyeBallShape`       | Shape of the finder ball (`Square`, `RoundSquare`, `Circle`, `Hexagon`) | `Square`     |
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
