@@ -60,10 +60,7 @@ public class QRSmith {
      * @param paddingPx The padding size in pixels to add on each side.
      * @return A new Bitmap with the specified padding, or null if originalBitmap is null.
      */
-    public static Bitmap addPaddingToBitmap(
-            Bitmap originalBitmap,
-            int paddingPx
-    ) {
+    public static Bitmap addPaddingToBitmap(Bitmap originalBitmap, int paddingPx) {
         if (originalBitmap == null) {
             return null;
         }

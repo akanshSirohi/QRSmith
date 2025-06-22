@@ -12,10 +12,10 @@ public class QRCodeOptions {
     private final int backgroundColor;
     private final int foregroundColor;
     private final QRErrorCorrectionLevel errorCorrectionLevel;
-    private final float dotSizeFactor;
     private final boolean clearLogoBackground;
     private final int logoPadding;
-    private final QRStyles.EyeShape eyeShape;
+    private final QRStyles.EyeFrameShape eyeFrameShape;
+    private final QRStyles.EyeBallShape eyeBallShape;
     private final QRStyles.PatternStyle patternStyle;
 
     private QRCodeOptions(Builder builder) {
@@ -27,10 +27,10 @@ public class QRCodeOptions {
         this.backgroundColor = builder.backgroundColor;
         this.foregroundColor = builder.foregroundColor;
         this.errorCorrectionLevel = builder.errorCorrectionLevel;
-        this.dotSizeFactor = builder.dotSizeFactor;
         this.clearLogoBackground = builder.clearLogoBackground;
         this.logoPadding = builder.logoPadding;
-        this.eyeShape = builder.eyeShape;
+        this.eyeFrameShape = builder.eyeFrameShape;
+        this.eyeBallShape = builder.eyeBallShape;
         this.patternStyle = builder.patternStyle;
     }
 
@@ -42,10 +42,10 @@ public class QRCodeOptions {
     public int getBackgroundColor() { return backgroundColor; }
     public int getForegroundColor() { return foregroundColor; }
     public QRErrorCorrectionLevel getErrorCorrectionLevel() { return errorCorrectionLevel; }
-    public float getDotSizeFactor() { return dotSizeFactor; }
     public boolean isClearLogoBackground() { return clearLogoBackground; }
     public int getLogoPadding() { return logoPadding; }
-    public QRStyles.EyeShape getEyeShape() { return eyeShape; }
+    public QRStyles.EyeFrameShape getEyeFrameShape() { return eyeFrameShape; }
+    public QRStyles.EyeBallShape getEyeBallShape() { return eyeBallShape; }
     public QRStyles.PatternStyle getPatternStyle() { return patternStyle; }
 
     public static class Builder {
@@ -57,11 +57,11 @@ public class QRCodeOptions {
         private int backgroundColor = Color.WHITE;
         private int foregroundColor = Color.BLACK;
         private QRErrorCorrectionLevel errorCorrectionLevel = QRErrorCorrectionLevel.H;
-        private float dotSizeFactor = 0.8f;
         private boolean clearLogoBackground = true;
         private int logoPadding = 0;
-        private QRStyles.EyeShape eyeShape = QRStyles.EyeShape.Squared;
-        private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.Squared;
+        private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.Square;
+        private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.Square;
+        private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.Square;
 
         public Builder() {}
 
@@ -74,10 +74,10 @@ public class QRCodeOptions {
             this.backgroundColor = base.backgroundColor;
             this.foregroundColor = base.foregroundColor;
             this.errorCorrectionLevel = base.errorCorrectionLevel;
-            this.dotSizeFactor = base.dotSizeFactor;
             this.clearLogoBackground = base.clearLogoBackground;
             this.logoPadding = base.logoPadding;
-            this.eyeShape = base.eyeShape;
+            this.eyeFrameShape = base.eyeFrameShape;
+            this.eyeBallShape = base.eyeBallShape;
             this.patternStyle = base.patternStyle;
         }
 
@@ -89,10 +89,10 @@ public class QRCodeOptions {
         public Builder setBackgroundColor(int backgroundColor) { this.backgroundColor = backgroundColor; return this; }
         public Builder setForegroundColor(int foregroundColor) { this.foregroundColor = foregroundColor; return this; }
         public Builder setErrorCorrectionLevel(QRErrorCorrectionLevel level) { this.errorCorrectionLevel = level; return this; }
-        public Builder setDotSizeFactor(float dotSizeFactor) { this.dotSizeFactor = dotSizeFactor; return this; }
         public Builder setClearLogoBackground(boolean clearLogoBackground) { this.clearLogoBackground = clearLogoBackground; return this; }
         public Builder setLogoPadding(int logoPadding) { this.logoPadding = logoPadding; return this; }
-        public Builder setEyeShape(QRStyles.EyeShape eyeShape) { this.eyeShape = eyeShape; return this; }
+        public Builder setEyeFrameShape(QRStyles.EyeFrameShape eyeFrameShape) { this.eyeFrameShape = eyeFrameShape; return this; }
+        public Builder setEyeBallShape(QRStyles.EyeBallShape eyeBallShape) { this.eyeBallShape = eyeBallShape; return this; }
         public Builder setPatternStyle(QRStyles.PatternStyle patternStyle) { this.patternStyle = patternStyle; return this; }
         public QRCodeOptions build() { return new QRCodeOptions(this); }
     }
