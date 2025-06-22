@@ -2,11 +2,19 @@ package com.akansh.qrsmith.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 
 import com.akansh.qrsmith.util.CommonShapeUtils;
 
 public class QRFinderBallRenderer {
+
+    public enum CornerPosition {
+        TOP_LEFT,
+        TOP_RIGHT,
+        BOTTOM_RIGHT,
+        BOTTOM_LEFT
+    }
 
     private void drawNormalStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, boolean rounded) {
         int stroke = size / 7;
@@ -46,5 +54,41 @@ public class QRFinderBallRenderer {
         paint.setColor(foregroundColor);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawOval(new RectF((x + MIDDLE_DOT_OFFSET), (y + MIDDLE_DOT_OFFSET), (x + MIDDLE_DOT_OFFSET + MIDDLE_DOT_DIAMETER), (y + MIDDLE_DOT_OFFSET + MIDDLE_DOT_DIAMETER)), paint);
+    }
+
+    public void drawOneSharpCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CornerPosition sharpCorner) {
+
+        float gapModules = 1.8f;
+        float innerOffset = multiple * gapModules;
+        float innerSize   = size - (innerOffset * 2f);
+        float radius    = (multiple / 2f) * 2f; // Tweak as needed
+
+        paint.setColor(color);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.FILL);    // filled, not stroked
+
+        float[] radii = {
+                radius, radius,   // TL
+                radius, radius,   // TR
+                radius, radius,   // BR
+                radius, radius    // BL
+        };
+        switch (sharpCorner) {
+            case TOP_LEFT:     radii[0] = radii[1] = 0; break;
+            case TOP_RIGHT:    radii[2] = radii[3] = 0; break;
+            case BOTTOM_RIGHT: radii[4] = radii[5] = 0; break;
+            case BOTTOM_LEFT:  radii[6] = radii[7] = 0; break;
+        }
+
+        RectF rect = new RectF(
+                x + innerOffset,
+                y + innerOffset,
+                x + innerOffset + innerSize,
+                y + innerOffset + innerSize
+        );
+
+        Path path = new Path();
+        path.addRoundRect(rect, radii, Path.Direction.CW);
+        canvas.drawPath(path, paint);
     }
 }

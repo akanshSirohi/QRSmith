@@ -2,11 +2,19 @@ package com.akansh.qrsmith.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 
 import com.akansh.qrsmith.util.CommonShapeUtils;
 
 class QRFinderFrameRenderer {
+
+    public enum CornerPosition {
+        TOP_LEFT,
+        TOP_RIGHT,
+        BOTTOM_RIGHT,
+        BOTTOM_LEFT
+    }
 
     private void drawNormalStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, boolean rounded) {
         int stroke = size / 7;
@@ -51,4 +59,38 @@ class QRFinderFrameRenderer {
 
         canvas.drawOval(new RectF(x, y, (x + circleDiameter), (y + circleDiameter)), paint);
     }
+
+    public void drawOneSharpCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CornerPosition sharpCorner) {
+
+        // stroke and radius follow the library’s own math
+        int stroke = size / 7;
+        float radius = (multiple / 2f) * 5f;
+
+        paint.setColor(color);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(stroke);
+
+        // start with all rounded
+        float[] radii = {
+                radius, radius,   // top-left
+                radius, radius,   // top-right
+                radius, radius,   // bottom-right
+                radius, radius    // bottom-left
+        };
+
+        // knock out the sharp corner
+        switch (sharpCorner) {
+            case TOP_LEFT:      radii[0] = radii[1] = 0; break;
+            case TOP_RIGHT:     radii[2] = radii[3] = 0; break;
+            case BOTTOM_RIGHT:  radii[4] = radii[5] = 0; break;
+            case BOTTOM_LEFT:   radii[6] = radii[7] = 0; break;
+        }
+
+        Path path = new Path();
+        path.addRoundRect(new RectF(x, y, x + size, y + size), radii, Path.Direction.CW);
+        canvas.drawPath(path, paint);
+    }
+
+
 }
