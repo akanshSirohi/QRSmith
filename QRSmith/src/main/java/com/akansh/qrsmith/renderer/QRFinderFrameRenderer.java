@@ -85,12 +85,19 @@ class QRFinderFrameRenderer {
                 radius, radius    // bottom-left
         };
 
-        // knock out the sharp corner
         switch (sharpCorner) {
-            case TOP_LEFT:      radii[4] = radii[5] = 0; break;
-            case TOP_RIGHT:     radii[6] = radii[7] = 0; break;
-            case BOTTOM_RIGHT:  radii[0] = radii[1] = 0; break;
-            case BOTTOM_LEFT:   radii[2] = radii[3] = 0; break;
+            case TOP_LEFT:
+                radii[4] = radii[5] = 0;
+                break;
+            case TOP_RIGHT:
+                radii[6] = radii[7] = 0;
+                break;
+            case BOTTOM_RIGHT:
+                radii[0] = radii[1] = 0;
+                break;
+            case BOTTOM_LEFT:
+                radii[2] = radii[3] = 0;
+                break;
         }
 
         drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
@@ -107,12 +114,60 @@ class QRFinderFrameRenderer {
                 radius, radius    // bottom-left
         };
 
-        // knock out the sharp corner
         switch (sharpCorner) {
-            case TOP_LEFT:      radii[0] = radii[1] = 0; radii[4] = radii[5] = 0; break;
-            case TOP_RIGHT:     radii[2] = radii[3] = 0; radii[6] = radii[7] = 0; break;
-            case BOTTOM_RIGHT:  radii[4] = radii[5] = 0; radii[0] = radii[1] = 0; break;
-            case BOTTOM_LEFT:   radii[6] = radii[7] = 0; radii[2] = radii[3] = 0; break;
+            case TOP_LEFT:
+                radii[0] = radii[1] = 0;
+                radii[4] = radii[5] = 0;
+                break;
+            case TOP_RIGHT:
+                radii[2] = radii[3] = 0;
+                radii[6] = radii[7] = 0;
+                break;
+            case BOTTOM_RIGHT:
+                radii[4] = radii[5] = 0;
+                radii[0] = radii[1] = 0;
+                break;
+            case BOTTOM_LEFT:
+                radii[6] = radii[7] = 0;
+                radii[2] = radii[3] = 0;
+                break;
+        }
+
+        drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
+    }
+
+    public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CornerPosition sharpCorner) {
+        float radius = (multiple / 2f) * 5f;
+
+        // start with all rounded
+        float[] radii = {
+                radius, radius,   // top-left
+                radius, radius,   // top-right
+                radius, radius,   // bottom-right
+                radius, radius    // bottom-left
+        };
+
+        switch (sharpCorner) {
+            case TOP_LEFT:
+                radii[2] = radii[3] = 0;
+                radii[4] = radii[5] = 0;
+                radii[6] = radii[7] = 0;
+                break;
+            case TOP_RIGHT:
+                radii[0] = radii[1] = 0;
+                radii[4] = radii[5] = 0;
+                radii[6] = radii[7] = 0;
+                break;
+            case BOTTOM_RIGHT:
+                radii[0] = radii[1] = 0;
+                radii[2] = radii[3] = 0;
+                radii[6] = radii[7] = 0;
+                break;
+            case BOTTOM_LEFT:
+                radii[0] = radii[1] = 0;
+                radii[2] = radii[3] = 0;
+                radii[4] = radii[5] = 0;
+                break;
         }
 
         drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
