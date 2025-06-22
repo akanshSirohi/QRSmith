@@ -8,7 +8,7 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 - **Logo Integration**: Add logos with optional padding and background clearing.
 - **Custom Backgrounds**: Use custom images or colors as QR code backgrounds.
 - **Full Customization**: Adjust size, colors, quiet zones, and more.
-- **Customizable Finder Patterns**: Choose separate shapes for the finder frame and ball.
+- **Customizable Finder Patterns**: Choose separate shapes for the finder frame and ball, including options like `Square`, `RoundSquare`, `Circle`, `Hexagon`, `OneSharpCorner`, `TechEye`, `SoftRounded`, `PinchedSquircle`, `BlobCorner`, and `CornerWarp`.
 - **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
 - **Developer-Friendly API**: Easy-to-use interface with robust customization options.
 
@@ -48,7 +48,7 @@ Include this in your module-level `build.gradle` file:
 
 ```groovy
 dependencies {
-    implementation 'com.github.akanshSirohi:QRSmith:1.1.0'
+    implementation 'com.github.akanshSirohi:QRSmith:2.0.0'
 }
 ```
 
@@ -140,8 +140,8 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `backgroundColor`      | Color of the QR code background                   | `Color.WHITE` |
 | `patternStyle` | Pattern style (`Square`, `Fluid`, `Dotted`, `Hexagon`) | `Square`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
-| `eyeFrameShape`      | Shape of the finder frame (`Square`, `RoundSquare`, `Circle`, `Hexagon`) | `Square`     |
-| `eyeBallShape`       | Shape of the finder ball (`Square`, `RoundSquare`, `Circle`, `Hexagon`) | `Square`     |
+| `eyeFrameShape`      | Shape of the finder frame (`Square`, `RoundSquare`, `Circle`, `Hexagon`, `OneSharpCorner`, `TechEye`, `SoftRounded`, `PinchedSquircle`, `BlobCorner`, `CornerWarp`) | `Square`     |
+| `eyeBallShape`       | Shape of the finder ball (`Square`, `RoundSquare`, `Circle`, `Hexagon`, `OneSharpCorner`, `TechEye`, `SoftRounded`, `PinchedSquircle`, `BlobCorner`, `CornerWarp`) | `Square`     |
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
