@@ -16,24 +16,42 @@ class QRFinderFrameRenderer {
         BOTTOM_LEFT
     }
 
-    private void drawNormalStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, boolean rounded) {
+    private void drawMultiRoundCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, float[] radii) {
+        // stroke and radius follow the library’s own math
         int stroke = size / 7;
-        float radiusMultiple = rounded ? 1.0f : 0.0f;
-        float radius = (multiple / 2f) * radiusMultiple;
 
         paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(stroke);
-        canvas.drawRoundRect(new RectF(x, y, x + size, y + size), radius, radius, paint);
+
+        Path path = new Path();
+        path.addRoundRect(new RectF(x, y, x + size, y + size), radii, Path.Direction.CW);
+        canvas.drawPath(path, paint);
     }
 
     public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
-        drawNormalStyle(canvas, paint, x, y, size, multiple, color, true);
+        float radius = (multiple / 2f) * 5f;
+
+        // start with all rounded
+        float[] radii = {
+                radius, radius,   // top-left
+                radius, radius,   // top-right
+                radius, radius,   // bottom-right
+                radius, radius    // bottom-left
+        };
+
+        drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
     }
 
-    public void drawSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
-        drawNormalStyle(canvas, paint, x, y, size, multiple, color, false);
+    public void drawSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
+        int stroke = size / 7;
+
+        paint.setColor(color);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(stroke);
+        canvas.drawRoundRect(new RectF(x, y, x + size, y + size), 0, 0, paint);
     }
 
     public void drawHexStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
@@ -60,19 +78,7 @@ class QRFinderFrameRenderer {
         canvas.drawOval(new RectF(x, y, (x + circleDiameter), (y + circleDiameter)), paint);
     }
 
-    private void drawMultiRoundCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, float[] radii) {
-        // stroke and radius follow the library’s own math
-        int stroke = size / 7;
 
-        paint.setColor(color);
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(stroke);
-
-        Path path = new Path();
-        path.addRoundRect(new RectF(x, y, x + size, y + size), radii, Path.Direction.CW);
-        canvas.drawPath(path, paint);
-    }
 
     public void drawOneSharpCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 5f;

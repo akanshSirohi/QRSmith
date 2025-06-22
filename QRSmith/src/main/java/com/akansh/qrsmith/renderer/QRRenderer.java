@@ -105,9 +105,9 @@ public class QRRenderer {
 
         // Finder frame renderer
         if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.Square) {
-            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor());
+            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.getForegroundColor());
+            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor());
+            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor());
         }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.RoundSquare) {
             qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
             qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
@@ -136,9 +136,9 @@ public class QRRenderer {
 
         // Finder ball renderer
         if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.Square) {
-            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor());
+            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.getForegroundColor());
+            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor());
+            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor());
         }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.RoundSquare) {
             qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
             qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
