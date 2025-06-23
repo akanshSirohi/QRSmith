@@ -22,7 +22,6 @@ public class QRRenderer {
     QRFinderFrameRenderer qrFinderFrameRenderer = new QRFinderFrameRenderer();
     QRFinderBallRenderer qrFinderBallRenderer = new QRFinderBallRenderer();
 
-
     public Bitmap renderQRImage(String content, QRCodeOptions qrOptions, ErrorCorrectionLevel errorCorrectionLevel) throws WriterException {
         Map<EncodeHintType, Object> hints = new HashMap<>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
@@ -103,108 +102,22 @@ public class QRRenderer {
 
         int patternSize = multiple * FINDER_PATTERN_SIZE;
 
+        // Eye Alignment Config
+        int[] EyeAlignmentX = {
+                leftPadding, topPadding
+        };
+        int[] EyeAlignmentY = {
+            leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding
+        };
+        int[] EyeAlignmentZ = {
+            leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple
+        };
+
         // Finder frame renderer
-        if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.SQUARE) {
-            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.ROUND_SQUARE) {
-            qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.HEXAGON) {
-            qrFinderFrameRenderer.drawHexStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawHexStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawHexStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.CIRCLE) {
-            qrFinderFrameRenderer.drawCircleStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawCircleStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderFrameRenderer.drawCircleStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.ONE_SHARP_CORNER) {
-            qrFinderFrameRenderer.drawOneSharpCornerStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderFrameRenderer.drawOneSharpCornerStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderFrameRenderer.drawOneSharpCornerStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.TECH_EYE) {
-            qrFinderFrameRenderer.drawTechEyeStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderFrameRenderer.drawTechEyeStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderFrameRenderer.drawTechEyeStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.SOFT_ROUNDED) {
-            qrFinderFrameRenderer.drawSoftRoundedStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderFrameRenderer.drawSoftRoundedStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderFrameRenderer.drawSoftRoundedStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.PINCHED_SQUIRCLE) {
-            qrFinderFrameRenderer.drawPinchedSquircleStyle(canvas, paint, leftPadding, topPadding, patternSize,  qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderFrameRenderer.drawPinchedSquircleStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor(),CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderFrameRenderer.drawPinchedSquircleStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.BLOB_CORNER) {
-            qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding, patternSize,  qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor(),CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeFrameShape() == QRStyles.EyeFrameShape.CORNER_WARP) {
-            qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding, patternSize,  qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor(),CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }
+        drawEyeFrame(qrOptions.getEyeFrameShape(), canvas, paint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, qrOptions.getForegroundColor());
 
         // Finder ball renderer
-        if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.SQUARE) {
-            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.ROUND_SQUARE) {
-            qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.HEXAGON) {
-            qrFinderBallRenderer.drawHexStyle(canvas, paint, leftPadding, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawHexStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawHexStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.CIRCLE) {
-            qrFinderBallRenderer.drawCircleStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawCircleStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor());
-            qrFinderBallRenderer.drawCircleStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor());
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.ONE_SHARP_CORNER) {
-            qrFinderBallRenderer.drawOneSharpCornerStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawOneSharpCornerStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawOneSharpCornerStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.TECH_EYE) {
-            qrFinderBallRenderer.drawTechEyeStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawTechEyeStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawTechEyeStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.SOFT_ROUNDED) {
-            qrFinderBallRenderer.drawSoftRoundedStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawSoftRoundedStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawSoftRoundedStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.PINCHED_SQUIRCLE) {
-            qrFinderBallRenderer.drawPinchedSquircleStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawPinchedSquircleStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawPinchedSquircleStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.BLOB_CORNER) {
-            qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.CORNER_WARP) {
-            qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.PILL_STACK_H) {
-            qrFinderBallRenderer.drawPillStackHStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawPillStackHStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawPillStackHStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.PILL_STACK_V) {
-            qrFinderBallRenderer.drawPillStackVStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawPillStackVStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawPillStackVStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.INCURVE) {
-            qrFinderBallRenderer.drawIncurveStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawIncurveStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawIncurveStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }else if(qrOptions.getEyeBallShape() == QRStyles.EyeBallShape.CHISEL) {
-            qrFinderBallRenderer.drawChiselStyle(canvas, paint, leftPadding, topPadding, patternSize, multiple, qrOptions.getForegroundColor(),  CommonShapeUtils.CornerPosition.TOP_LEFT);
-            qrFinderBallRenderer.drawChiselStyle(canvas, paint, leftPadding + (inputWidth - FINDER_PATTERN_SIZE) * multiple, topPadding, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.TOP_RIGHT);
-            qrFinderBallRenderer.drawChiselStyle(canvas, paint, leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple, patternSize, multiple, qrOptions.getForegroundColor(), CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
-        }
-
+        drawEyeBall(qrOptions.getEyeBallShape(), canvas, paint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, qrOptions.getForegroundColor());
 
         if (logo != null) {
             Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
@@ -212,5 +125,136 @@ public class QRRenderer {
         }
 
         return bitmap;
+    }
+
+    private void drawEyeFrame(QRStyles.EyeFrameShape shape, Canvas canvas, Paint paint, int[] EyeAlignmentX, int[] EyeAlignmentY, int[] EyeAlignmentZ, int patternSize, int multiple, int color) {
+        switch (shape) {
+            case SQUARE:
+                qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color);
+                qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color);
+                qrFinderFrameRenderer.drawSquaredStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color);
+                break;
+            case ROUND_SQUARE:
+                qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color);
+                qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color);
+                qrFinderFrameRenderer.drawRoundedSquaredStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color);
+                break;
+            case HEXAGON:
+                qrFinderFrameRenderer.drawHexStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color);
+                qrFinderFrameRenderer.drawHexStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color);
+                qrFinderFrameRenderer.drawHexStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color);
+                break;
+            case CIRCLE:
+                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color);
+                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color);
+                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color);
+                break;
+            case ONE_SHARP_CORNER:
+                qrFinderFrameRenderer.drawOneSharpCornerStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderFrameRenderer.drawOneSharpCornerStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderFrameRenderer.drawOneSharpCornerStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case TECH_EYE:
+                qrFinderFrameRenderer.drawTechEyeStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderFrameRenderer.drawTechEyeStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderFrameRenderer.drawTechEyeStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case SOFT_ROUNDED:
+                qrFinderFrameRenderer.drawSoftRoundedStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderFrameRenderer.drawSoftRoundedStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderFrameRenderer.drawSoftRoundedStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case PINCHED_SQUIRCLE:
+                qrFinderFrameRenderer.drawPinchedSquircleStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderFrameRenderer.drawPinchedSquircleStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderFrameRenderer.drawPinchedSquircleStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case BLOB_CORNER:
+                qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderFrameRenderer.drawBlobCornerStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case CORNER_WARP:
+                qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderFrameRenderer.drawCornerWarpStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+        }
+    }
+
+    private void drawEyeBall(QRStyles.EyeBallShape shape, Canvas canvas, Paint paint, int[] EyeAlignmentX, int[] EyeAlignmentY, int[] EyeAlignmentZ, int patternSize, int multiple, int color) {
+        switch (shape) {
+            case SQUARE:
+                qrFinderBallRenderer.drawSquaredStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color);
+                qrFinderBallRenderer.drawSquaredStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color);
+                qrFinderBallRenderer.drawSquaredStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color);
+                break;
+            case ROUND_SQUARE:
+                qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color);
+                qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color);
+                qrFinderBallRenderer.drawRoundedSquaredStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color);
+                break;
+            case HEXAGON:
+                qrFinderBallRenderer.drawHexStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color);
+                qrFinderBallRenderer.drawHexStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color);
+                qrFinderBallRenderer.drawHexStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color);
+                break;
+            case CIRCLE:
+                qrFinderBallRenderer.drawCircleStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color);
+                qrFinderBallRenderer.drawCircleStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color);
+                qrFinderBallRenderer.drawCircleStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color);
+                break;
+            case ONE_SHARP_CORNER:
+                qrFinderBallRenderer.drawOneSharpCornerStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawOneSharpCornerStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawOneSharpCornerStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case TECH_EYE:
+                qrFinderBallRenderer.drawTechEyeStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color,  CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawTechEyeStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawTechEyeStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case SOFT_ROUNDED:
+                qrFinderBallRenderer.drawSoftRoundedStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawSoftRoundedStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawSoftRoundedStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case PINCHED_SQUIRCLE:
+                qrFinderBallRenderer.drawPinchedSquircleStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawPinchedSquircleStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawPinchedSquircleStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case BLOB_CORNER:
+                qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawBlobCornerStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case CORNER_WARP:
+                qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawCornerWarpStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case PILL_STACK_H:
+                qrFinderBallRenderer.drawPillStackHStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawPillStackHStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawPillStackHStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case PILL_STACK_V:
+                qrFinderBallRenderer.drawPillStackVStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawPillStackVStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawPillStackVStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case INCURVE:
+                qrFinderBallRenderer.drawIncurveStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawIncurveStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawIncurveStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+            case CHISEL:
+                qrFinderBallRenderer.drawChiselStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawChiselStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawChiselStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
+
+        }
     }
 }

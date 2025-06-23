@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 .setQuietZone(1)
                 .setLogoPadding(2)
                 .setPatternStyle(QRStyles.PatternStyle.HEXAGON)
-                .setEyeBallShape(QRStyles.EyeBallShape.PILL_STACK_H)
-                .setEyeFrameShape(QRStyles.EyeFrameShape.CORNER_WARP)
+                .setEyeBallShape(QRStyles.EyeBallShape.CHISEL)
+                .setEyeFrameShape(QRStyles.EyeFrameShape.CIRCLE)
                 .build();
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);
