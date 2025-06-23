@@ -59,9 +59,9 @@ public class QRCodeOptions {
         private QRErrorCorrectionLevel errorCorrectionLevel = QRErrorCorrectionLevel.H;
         private boolean clearLogoBackground = true;
         private int logoPadding = 0;
-        private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.Square;
-        private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.Square;
-        private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.Square;
+        private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.SQUARE;
+        private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.SQUARE;
+        private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.SQUARE;
 
         public Builder() {}
 
