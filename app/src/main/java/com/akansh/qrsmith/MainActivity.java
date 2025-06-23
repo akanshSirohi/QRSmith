@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 .setQuietZone(1)
                 .setLogoPadding(2)
                 .setPatternStyle(QRStyles.PatternStyle.Hexagon)
-                .setEyeBallShape(QRStyles.EyeBallShape.CornerWarp)
+                .setEyeBallShape(QRStyles.EyeBallShape.PillStackH)
                 .setEyeFrameShape(QRStyles.EyeFrameShape.CornerWarp)
                 .build();
 

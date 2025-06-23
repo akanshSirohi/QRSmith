@@ -165,7 +165,7 @@ class QRFinderFrameRenderer {
 
         int[] orientation = {-1, 1, 1, 1, -1, -1};
 
-        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, CommonShapeUtils.PinchedSquircle_Frame_SVG, orientation);
+        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, EyesShapesSVGContants.PinchedSquircle_Frame_SVG, orientation, 0f);
         canvas.drawPath(finder, paint);
     }
 
@@ -176,7 +176,7 @@ class QRFinderFrameRenderer {
 
         int[] orientation = {1, 1, -1, 1, 1, -1};
 
-        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, CommonShapeUtils.BlobCorner_Frame_SVG, orientation);
+        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, EyesShapesSVGContants.BlobCorner_Frame_SVG, orientation, 0f);
         canvas.drawPath(finder, paint);
     }
 
@@ -187,7 +187,7 @@ class QRFinderFrameRenderer {
 
         int[] orientation = {1, 1, -1, 1, 1, -1};
 
-        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, CommonShapeUtils.CornerWarp_Frame_SVG, orientation);
+        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, EyesShapesSVGContants.CornerWarp_Frame_SVG, orientation, 0f);
         canvas.drawPath(finder, paint);
     }
 }

@@ -2,8 +2,8 @@ package com.akansh.qrsmith.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.RectF;
+import java.util.Collections;
 
 public class QRFinderBallRenderer {
 
@@ -154,48 +154,27 @@ public class QRFinderBallRenderer {
     }
 
     public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
-        float gapModules  = 1.8f;
-        float innerOffPx  = multiple * gapModules;
-        float innerSizePx = size - 2f * innerOffPx;
-
         int[] orientation = { -1, 1, 1, 1, -1, -1 };
-
-        Path ball = CommonShapeUtils.makeFinderFramePath(pos, innerSizePx, x + innerOffPx, y + innerOffPx, CommonShapeUtils.PinchedSquircle_Ball_SVG, orientation);
-
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-        canvas.drawPath(ball, paint);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.PinchedSquircle_Ball_SVG), 0f);
     }
 
     public void drawBlobCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
-
-        float gapModules  = 1.8f;
-        float innerOffPx  = multiple * gapModules;
-        float innerSizePx = size - 2f * innerOffPx;
-
         int[] orientation = {1, 1, -1, 1, 1, -1};
-
-        Path ball = CommonShapeUtils.makeFinderFramePath(pos, innerSizePx, x + innerOffPx, y + innerOffPx, CommonShapeUtils.BlobCorner_Ball_SVG, orientation);
-
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-        canvas.drawPath(ball, paint);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.BlobCorner_Ball_SVG), 0f);
     }
 
     public void drawCornerWarpStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
-        float gapModules  = 1.8f;
-        float innerOffPx  = multiple * gapModules;
-        float innerSizePx = size - 2f * innerOffPx;
-
         int[] orientation = {1, 1, -1, 1, 1, -1};
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.CornerWarp_Ball_SVG), 0f);
+    }
 
-        Path ball = CommonShapeUtils.makeFinderFramePath(pos, innerSizePx, x + innerOffPx, y + innerOffPx, CommonShapeUtils.CornerWarp_Ball_SVG, orientation);
+    public void drawPillStackHStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
+        int[] orientation = {1, 1, 1, 1, 1, 1};
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, EyesShapesSVGContants.PillStack_Ball_SVG, 90f);
+    }
 
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-        canvas.drawPath(ball, paint);
+    public void drawPillStackVStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
+        int[] orientation = {1, 1, 1, 1, 1, 1};
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, EyesShapesSVGContants.PillStack_Ball_SVG, 0f);
     }
 }

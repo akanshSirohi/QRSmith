@@ -10,7 +10,8 @@ public class QRStyles {
     public enum EyeBallShape {
         Square, RoundSquare, Circle, Hexagon,
         OneSharpCorner, TechEye, SoftRounded,
-        PinchedSquircle, BlobCorner, CornerWarp
+        PinchedSquircle, BlobCorner, CornerWarp,
+        PillStackH, PillStackV
     }
 
     public enum PatternStyle {
