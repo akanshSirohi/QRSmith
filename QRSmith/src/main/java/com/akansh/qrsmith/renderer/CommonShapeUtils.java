@@ -19,10 +19,6 @@ class CommonShapeUtils {
         BOTTOM_LEFT
     }
 
-    public static Path makeFinderFramePath(CornerPosition pos, float sizePx, float dstX, float dstY, String svgPath, int[] orientation, float rotationDeg) {
-        return makeFinderFramePath(pos, sizePx, dstX, dstY, Collections.singleton(svgPath), orientation, rotationDeg);
-    }
-
     public static void drawCommonSVGStyleEyeBall(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color,int[] orientation, CommonShapeUtils.CornerPosition pos, Collection<String> svgCode, float rotation) {
         float gapModules  = 1.8f;
         float innerOffPx  = multiple * gapModules;
@@ -34,6 +30,19 @@ class CommonShapeUtils {
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
         canvas.drawPath(ball, paint);
+    }
+
+    public static void drawCommonSVGStyleEyeFrame(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos, int[] orientation, String svgCode) {
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setAntiAlias(true);
+
+        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, svgCode, orientation, 0f);
+        canvas.drawPath(finder, paint);
+    }
+
+    public static Path makeFinderFramePath(CornerPosition pos, float sizePx, float dstX, float dstY, String svgPath, int[] orientation, float rotationDeg) {
+        return makeFinderFramePath(pos, sizePx, dstX, dstY, Collections.singleton(svgPath), orientation, rotationDeg);
     }
 
     public static Path makeFinderFramePath(CornerPosition pos, float sizePx, float dstX, float dstY, Collection<String> svgPaths, int[] orientation, float rotationDeg) {

@@ -159,35 +159,17 @@ class QRFinderFrameRenderer {
     }
 
     public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-
         int[] orientation = {-1, 1, 1, 1, -1, -1};
-
-        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, EyesShapesSVGContants.PinchedSquircle_Frame_SVG, orientation, 0f);
-        canvas.drawPath(finder, paint);
+        CommonShapeUtils.drawCommonSVGStyleEyeFrame(canvas, paint, x, y, size, color, pos, orientation, EyesShapesSVGContants.PinchedSquircle_Frame_SVG);
     }
 
     public void drawBlobCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-
         int[] orientation = {1, 1, -1, 1, 1, -1};
-
-        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, EyesShapesSVGContants.BlobCorner_Frame_SVG, orientation, 0f);
-        canvas.drawPath(finder, paint);
+        CommonShapeUtils.drawCommonSVGStyleEyeFrame(canvas, paint, x, y, size, color, pos, orientation, EyesShapesSVGContants.BlobCorner_Frame_SVG);
     }
 
     public void drawCornerWarpStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-
         int[] orientation = {1, 1, -1, 1, 1, -1};
-
-        Path finder = CommonShapeUtils.makeFinderFramePath(pos, size, x, y, EyesShapesSVGContants.CornerWarp_Frame_SVG, orientation, 0f);
-        canvas.drawPath(finder, paint);
+        CommonShapeUtils.drawCommonSVGStyleEyeFrame(canvas, paint, x, y, size, color, pos, orientation, EyesShapesSVGContants.CornerWarp_Frame_SVG);
     }
 }

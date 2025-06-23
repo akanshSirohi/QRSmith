@@ -11,7 +11,7 @@ public class QRStyles {
         Square, RoundSquare, Circle, Hexagon,
         OneSharpCorner, TechEye, SoftRounded,
         PinchedSquircle, BlobCorner, CornerWarp,
-        PillStackH, PillStackV
+        PillStackH, PillStackV, Incurve, Chisel
     }
 
     public enum PatternStyle {

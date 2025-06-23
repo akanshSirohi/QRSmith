@@ -177,4 +177,13 @@ public class QRFinderBallRenderer {
         int[] orientation = {1, 1, 1, 1, 1, 1};
         CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, EyesShapesSVGContants.PillStack_Ball_SVG, 0f);
     }
+
+    public void drawIncurveStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
+        int[] orientation = {1, 1, 1, 1, 1, 1};
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Incurve_Ball_SVG), 0f);
+    }
+    public void drawChiselStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
+        int[] orientation = {1, 1, 1, -1, 1, -1};
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Chisel_Ball_SVG), 0f);
+    }
 }
