@@ -8,7 +8,7 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 - **Logo Integration**: Add logos with optional padding and background clearing.
 - **Custom Backgrounds**: Use custom images or colors as QR code backgrounds.
 - **Full Customization**: Adjust size, colors, quiet zones, and more.
-- **Customizable Finder Patterns**: Choose separate shapes for the finder frame and ball, including options like `Square`, `RoundSquare`, `Circle`, `Hexagon`, `OneSharpCorner`, `TechEye`, `SoftRounded`, `PinchedSquircle`, `BlobCorner`, and `CornerWarp`.
+- **Customizable Finder Patterns**: Choose separate shapes for the finder frame and ball, including options like `SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, and `CORNER_WARP`.
 - **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
 - **Developer-Friendly API**: Easy-to-use interface with robust customization options.
 
@@ -72,9 +72,9 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .setHeight(500)
         .setForegroundColor(Color.BLACK)
         .setBackgroundColor(Color.WHITE)
-        .setPatternStyle(QRStyles.PatternStyle.Square)
-        .setEyeFrameShape(QRStyles.EyeFrameShape.Square)
-        .setEyeBallShape(QRStyles.EyeBallShape.Square)
+        .setPatternStyle(QRStyles.PatternStyle.SQUARE)
+        .setEyeFrameShape(QRStyles.EyeFrameShape.SQUARE)
+        .setEyeBallShape(QRStyles.EyeBallShape.SQUARE)
         .setQuietZone(1)
         .build();
 
@@ -110,9 +110,9 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .setHeight(600)
         .setForegroundColor(Color.BLACK)
         .setBackgroundColor(Color.WHITE)
-        .setPatternStyle(QRStyles.PatternStyle.Hexagon)
-        .setEyeFrameShape(QRStyles.EyeFrameShape.Hexagon)
-        .setEyeBallShape(QRStyles.EyeBallShape.Hexagon)
+        .setPatternStyle(QRStyles.PatternStyle.HEXAGON)
+        .setEyeFrameShape(QRStyles.EyeFrameShape.HEXAGON)
+        .setEyeBallShape(QRStyles.EyeBallShape.HEXAGON)
         .setLogo(logo)
         .setBackground(background) // Set custom background
         .setErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
@@ -138,10 +138,10 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `height`               | Height of the QR code in pixels                   | 500           |
 | `foregroundColor`      | Color of the QR code foreground                   | `Color.BLACK` |
 | `backgroundColor`      | Color of the QR code background                   | `Color.WHITE` |
-| `patternStyle` | Pattern style (`Square`, `Fluid`, `Dotted`, `Hexagon`) | `Square`     |
+| `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `DOTTED`, `HEXAGON`) | `SQUARE`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
-| `eyeFrameShape`      | Shape of the finder frame (`Square`, `RoundSquare`, `Circle`, `Hexagon`, `OneSharpCorner`, `TechEye`, `SoftRounded`, `PinchedSquircle`, `BlobCorner`, `CornerWarp`) | `Square`     |
-| `eyeBallShape`       | Shape of the finder ball (`Square`, `RoundSquare`, `Circle`, `Hexagon`, `OneSharpCorner`, `TechEye`, `SoftRounded`, `PinchedSquircle`, `BlobCorner`, `CornerWarp`) | `Square`     |
+| `eyeFrameShape`      | Shape of the finder frame (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
+| `eyeBallShape`       | Shape of the finder ball (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
