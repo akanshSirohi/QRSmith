@@ -124,24 +124,33 @@ public class QRRenderer {
             leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple
         };
 
-        // Prepare solid paints for eyes
+        // Prepare paints for eyes.  Start with the base paint so any gradient
+        // specified for the foreground is preserved. Only override the color if
+        // a custom eye color was provided.
         Paint framePaint = new Paint(paint);
-        framePaint.setShader(null);
-        int frameColor = qrOptions.getEyeFrameColor() != null ?
-                qrOptions.getEyeFrameColor() : qrOptions.getForegroundColor();
-        framePaint.setColor(frameColor);
+        Integer frameColor = qrOptions.getEyeFrameColor();
+        if (frameColor != null) {
+            framePaint.setShader(null);
+            framePaint.setColor(frameColor);
+        }
 
         Paint ballPaint = new Paint(paint);
-        ballPaint.setShader(null);
-        int ballColor = qrOptions.getEyeBallColor() != null ?
-                qrOptions.getEyeBallColor() : qrOptions.getForegroundColor();
-        ballPaint.setColor(ballColor);
+        Integer ballColor = qrOptions.getEyeBallColor();
+        if (ballColor != null) {
+            ballPaint.setShader(null);
+            ballPaint.setColor(ballColor);
+        }
+
+        // Default color values for methods that require an explicit color even
+        // when a shader is used
+        int frameColorValue = frameColor != null ? frameColor : qrOptions.getForegroundColor();
+        int ballColorValue = ballColor != null ? ballColor : qrOptions.getForegroundColor();
 
         // Finder frame renderer
-        drawEyeFrame(qrOptions.getEyeFrameShape(), canvas, framePaint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, frameColor);
+        drawEyeFrame(qrOptions.getEyeFrameShape(), canvas, framePaint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, frameColorValue);
 
         // Finder ball renderer
-        drawEyeBall(qrOptions.getEyeBallShape(), canvas, ballPaint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, ballColor);
+        drawEyeBall(qrOptions.getEyeBallShape(), canvas, ballPaint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, ballColorValue);
 
         if (logo != null) {
             Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);

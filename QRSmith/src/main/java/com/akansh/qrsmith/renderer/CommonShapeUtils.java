@@ -120,7 +120,9 @@ class CommonShapeUtils {
         // stroke and radius follow the library’s own math
         int stroke = size / 7;
 
-        paint.setColor(color);
+        if (paint.getShader() == null) {
+            paint.setColor(color);
+        }
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(stroke);
