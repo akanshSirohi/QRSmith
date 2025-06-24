@@ -46,18 +46,18 @@ public class MainActivity extends AppCompatActivity {
                 .setBackgroundColor(Color.WHITE)
                 .setForegroundColor(Color.BLACK)
                 .setErrorCorrectionLevel(QRErrorCorrectionLevel.H)
-                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.RADIAL)
+                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
 //                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
 //                .setLogo(logo)
 //                .setBackground(bg)
                 .setClearLogoBackground(true)
                 .setQuietZone(1)
                 .setLogoPadding(2)
-                .setPatternStyle(QRStyles.PatternStyle.STAR)
-                .setEyeBallShape(QRStyles.EyeBallShape.CHISEL)
+                .setPatternStyle(QRStyles.PatternStyle.HEART)
+                .setEyeBallShape(QRStyles.EyeBallShape.HEART)
                 .setEyeFrameShape(QRStyles.EyeFrameShape.CIRCLE)
-                .setEyeFrameColor(Color.BLUE)
-                .setEyeBallColor(Color.BLACK)
+//                .setEyeFrameColor(Color.parseColor("#000000"))
+//                .setEyeBallColor(Color.parseColor("#e60808"))
                 .build();
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);

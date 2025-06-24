@@ -313,7 +313,11 @@ public class QRRenderer {
                 qrFinderBallRenderer.drawChiselStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
                 qrFinderBallRenderer.drawChiselStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
                 break;
-
+            case HEART:
+                qrFinderBallRenderer.drawHeartStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
+                qrFinderBallRenderer.drawHeartStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.TOP_RIGHT);
+                qrFinderBallRenderer.drawHeartStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, multiple, color, CommonShapeUtils.CornerPosition.BOTTOM_LEFT);
+                break;
         }
     }
 
