@@ -123,6 +123,32 @@ class QRDataPatternRenderer {
     }
 
     public void drawStarStyle(Canvas canvas, Paint paint, int outputX, int outputY, int multiple) {
+        float centerX = outputX + multiple / 2f;
+        float centerY = outputY + multiple / 2f;
 
+        float outerRadius = multiple / 2f;
+        float innerRadius = multiple / 4f;
+
+        Path starPath = new Path();
+
+        for (int i = 0; i < 5; i++) {
+            double outerAngle = Math.toRadians(72 * i - 90);
+            float xOuter = centerX + (float) (outerRadius * Math.cos(outerAngle));
+            float yOuter = centerY + (float) (outerRadius * Math.sin(outerAngle));
+
+            if (i == 0) {
+                starPath.moveTo(xOuter, yOuter);
+            } else {
+                starPath.lineTo(xOuter, yOuter);
+            }
+
+            double innerAngle = Math.toRadians(72 * i - 90 + 36);
+            float xInner = centerX + (float) (innerRadius * Math.cos(innerAngle));
+            float yInner = centerY + (float) (innerRadius * Math.sin(innerAngle));
+            starPath.lineTo(xInner, yInner);
+        }
+
+        starPath.close();
+        canvas.drawPath(starPath, paint);
     }
 }
