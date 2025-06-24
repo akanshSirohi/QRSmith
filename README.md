@@ -136,8 +136,8 @@ try {
 int[] fgColors = new int[]{Color.RED, Color.BLUE};
 int[] bgColors = new int[]{Color.WHITE, Color.LTGRAY};
 QRCodeOptions options = new QRCodeOptions.Builder()
-        .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
-        .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
+        .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.RADIAL)
+        .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.RADIAL)
         .build();
 Bitmap qrCode = QRSmith.generateQRCode("https://example.com", options);
 ```
