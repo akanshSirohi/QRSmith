@@ -146,6 +146,24 @@ class CommonShapeUtils {
         canvas.drawPath(hexagonPath, paint);
     }
 
+    public static void drawSvgDataPattern(Canvas canvas, Paint paint, int outputX, int outputY, int multiple, String svgPath) {
+        if (svgPath == null || svgPath.isEmpty()) {
+            return;
+        }
+        Path path = PathParser.createPathFromPathData(svgPath);
+        RectF bounds = new RectF();
+        path.computeBounds(bounds, true);
+
+        Matrix m = new Matrix();
+        m.postTranslate(-bounds.left, -bounds.top);
+        float scale = multiple / Math.max(bounds.width(), bounds.height());
+        m.postScale(scale, scale);
+        m.postTranslate(outputX, outputY);
+        path.transform(m);
+
+        canvas.drawPath(path, paint);
+    }
+
 
     public static void drawDottedStylePattern(Canvas canvas, Paint paint, int outputX, int outputY, int circleSize) {
         canvas.drawOval(new RectF(outputX, outputY, (outputX + circleSize), (outputY + circleSize)), paint);

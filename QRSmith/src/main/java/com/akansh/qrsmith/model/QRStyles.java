@@ -17,6 +17,6 @@ public class QRStyles {
     public enum PatternStyle {
         SQUARE, FLUID, S_DOT, L_DOT,
         HEXAGON, X_AXIS_FLUID, Y_AXIS_FLUID,
-        DIAMOND, STAR
+        DIAMOND, STAR, HEART
     }
 }
