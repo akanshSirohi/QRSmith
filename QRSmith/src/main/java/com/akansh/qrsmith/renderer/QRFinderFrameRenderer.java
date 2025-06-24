@@ -7,20 +7,6 @@ import android.graphics.RectF;
 
 class QRFinderFrameRenderer {
 
-    private void drawMultiRoundCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, float[] radii) {
-        // stroke and radius follow the library’s own math
-        int stroke = size / 7;
-
-        paint.setColor(color);
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(stroke);
-
-        Path path = new Path();
-        path.addRoundRect(new RectF(x, y, x + size, y + size), radii, Path.Direction.CW);
-        canvas.drawPath(path, paint);
-    }
-
     public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
         float radius = (multiple / 2f) * 5f;
 
@@ -32,13 +18,15 @@ class QRFinderFrameRenderer {
                 radius, radius    // bottom-left
         };
 
-        drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
     }
 
     public void drawSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
         int stroke = size / 7;
 
-        paint.setColor(color);
+        if (paint.getShader() == null) {
+            paint.setColor(color);
+        }
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(stroke);
@@ -49,8 +37,9 @@ class QRFinderFrameRenderer {
         float centerX = x + size/2f;
         float centerY = y + size/2f;
 
-        // Draw outer hexagon
-        paint.setColor(color);
+        if (paint.getShader() == null) {
+            paint.setColor(color);
+        }
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(size/8f);
@@ -61,7 +50,7 @@ class QRFinderFrameRenderer {
         int WHITE_CIRCLE_OFFSET = circleDiameter / 7;
 
         // Draw the outer circle
-        paint.setColor(foregroundColor);
+        if (paint.getShader() == null) paint.setColor(foregroundColor);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(WHITE_CIRCLE_OFFSET);
@@ -94,7 +83,7 @@ class QRFinderFrameRenderer {
                 break;
         }
 
-        drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
     }
 
     public void drawTechEyeStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
@@ -123,7 +112,7 @@ class QRFinderFrameRenderer {
                 break;
         }
 
-        drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
     }
 
     public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
@@ -155,7 +144,7 @@ class QRFinderFrameRenderer {
                 break;
         }
 
-        drawMultiRoundCornerStyle(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
     }
 
     public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
