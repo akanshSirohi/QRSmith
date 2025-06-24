@@ -26,14 +26,14 @@ class CommonShapeUtils {
 
         Path ball = CommonShapeUtils.makeFinderFramePath(pos, innerSizePx, x + innerOffPx, y + innerOffPx, svgCode, orientation, rotation);
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
         canvas.drawPath(ball, paint);
     }
 
     public static void drawCommonSVGStyleEyeFrame(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos, int[] orientation, String svgCode) {
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
 
@@ -93,7 +93,7 @@ class CommonShapeUtils {
         float innerOffset = multiple * gapModules;
         float innerSize = size - (innerOffset * 2f);
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);    // filled, not stroked
 

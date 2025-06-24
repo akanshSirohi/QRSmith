@@ -12,7 +12,7 @@ public class QRFinderBallRenderer {
     public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
         float radius = (multiple / 2f) * 2f; // Tweak as needed
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);    // filled, not stroked
 
@@ -31,7 +31,7 @@ public class QRFinderBallRenderer {
         int innerSize = size * 3 / 7;
         int innerOffset = size * 2 / 7;
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStrokeWidth(stroke);
         paint.setStyle(Paint.Style.FILL);
@@ -42,7 +42,7 @@ public class QRFinderBallRenderer {
         float centerX = x + size/2f;
         float centerY = y + size/2f;
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);
         CommonShapeUtils.drawHexagon(canvas, paint, centerX, centerY, size/4.0f);
     }
@@ -53,7 +53,7 @@ public class QRFinderBallRenderer {
         float MIDDLE_DOT_OFFSET = multiple * gapModules;
         float MIDDLE_DOT_DIAMETER = circleDiameter - (MIDDLE_DOT_OFFSET * 2f);
 
-        paint.setColor(foregroundColor);
+        if (paint.getShader() == null) paint.setColor(foregroundColor);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawOval(new RectF((x + MIDDLE_DOT_OFFSET), (y + MIDDLE_DOT_OFFSET), (x + MIDDLE_DOT_OFFSET + MIDDLE_DOT_DIAMETER), (y + MIDDLE_DOT_OFFSET + MIDDLE_DOT_DIAMETER)), paint);
     }
@@ -62,7 +62,7 @@ public class QRFinderBallRenderer {
 
         float radius = (multiple / 2f) * 2f; // Tweak as needed
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);    // filled, not stroked
 
@@ -90,7 +90,7 @@ public class QRFinderBallRenderer {
     public void drawTechEyeStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 2f; // Tweak as needed
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);    // filled, not stroked
 
@@ -121,7 +121,7 @@ public class QRFinderBallRenderer {
     public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 2f; // Tweak as needed
 
-        paint.setColor(color);
+        if (paint.getShader() == null) paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);    // filled, not stroked
 

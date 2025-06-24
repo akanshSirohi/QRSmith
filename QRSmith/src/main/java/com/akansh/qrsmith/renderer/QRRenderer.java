@@ -3,6 +3,8 @@ package com.akansh.qrsmith.renderer;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -36,13 +38,29 @@ public class QRRenderer {
         } else {
             Paint bgPaint = new Paint();
             bgPaint.setStyle(Paint.Style.FILL);
-            bgPaint.setColor(qrOptions.getBackgroundColor());
+            if (qrOptions.getBackgroundGradientColors() != null) {
+                bgPaint.setShader(buildGradient(
+                        qrOptions.getBackgroundGradientColors(),
+                        qrOptions.getBackgroundGradientOrientation(),
+                        qrOptions.getWidth(),
+                        qrOptions.getHeight()));
+            } else {
+                bgPaint.setColor(qrOptions.getBackgroundColor());
+            }
             canvas.drawRect(0, 0, qrOptions.getWidth(), qrOptions.getHeight(), bgPaint);
         }
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(qrOptions.getForegroundColor());
+        if (qrOptions.getForegroundGradientColors() != null) {
+            paint.setShader(buildGradient(
+                    qrOptions.getForegroundGradientColors(),
+                    qrOptions.getForegroundGradientOrientation(),
+                    qrOptions.getWidth(),
+                    qrOptions.getHeight()));
+        } else {
+            paint.setColor(qrOptions.getForegroundColor());
+        }
 
         ByteMatrix input = qrCode.getMatrix();
         if (input == null) throw new IllegalStateException();
@@ -256,5 +274,24 @@ public class QRRenderer {
                 break;
 
         }
+    }
+
+    private LinearGradient buildGradient(int[] colors, QRCodeOptions.GradientOrientation orientation, int width, int height) {
+        float startX = 0, startY = 0, endX = width, endY = height;
+        switch (orientation) {
+            case TOP_BOTTOM:
+                endX = 0;
+                break;
+            case LEFT_RIGHT:
+                endY = 0;
+                break;
+            case TL_BR:
+                break; // defaults already set
+            case BL_TR:
+                startY = height;
+                endY = 0;
+                break;
+        }
+        return new LinearGradient(startX, startY, endX, endY, colors, null, Shader.TileMode.CLAMP);
     }
 }

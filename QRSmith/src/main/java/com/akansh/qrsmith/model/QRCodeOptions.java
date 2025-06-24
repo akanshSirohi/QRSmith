@@ -3,6 +3,10 @@ package com.akansh.qrsmith.model;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
+/**
+ * Configuration options for generating a QR code.
+ */
+
 public class QRCodeOptions {
     private final int width;
     private final int height;
@@ -17,6 +21,18 @@ public class QRCodeOptions {
     private final QRStyles.EyeFrameShape eyeFrameShape;
     private final QRStyles.EyeBallShape eyeBallShape;
     private final QRStyles.PatternStyle patternStyle;
+    private final int[] foregroundGradientColors;
+    private final int[] backgroundGradientColors;
+    private final GradientOrientation foregroundGradientOrientation;
+    private final GradientOrientation backgroundGradientOrientation;
+
+    /** Orientation for linear gradients. */
+    public enum GradientOrientation {
+        LEFT_RIGHT,
+        TOP_BOTTOM,
+        TL_BR,
+        BL_TR
+    }
 
     private QRCodeOptions(Builder builder) {
         this.width = builder.width;
@@ -32,6 +48,10 @@ public class QRCodeOptions {
         this.eyeFrameShape = builder.eyeFrameShape;
         this.eyeBallShape = builder.eyeBallShape;
         this.patternStyle = builder.patternStyle;
+        this.foregroundGradientColors = builder.foregroundGradientColors;
+        this.backgroundGradientColors = builder.backgroundGradientColors;
+        this.foregroundGradientOrientation = builder.foregroundGradientOrientation;
+        this.backgroundGradientOrientation = builder.backgroundGradientOrientation;
     }
 
     public int getWidth() { return width; }
@@ -47,6 +67,10 @@ public class QRCodeOptions {
     public QRStyles.EyeFrameShape getEyeFrameShape() { return eyeFrameShape; }
     public QRStyles.EyeBallShape getEyeBallShape() { return eyeBallShape; }
     public QRStyles.PatternStyle getPatternStyle() { return patternStyle; }
+    public int[] getForegroundGradientColors() { return foregroundGradientColors; }
+    public int[] getBackgroundGradientColors() { return backgroundGradientColors; }
+    public GradientOrientation getForegroundGradientOrientation() { return foregroundGradientOrientation; }
+    public GradientOrientation getBackgroundGradientOrientation() { return backgroundGradientOrientation; }
 
     public static class Builder {
         private int width = 500;
@@ -62,6 +86,10 @@ public class QRCodeOptions {
         private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.SQUARE;
         private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.SQUARE;
         private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.SQUARE;
+        private int[] foregroundGradientColors = null;
+        private int[] backgroundGradientColors = null;
+        private GradientOrientation foregroundGradientOrientation = GradientOrientation.LEFT_RIGHT;
+        private GradientOrientation backgroundGradientOrientation = GradientOrientation.LEFT_RIGHT;
 
         public Builder() {}
 
@@ -79,6 +107,10 @@ public class QRCodeOptions {
             this.eyeFrameShape = base.eyeFrameShape;
             this.eyeBallShape = base.eyeBallShape;
             this.patternStyle = base.patternStyle;
+            this.foregroundGradientColors = base.foregroundGradientColors;
+            this.backgroundGradientColors = base.backgroundGradientColors;
+            this.foregroundGradientOrientation = base.foregroundGradientOrientation;
+            this.backgroundGradientOrientation = base.backgroundGradientOrientation;
         }
 
         public Builder setWidth(int width) { this.width = width; return this; }
@@ -94,6 +126,17 @@ public class QRCodeOptions {
         public Builder setEyeFrameShape(QRStyles.EyeFrameShape eyeFrameShape) { this.eyeFrameShape = eyeFrameShape; return this; }
         public Builder setEyeBallShape(QRStyles.EyeBallShape eyeBallShape) { this.eyeBallShape = eyeBallShape; return this; }
         public Builder setPatternStyle(QRStyles.PatternStyle patternStyle) { this.patternStyle = patternStyle; return this; }
+        public Builder setForegroundGradient(int[] colors, GradientOrientation orientation) {
+            this.foregroundGradientColors = colors;
+            this.foregroundGradientOrientation = orientation;
+            return this;
+        }
+
+        public Builder setBackgroundGradient(int[] colors, GradientOrientation orientation) {
+            this.backgroundGradientColors = colors;
+            this.backgroundGradientOrientation = orientation;
+            return this;
+        }
         public QRCodeOptions build() { return new QRCodeOptions(this); }
     }
 }
