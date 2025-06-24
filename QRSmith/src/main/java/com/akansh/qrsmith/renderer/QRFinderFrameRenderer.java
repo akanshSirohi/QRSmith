@@ -11,9 +11,7 @@ class QRFinderFrameRenderer {
         // stroke and radius follow the library’s own math
         int stroke = size / 7;
 
-        if (paint.getShader() == null) {
-            paint.setColor(color);
-        }
+        paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(stroke);
@@ -40,9 +38,7 @@ class QRFinderFrameRenderer {
     public void drawSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
         int stroke = size / 7;
 
-        if (paint.getShader() == null) {
-            paint.setColor(color);
-        }
+        paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(stroke);
@@ -52,10 +48,9 @@ class QRFinderFrameRenderer {
     public void drawHexStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
         float centerX = x + size/2f;
         float centerY = y + size/2f;
-        
-        if (paint.getShader() == null) {
-            paint.setColor(color);
-        }
+
+        // Draw outer hexagon
+        paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(size/8f);
@@ -66,7 +61,7 @@ class QRFinderFrameRenderer {
         int WHITE_CIRCLE_OFFSET = circleDiameter / 7;
 
         // Draw the outer circle
-        if (paint.getShader() == null) paint.setColor(foregroundColor);
+        paint.setColor(foregroundColor);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(WHITE_CIRCLE_OFFSET);

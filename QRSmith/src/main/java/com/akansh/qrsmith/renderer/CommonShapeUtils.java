@@ -92,7 +92,7 @@ class CommonShapeUtils {
 
 
 
-    public static void drawMultiRoundCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, float[] radii) {
+    public static void drawMultiRoundCornerStyleBall(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, float[] radii) {
         float gapModules = 1.8f;
         float innerOffset = multiple * gapModules;
         float innerSize = size - (innerOffset * 2f);
@@ -116,6 +116,20 @@ class CommonShapeUtils {
         canvas.drawPath(path, paint);
     }
 
+    public static void drawMultiRoundCornerStyleFrame(Canvas canvas, Paint paint, int x, int y, int size, int color, float[] radii) {
+        // stroke and radius follow the library’s own math
+        int stroke = size / 7;
+
+        paint.setColor(color);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(stroke);
+
+        Path path = new Path();
+        path.addRoundRect(new RectF(x, y, x + size, y + size), radii, Path.Direction.CW);
+        canvas.drawPath(path, paint);
+    }
+
     public static void drawHexagon(Canvas canvas, Paint paint, float centerX, float centerY, float size) {
         Path hexagonPath = new Path();
         for (int i = 0; i < 6; i++) {
@@ -130,5 +144,10 @@ class CommonShapeUtils {
         }
         hexagonPath.close();
         canvas.drawPath(hexagonPath, paint);
+    }
+
+
+    public static void drawDottedStylePattern(Canvas canvas, Paint paint, int outputX, int outputY, int circleSize) {
+        canvas.drawOval(new RectF(outputX, outputY, (outputX + circleSize), (outputY + circleSize)), paint);
     }
 }

@@ -104,15 +104,7 @@ public class QRRenderer {
                             outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
 
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.isClearLogoBackground())) {
-                        if(qrOptions.getPatternStyle() == QRStyles.PatternStyle.SQUARE) {
-                            qrDataPatternRenderer.drawNormalStyle(canvas, paint, outputX, outputY, multiple);
-                        }else if(qrOptions.getPatternStyle() == QRStyles.PatternStyle.FLUID) {
-                            qrDataPatternRenderer.drawFluidStyle(canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
-                        }else if(qrOptions.getPatternStyle() == QRStyles.PatternStyle.DOTTED) {
-                            qrDataPatternRenderer.drawDottedStyle(canvas, paint, outputX, outputY, multiple);
-                        }else if(qrOptions.getPatternStyle() == QRStyles.PatternStyle.HEXAGON) {
-                            qrDataPatternRenderer.drawHexStyle(canvas, paint, outputX, outputY, multiple);
-                        }
+                        drawDataPattern(qrOptions.getPatternStyle(), canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                     }
                 }
             }
@@ -143,6 +135,38 @@ public class QRRenderer {
         }
 
         return bitmap;
+    }
+
+    private void drawDataPattern(QRStyles.PatternStyle style, Canvas canvas, Paint paint, int inputX, int inputY, ByteMatrix input, int inputWidth, int inputHeight, int outputX, int outputY, int multiple) {
+        switch (style) {
+            case SQUARE:
+                qrDataPatternRenderer.drawNormalStyle(canvas, paint, outputX, outputY, multiple);
+                break;
+            case FLUID:
+                qrDataPatternRenderer.drawFluidStyle(canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                break;
+            case L_DOT:
+                qrDataPatternRenderer.drawBigDotStyle(canvas, paint, outputX, outputY, multiple);
+                break;
+            case S_DOT:
+                qrDataPatternRenderer.drawSmallDotStyle(canvas, paint, outputX, outputY, multiple);
+                break;
+            case HEXAGON:
+                qrDataPatternRenderer.drawHexStyle(canvas, paint, outputX, outputY, multiple);
+                break;
+            case X_AXIS_FLUID:
+                qrDataPatternRenderer.drawAxisFluidStyle(canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple, 0);
+                break;
+            case Y_AXIS_FLUID:
+                qrDataPatternRenderer.drawAxisFluidStyle(canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple, 1);
+                break;
+            case DIAMOND:
+                qrDataPatternRenderer.drawDiamondStyle(canvas, paint, outputX, outputY, multiple);
+                break;
+            case STAR:
+                qrDataPatternRenderer.drawStarStyle(canvas, paint, outputX, outputY, multiple);
+                break;
+        }
     }
 
     private void drawEyeFrame(QRStyles.EyeFrameShape shape, Canvas canvas, Paint paint, int[] EyeAlignmentX, int[] EyeAlignmentY, int[] EyeAlignmentZ, int patternSize, int multiple, int color) {

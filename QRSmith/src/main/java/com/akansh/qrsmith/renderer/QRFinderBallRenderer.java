@@ -7,8 +7,6 @@ import java.util.Collections;
 
 public class QRFinderBallRenderer {
 
-
-
     public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
         float radius = (multiple / 2f) * 2f; // Tweak as needed
 
@@ -25,7 +23,7 @@ public class QRFinderBallRenderer {
                 radius, radius    // BL
         };
 
-        CommonShapeUtils.drawMultiRoundCornerStyle(canvas, paint, x, y, size, multiple, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleBall(canvas, paint, x, y, size, multiple, color, radii);
     }
 
     public void drawSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
@@ -92,7 +90,7 @@ public class QRFinderBallRenderer {
                 break;
         }
 
-        CommonShapeUtils.drawMultiRoundCornerStyle(canvas, paint, x, y, size, multiple, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleBall(canvas, paint, x, y, size, multiple, color, radii);
     }
 
     public void drawTechEyeStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
@@ -125,7 +123,7 @@ public class QRFinderBallRenderer {
                 break;
         }
 
-        CommonShapeUtils.drawMultiRoundCornerStyle(canvas, paint, x, y, size, multiple, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleBall(canvas, paint, x, y, size, multiple, color, radii);
     }
 
     public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
@@ -162,7 +160,7 @@ public class QRFinderBallRenderer {
                 break;
         }
 
-        CommonShapeUtils.drawMultiRoundCornerStyle(canvas, paint, x, y, size, multiple, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleBall(canvas, paint, x, y, size, multiple, color, radii);
     }
 
     public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
