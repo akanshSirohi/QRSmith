@@ -286,7 +286,7 @@ public class QRRenderer {
                 endY = 0;
                 break;
             case TL_BR:
-                break; // defaults already set
+                break;
             case BL_TR:
                 startY = height;
                 endY = 0;
