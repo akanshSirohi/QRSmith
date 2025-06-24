@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 .setBackgroundColor(Color.WHITE)
                 .setForegroundColor(Color.BLACK)
                 .setErrorCorrectionLevel(QRErrorCorrectionLevel.H)
-                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
+                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.RADIAL)
 //                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
 //                .setLogo(logo)
 //                .setBackground(bg)

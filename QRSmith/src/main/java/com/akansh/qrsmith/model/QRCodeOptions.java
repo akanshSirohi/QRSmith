@@ -28,12 +28,16 @@ public class QRCodeOptions {
     private final GradientOrientation foregroundGradientOrientation;
     private final GradientOrientation backgroundGradientOrientation;
 
-    /** Orientation for linear gradients. */
+    /**
+     * Orientation for gradients. The first four values are used for
+     * linear gradients while {@code RADIAL} creates a radial gradient.
+     */
     public enum GradientOrientation {
         LEFT_RIGHT,
         TOP_BOTTOM,
         TL_BR,
-        BL_TR
+        BL_TR,
+        RADIAL
     }
 
     private QRCodeOptions(Builder builder) {

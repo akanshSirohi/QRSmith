@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.LinearGradient;
+import android.graphics.RadialGradient;
 import android.graphics.Shader;
 
 import com.google.zxing.EncodeHintType;
@@ -313,7 +314,14 @@ public class QRRenderer {
         }
     }
 
-    private LinearGradient buildGradient(int[] colors, QRCodeOptions.GradientOrientation orientation, int width, int height) {
+    private Shader buildGradient(int[] colors, QRCodeOptions.GradientOrientation orientation, int width, int height) {
+        if (orientation == QRCodeOptions.GradientOrientation.RADIAL) {
+            float cx = width / 2f;
+            float cy = height / 2f;
+            float radius = Math.max(width, height) / 2f;
+            return new RadialGradient(cx, cy, radius, colors, null, Shader.TileMode.CLAMP);
+        }
+
         float startX = 0, startY = 0, endX = width, endY = height;
         switch (orientation) {
             case TOP_BOTTOM:
@@ -327,6 +335,8 @@ public class QRRenderer {
             case BL_TR:
                 startY = height;
                 endY = 0;
+                break;
+            default:
                 break;
         }
         return new LinearGradient(startX, startY, endX, endY, colors, null, Shader.TileMode.CLAMP);
