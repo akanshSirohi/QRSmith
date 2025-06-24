@@ -179,6 +179,9 @@ public class QRRenderer {
             case STAR:
                 qrDataPatternRenderer.drawStarStyle(canvas, paint, outputX, outputY, multiple);
                 break;
+            case HEART:
+                qrDataPatternRenderer.drawHeartStyle(canvas, paint, outputX, outputY, multiple);
+                break;
         }
     }
 

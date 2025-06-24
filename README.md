@@ -4,7 +4,8 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 
 ## Key Features
 
-- **Multiple Styles**: Generate QR codes in **square**, **fluid**, **dotted**, or **hexagon** styles.
+- **Multiple Styles**: Generate QR codes in **square**, **fluid**, **dotted**, **hexagon**, **star**, **diamond**, or **heart** styles.
+- **Heart Pattern**: The `HEART` style draws each module as a small heart shape for a playful look.
 - **Logo Integration**: Add logos with optional padding and background clearing.
 - **Custom Backgrounds**: Use custom images or colors as QR code backgrounds.
 - **Full Customization**: Adjust size, colors, quiet zones, and more.
@@ -155,7 +156,7 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `backgroundGradientColors` | Colors for the background gradient | `null` |
 | `foregroundGradientOrientation` | Gradient orientation (`LEFT_RIGHT`, `TOP_BOTTOM`, `TL_BR`, `BL_TR`) | `LEFT_RIGHT` |
 | `backgroundGradientOrientation` | Orientation for the background gradient | `LEFT_RIGHT` |
-| `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `S_DOT`, `L_DOT`, `HEXAGON`, `X_AXIS_FLUID`, `Y_AXIS_FLUID`, `DIAMOND`, `STAR`) | `SQUARE`     |
+| `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `S_DOT`, `L_DOT`, `HEXAGON`, `X_AXIS_FLUID`, `Y_AXIS_FLUID`, `DIAMOND`, `STAR`, `HEART`) | `SQUARE`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
 | `eyeFrameShape`      | Shape of the finder frame (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
 | `eyeBallShape`       | Shape of the finder ball (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
