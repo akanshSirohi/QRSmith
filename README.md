@@ -113,6 +113,8 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .setPatternStyle(QRStyles.PatternStyle.HEXAGON)
         .setEyeFrameShape(QRStyles.EyeFrameShape.HEXAGON)
         .setEyeBallShape(QRStyles.EyeBallShape.HEXAGON)
+        .setEyeFrameColor(Color.BLUE)
+        .setEyeBallColor(Color.RED)
         .setLogo(logo)
         .setBackground(background) // Set custom background
         .setErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
@@ -157,6 +159,8 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
 | `eyeFrameShape`      | Shape of the finder frame (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
 | `eyeBallShape`       | Shape of the finder ball (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
+| `eyeFrameColor`      | Solid color for finder frames (overrides gradients) | `null` |
+| `eyeBallColor`       | Solid color for finder balls (overrides gradients)  | `null` |
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |

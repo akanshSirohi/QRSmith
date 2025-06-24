@@ -123,11 +123,24 @@ public class QRRenderer {
             leftPadding, topPadding + (inputHeight - FINDER_PATTERN_SIZE) * multiple
         };
 
+        // Prepare solid paints for eyes
+        Paint framePaint = new Paint(paint);
+        framePaint.setShader(null);
+        int frameColor = qrOptions.getEyeFrameColor() != null ?
+                qrOptions.getEyeFrameColor() : qrOptions.getForegroundColor();
+        framePaint.setColor(frameColor);
+
+        Paint ballPaint = new Paint(paint);
+        ballPaint.setShader(null);
+        int ballColor = qrOptions.getEyeBallColor() != null ?
+                qrOptions.getEyeBallColor() : qrOptions.getForegroundColor();
+        ballPaint.setColor(ballColor);
+
         // Finder frame renderer
-        drawEyeFrame(qrOptions.getEyeFrameShape(), canvas, paint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, qrOptions.getForegroundColor());
+        drawEyeFrame(qrOptions.getEyeFrameShape(), canvas, framePaint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, frameColor);
 
         // Finder ball renderer
-        drawEyeBall(qrOptions.getEyeBallShape(), canvas, paint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, qrOptions.getForegroundColor());
+        drawEyeBall(qrOptions.getEyeBallShape(), canvas, ballPaint, EyeAlignmentX, EyeAlignmentY, EyeAlignmentZ, patternSize, multiple, ballColor);
 
         if (logo != null) {
             Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
