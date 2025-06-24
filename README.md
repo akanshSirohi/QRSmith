@@ -128,6 +128,17 @@ try {
 }
 ```
 
+### Gradient Example
+```java
+int[] fgColors = new int[]{Color.RED, Color.BLUE};
+int[] bgColors = new int[]{Color.WHITE, Color.LTGRAY};
+QRCodeOptions options = new QRCodeOptions.Builder()
+        .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
+        .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
+        .build();
+Bitmap qrCode = QRSmith.generateQRCode("https://example.com", options);
+```
+
 ## Customization Options
 
 QRSmith offers extensive customization through the `QRCodeOptions` class:
@@ -138,6 +149,10 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `height`               | Height of the QR code in pixels                   | 500           |
 | `foregroundColor`      | Color of the QR code foreground                   | `Color.BLACK` |
 | `backgroundColor`      | Color of the QR code background                   | `Color.WHITE` |
+| `foregroundGradientColors` | Colors for a gradient QR foreground | `null` |
+| `backgroundGradientColors` | Colors for the background gradient | `null` |
+| `foregroundGradientOrientation` | Gradient orientation (`LEFT_RIGHT`, `TOP_BOTTOM`, `TL_BR`, `BL_TR`) | `LEFT_RIGHT` |
+| `backgroundGradientOrientation` | Orientation for the background gradient | `LEFT_RIGHT` |
 | `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `DOTTED`, `HEXAGON`) | `SQUARE`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
 | `eyeFrameShape`      | Shape of the finder frame (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |

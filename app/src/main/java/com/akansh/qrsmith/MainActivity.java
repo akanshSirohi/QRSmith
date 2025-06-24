@@ -36,17 +36,23 @@ public class MainActivity extends AppCompatActivity {
 
 //        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
 //        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.bg_img);
+
+        int[] fgColors = new int[]{Color.parseColor("#0277BD"), Color.BLACK};
+//        int[] bgColors = new int[]{Color.WHITE, Color.LTGRAY};
+
         QRCodeOptions options = new QRCodeOptions.Builder()
                 .setWidth(720)
                 .setHeight(720)
                 .setBackgroundColor(Color.WHITE)
-                .setForegroundColor(Color.BLACK)
+//                .setForegroundColor(Color.BLACK)
                 .setErrorCorrectionLevel(QRErrorCorrectionLevel.H)
 //                .setLogo(logo)
 //                .setBackground(bg)
                 .setClearLogoBackground(true)
                 .setQuietZone(1)
                 .setLogoPadding(2)
+                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.BL_TR)
+//                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
                 .setPatternStyle(QRStyles.PatternStyle.HEXAGON)
                 .setEyeBallShape(QRStyles.EyeBallShape.CHISEL)
                 .setEyeFrameShape(QRStyles.EyeFrameShape.CIRCLE)
