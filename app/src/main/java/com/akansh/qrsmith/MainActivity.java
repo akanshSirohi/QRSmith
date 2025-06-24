@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 .setClearLogoBackground(true)
                 .setQuietZone(1)
                 .setLogoPadding(2)
-                .setPatternStyle(QRStyles.PatternStyle.HEXAGON)
+                .setPatternStyle(QRStyles.PatternStyle.STAR)
                 .setEyeBallShape(QRStyles.EyeBallShape.CHISEL)
                 .setEyeFrameShape(QRStyles.EyeFrameShape.CIRCLE)
                 .setEyeFrameColor(Color.BLUE)
