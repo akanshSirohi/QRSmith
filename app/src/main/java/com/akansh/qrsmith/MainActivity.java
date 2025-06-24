@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 .setEyeBallShape(QRStyles.EyeBallShape.CHISEL)
                 .setEyeFrameShape(QRStyles.EyeFrameShape.CIRCLE)
                 .setEyeFrameColor(Color.BLUE)
-                .setEyeBallColor(Color.RED)
+                .setEyeBallColor(Color.BLACK)
                 .build();
 
         Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);

@@ -20,8 +20,8 @@ public class QRCodeOptions {
     private final int logoPadding;
     private final QRStyles.EyeFrameShape eyeFrameShape;
     private final QRStyles.EyeBallShape eyeBallShape;
-    private final Integer eyeFrameColor;
-    private final Integer eyeBallColor;
+    private final int eyeFrameColor;
+    private final int eyeBallColor;
     private final QRStyles.PatternStyle patternStyle;
     private final int[] foregroundGradientColors;
     private final int[] backgroundGradientColors;
