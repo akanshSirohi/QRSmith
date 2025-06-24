@@ -14,9 +14,12 @@ public class QRStyles {
         PILL_STACK_H, PILL_STACK_V, INCURVE, CHISEL
     }
 
+    /**
+     * Available styles for the individual QR modules.
+     */
     public enum PatternStyle {
         SQUARE, FLUID, S_DOT, L_DOT,
         HEXAGON, X_AXIS_FLUID, Y_AXIS_FLUID,
-        DIAMOND, STAR
+        DIAMOND, STAR, HEART
     }
 }
