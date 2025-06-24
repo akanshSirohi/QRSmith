@@ -1,12 +1,12 @@
 package com.akansh.qrsmith.renderer;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 
 import com.google.zxing.qrcode.encoder.ByteMatrix;
+
 
 class QRDataPatternRenderer {
     public void drawAxisFluidStyle(Canvas canvas, Paint paint, int inputX, int inputY, ByteMatrix input, int inputWidth, int inputHeight, int outputX, int outputY, int multiple, int axis) {
@@ -144,5 +144,9 @@ class QRDataPatternRenderer {
         }
         starPath.close();
         canvas.drawPath(starPath, paint);
+    }
+
+    public void drawHeartStyle(Canvas canvas, Paint paint, int outputX, int outputY, int multiple) {
+        CommonShapeUtils.drawSvgDataPattern(canvas, paint, outputX, outputY, multiple, DataPatternSVGConstants.HEART_SVG);
     }
 }
