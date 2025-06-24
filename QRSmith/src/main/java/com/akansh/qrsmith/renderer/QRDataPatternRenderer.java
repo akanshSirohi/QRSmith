@@ -145,25 +145,4 @@ class QRDataPatternRenderer {
         starPath.close();
         canvas.drawPath(starPath, paint);
     }
-
-    public void drawHeartStyle(Canvas canvas, Paint paint, int outputX, int outputY, int multiple) {
-        float cx = outputX + multiple / 2f;
-        float cy = outputY + multiple / 2f;
-
-        float size = multiple / 2f;
-
-        Path heartPath = new Path();
-
-        RectF leftArc = new RectF(cx - size, cy - size, cx, cy);
-        RectF rightArc = new RectF(cx, cy - size, cx + size, cy);
-
-        heartPath.moveTo(cx, cy + size);
-        heartPath.lineTo(cx - size, cy);
-        heartPath.addArc(leftArc, 180, 180);
-        heartPath.addArc(rightArc, 180, 180);
-        heartPath.lineTo(cx, cy + size);
-        heartPath.close();
-
-        canvas.drawPath(heartPath, paint);
-    }
 }
