@@ -1,10 +1,12 @@
 # QRSmith - Android QR Code Library
 
-QRSmith is a powerful and versatile Android library for generating advanced, customizable QR codes. It supports multiple styles, logos, backgrounds, and various error correction levels, making it an essential tool for developers looking to add unique QR code functionalities to their apps.
+![QRSmith Logo](docs/logo.png)
+
+QRSmith is a powerful and versatile Android library for generating advanced, customizable QR codes. It supports logos, backgrounds, and various error correction levels, making it an essential tool for developers looking to add unique QR code functionalities to their apps.
 
 ## Key Features
 
-- **Multiple Styles**: Generate QR codes in **square**, **fluid**, **dotted**, or **hexagon** styles.
+- **Customizable Patterns and Finder Shapes**: Use data patterns and finder shapes such as **heart**, **star**, **hexagon**, and more.
 - **Logo Integration**: Add logos with optional padding and background clearing.
 - **Custom Backgrounds**: Use custom images or colors as QR code backgrounds.
 - **Full Customization**: Adjust size, colors, quiet zones, and more.
@@ -158,7 +160,7 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `S_DOT`, `L_DOT`, `HEXAGON`, `X_AXIS_FLUID`, `Y_AXIS_FLUID`, `DIAMOND`, `STAR`, `HEART`) | `SQUARE`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
 | `eyeFrameShape`      | Shape of the finder frame (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
-| `eyeBallShape`       | Shape of the finder ball (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
+| `eyeBallShape`       | Shape of the finder ball (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`, `PILL_STACK_H`, `PILL_STACK_V`, `INCURVE`, `CHISEL`, `HEART`) | `SQUARE`     |
 | `eyeFrameColor`      | Solid color for finder frames (overrides gradients) | `null` |
 | `eyeBallColor`       | Solid color for finder balls (overrides gradients)  | `null` |
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
