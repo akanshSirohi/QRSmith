@@ -1,6 +1,6 @@
-# QRSmith - Android QR Code Library
+![QRSmith Logo](https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/banner.png?raw=true)
 
-![QRSmith Logo](docs/logo.png)
+# QRSmith - Android QR Code Library
 
 QRSmith is a powerful and versatile Android library for generating advanced, customizable QR codes. It supports logos, backgrounds, and various error correction levels, making it an essential tool for developers looking to add unique QR code functionalities to their apps.
 
@@ -17,14 +17,14 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 ## Sample QR Codes
 <table>
     <tr>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-1.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-2.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-3.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-4.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-1.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-2.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-3.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-4.jpg?raw=true" width="200" /></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-5.png?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/master/samples/QR-6.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-5.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-6.png?raw=true" width="200" /></td>
     </tr>
 </table>
 
