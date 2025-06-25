@@ -1,4 +1,4 @@
-![QRSmith Logo](https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/banner.png?raw=true)
+![QRSmith Logo](https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/banner.jpeg?raw=true)
 
 # QRSmith - Android QR Code Library
 
