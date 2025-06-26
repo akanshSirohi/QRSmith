@@ -52,8 +52,8 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
           <td>SOFT_ROUNDED</td>
         </tr>
         <tr>
-          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/PINCHED_SQIRCLE.png?raw=true" width="70" /></td>
-          <td>PINCHED_SQIRCLE</td>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/PINCHED_SQUIRCLE.png?raw=true" width="70" /></td>
+          <td>PINCHED_SQUIRCLE</td>
         </tr>
         <tr>
           <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/BLOB_CORNER.png?raw=true" width="70" /></td>
@@ -103,8 +103,8 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
           <td>SOFT_ROUNDED</td>
         </tr>
         <tr>
-          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/PINCHED_SQIRCLE.png?raw=true" width="70" /></td>
-          <td>PINCHED_SQIRCLE</td>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/PINCHED_SQUIRCLE.png?raw=true" width="70" /></td>
+          <td>PINCHED_SQUIRCLE</td>
         </tr>
       </table>
     </td>
