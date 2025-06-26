@@ -1,5 +1,10 @@
 ![QRSmith Logo](https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/banner.jpeg?raw=true)
 
+[![](https://jitpack.io/v/akanshSirohi/QRSmith.svg)](https://jitpack.io/#akanshSirohi/QRSmith)
+[![release](https://img.shields.io/github/release/akanshSirohi/QRSmith.svg)](https://github.com/akanshSirohi/QRSmith/releases/latest)
+[![license](https://img.shields.io/github/license/akanshSirohi/QRSmith.svg)](https://github.com/akanshSirohi/QRSmith/blob/master/LICENSE)
+![](https://img.shields.io/badge/Made%20With-❤️_By_Akansh_Sirohi-green.svg)
+
 # QRSmith - Android QR Code Library
 
 QRSmith is a powerful and versatile Android library for generating advanced, customizable QR codes. It supports logos, backgrounds, and various error correction levels, making it an essential tool for developers looking to add unique QR code functionalities to their apps.
