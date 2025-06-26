@@ -362,7 +362,7 @@ We welcome contributions! Feel free to open issues or submit pull requests to im
 
 ## License
 
-QRSmith is licensed under the MIT License. See `LICENSE` for details.
+QRSmith is licensed under the Apache 2.0 License. See `LICENSE` for details.
 
 ---
 
