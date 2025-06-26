@@ -213,6 +213,10 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 
 ## Installation
 
+### Requirements
+
+This library requires a minimum Android `minSdk` version of **21**, as specified in [`QRSmith/build.gradle`](QRSmith/build.gradle).
+
 ### Step 1: Add Repositories
 
 Add the following to your root `settings.gradle`:
