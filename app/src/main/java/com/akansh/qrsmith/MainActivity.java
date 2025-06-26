@@ -34,33 +34,38 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView qrView = findViewById(R.id.qrView);
 
-//        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
-//        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.bg_img);
+//        rgb(106, 17, 203), rgb(37, 117, 252)
 
-        int[] fgColors = new int[]{Color.RED, Color.BLACK};
-        int[] bgColors = new int[]{Color.WHITE, Color.LTGRAY};
+        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.a_logo);
+//        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.floral_1);
+
+//        int[] fgColors = new int[]{Color.BLACK, Color.parseColor("#004239")};
+//        int[] fgColors = new int[]{Color.argb(255, 106, 17, 203), Color.argb(255, 37, 117, 252)};
+//        int[] bgColors = new int[]{Color.parseColor("#3F5EFB"), Color.parseColor("#FC466B")};
+//        int[] bgColors = new int[]{Color.WHITE, Color.BLACK};
+//        int[] fgColors = new int[]{Color.parseColor("#008F11"), Color.parseColor("#00FF41")};
 
         QRCodeOptions options = new QRCodeOptions.Builder()
                 .setWidth(720)
                 .setHeight(720)
-                .setBackgroundColor(Color.WHITE)
-                .setForegroundColor(Color.BLACK)
+//                .setBackgroundColor(Color.WHITE)
+//                .setForegroundColor(Color.WHITE)
                 .setErrorCorrectionLevel(QRErrorCorrectionLevel.H)
-                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
-//                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
-//                .setLogo(logo)
+//                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
+//                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.RADIAL)
+                .setLogo(logo)
 //                .setBackground(bg)
-                .setClearLogoBackground(true)
+//                .setClearLogoBackground(true)
                 .setQuietZone(1)
-                .setLogoPadding(2)
-                .setPatternStyle(QRStyles.PatternStyle.HEART)
-                .setEyeBallShape(QRStyles.EyeBallShape.HEART)
-                .setEyeFrameShape(QRStyles.EyeFrameShape.CIRCLE)
-//                .setEyeFrameColor(Color.parseColor("#000000"))
-//                .setEyeBallColor(Color.parseColor("#e60808"))
+//                .setLogoPadding(2)
+                .setPatternStyle(QRStyles.PatternStyle.Y_AXIS_FLUID)
+                .setEyeBallShape(QRStyles.EyeBallShape.SOFT_ROUNDED)
+                .setEyeFrameShape(QRStyles.EyeFrameShape.SOFT_ROUNDED)
+//                .setEyeFrameColor(Color.parseColor("#003B00"))
+//                .setEyeBallColor(Color.parseColor("#003B00"))
                 .build();
 
-        Bitmap bitmap = QRSmith.generateQRCode("Hello, World!", options);
+        Bitmap bitmap = QRSmith.generateQRCode("https://akanshsirohi.dev", options);
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         dr.setCornerRadius(15f);
         qrView.setImageDrawable(dr);
