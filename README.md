@@ -14,17 +14,200 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 - **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
 - **Developer-Friendly API**: Easy-to-use interface with robust customization options.
 
+## Available Eye Frame Designs
+<table>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/SQUARE.png?raw=true" width="70" /></td>
+          <td>SQUARE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/ROUNDED_SQUARE.png?raw=true" width="70" /></td>
+          <td>ROUND_SQUARE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/CIRCLE.png?raw=true" width="70" /></td>
+          <td>CIRCLE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/HEXAGON.png?raw=true" width="70" /></td>
+          <td>HEXAGON</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/ONE_SHARP_CORNER.png?raw=true" width="70" /></td>
+          <td>ONE_SHARP_CORNER</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/TECHEYE.png?raw=true" width="70" /></td>
+          <td>TECH_EYE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/SOFT_ROUNDED.png?raw=true" width="70" /></td>
+          <td>SOFT_ROUNDED</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/PINCHED_SQIRCLE.png?raw=true" width="70" /></td>
+          <td>PINCHED_SQIRCLE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/BLOB_CORNER.png?raw=true" width="70" /></td>
+          <td>BLOB_CORNER</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_FRAME/CORNER_WARP.png?raw=true" width="70" /></td>
+          <td>CORNER_WARP</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+## Available Eye Ball Designs
+<table>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/SQUARE.png?raw=true" width="70" /></td>
+          <td>SQUARE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/ROUND_SQUARE.png?raw=true" width="70" /></td>
+          <td>ROUND_SQUARE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/CIRCLE.png?raw=true" width="70" /></td>
+          <td>CIRCLE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/HEXAGON.png?raw=true" width="70" /></td>
+          <td>HEXAGON</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/ONE_SHARP_CORNER.png?raw=true" width="70" /></td>
+          <td>ONE_SHARP_CORNER</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/TECH_EYE.png?raw=true" width="70" /></td>
+          <td>TECH_EYE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/SOFT_ROUNDED.png?raw=true" width="70" /></td>
+          <td>SOFT_ROUNDED</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/PINCHED_SQIRCLE.png?raw=true" width="70" /></td>
+          <td>PINCHED_SQIRCLE</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/BLOB_CORNER.png?raw=true" width="70" /></td>
+          <td>BLOB_CORNER</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/CORNER_WARP.png?raw=true" width="70" /></td>
+          <td>CORNER_WARP</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/PILL_STACK_H.png?raw=true" width="70" /></td>
+          <td>PILL_STACK_H</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/PILL_STACK_V.png?raw=true" width="70" /></td>
+          <td>PILL_STACK_V</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/INCURVE.png?raw=true" width="70" /></td>
+          <td>INCURVE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/CHISEL.png?raw=true" width="70" /></td>
+          <td>CHISEL</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/EYE_BALL/HEART.png?raw=true" width="70" /></td>
+          <td>HEART</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+## Available Data Pattern Styles
+<table>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/SQUARE.png?raw=true" width="70" /></td>
+          <td>SQUARE</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/FLUID.png?raw=true" width="70" /></td>
+          <td>FLUID</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/SDOT.png?raw=true" width="70" /></td>
+          <td>S_DOT</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/LDOT.png?raw=true" width="70" /></td>
+          <td>L_DOT</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/HEXAGON.png?raw=true" width="70" /></td>
+          <td>HEXAGON</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/XAXISFLUID.png?raw=true" width="70" /></td>
+          <td>X_AXIS_FLUID</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/YAXISFLUID.png?raw=true" width="70" /></td>
+          <td>Y_AXIS_FLUID</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/DIAMOND.png?raw=true" width="70" /></td>
+          <td>DIAMOND</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/STAR.png?raw=true" width="70" /></td>
+          <td>STAR</td>
+        </tr>
+        <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/HEART.png?raw=true" width="70" /></td>
+          <td>HEART</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
 ## Sample QR Codes
 <table>
     <tr>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-1.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-2.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-3.jpg?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-4.jpg?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr1.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr2.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr3.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr4.png?raw=true" width="200" /></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-5.png?raw=true" width="200" /></td>
-        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/QR-6.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr5.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr6.png?raw=true" width="200" /></td>
     </tr>
 </table>
 
