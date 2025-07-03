@@ -20,7 +20,7 @@ class CommonShapeUtils {
     }
 
     public static void drawCommonSVGStyleEyeBall(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color,int[] orientation, CommonShapeUtils.CornerPosition pos, Collection<String> svgCode, float rotation) {
-        float gapModules  = 1.8f;
+        float gapModules  = 2.0f;
         float innerOffPx  = multiple * gapModules;
         float innerSizePx = size - 2f * innerOffPx;
 
@@ -93,7 +93,7 @@ class CommonShapeUtils {
 
 
     public static void drawMultiRoundCornerStyleBall(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, float[] radii) {
-        float gapModules = 1.8f;
+        float gapModules = 2.0f;
         float innerOffset = multiple * gapModules;
         float innerSize = size - (innerOffset * 2f);
 

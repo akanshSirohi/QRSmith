@@ -8,7 +8,7 @@ import java.util.Collections;
 public class QRFinderBallRenderer {
 
     public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
-        float radius = (multiple / 2f) * 2f; // Tweak as needed
+        float radius = (multiple / 2f) * 1.5f; // Tweak as needed
 
         if (paint.getShader() == null) {
             paint.setColor(color);
@@ -53,7 +53,7 @@ public class QRFinderBallRenderer {
 
     public void drawCircleStyle(Canvas canvas, Paint paint, int x, int y, int circleDiameter, int multiple, int foregroundColor) {
 
-        float gapModules = 1.6f;
+        float gapModules = 2.0f;
         float MIDDLE_DOT_OFFSET = multiple * gapModules;
         float MIDDLE_DOT_DIAMETER = circleDiameter - (MIDDLE_DOT_OFFSET * 2f);
 
