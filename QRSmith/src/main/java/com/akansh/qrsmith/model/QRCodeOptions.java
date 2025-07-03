@@ -23,6 +23,8 @@ public class QRCodeOptions {
     private final Integer eyeFrameColor;
     private final Integer eyeBallColor;
     private final QRStyles.PatternStyle patternStyle;
+    private final float eyeFrameStrokeMultiplier;
+    private final float eyeFrameSizeScale;
     private final int[] foregroundGradientColors;
     private final int[] backgroundGradientColors;
     private final GradientOrientation foregroundGradientOrientation;
@@ -56,6 +58,8 @@ public class QRCodeOptions {
         this.eyeFrameColor = builder.eyeFrameColor;
         this.eyeBallColor = builder.eyeBallColor;
         this.patternStyle = builder.patternStyle;
+        this.eyeFrameStrokeMultiplier = builder.eyeFrameStrokeMultiplier;
+        this.eyeFrameSizeScale = builder.eyeFrameSizeScale;
         this.foregroundGradientColors = builder.foregroundGradientColors;
         this.backgroundGradientColors = builder.backgroundGradientColors;
         this.foregroundGradientOrientation = builder.foregroundGradientOrientation;
@@ -81,6 +85,8 @@ public class QRCodeOptions {
     public int[] getBackgroundGradientColors() { return backgroundGradientColors; }
     public GradientOrientation getForegroundGradientOrientation() { return foregroundGradientOrientation; }
     public GradientOrientation getBackgroundGradientOrientation() { return backgroundGradientOrientation; }
+    public float getEyeFrameStrokeMultiplier() { return eyeFrameStrokeMultiplier; }
+    public float getEyeFrameSizeScale() { return eyeFrameSizeScale; }
 
     public static class Builder {
         private int width = 500;
@@ -96,6 +102,8 @@ public class QRCodeOptions {
         private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.SQUARE;
         private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.SQUARE;
         private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.SQUARE;
+        private float eyeFrameStrokeMultiplier = 1f;
+        private float eyeFrameSizeScale = 1f;
         private int[] foregroundGradientColors = null;
         private int[] backgroundGradientColors = null;
         private GradientOrientation foregroundGradientOrientation = GradientOrientation.LEFT_RIGHT;
@@ -121,6 +129,8 @@ public class QRCodeOptions {
             this.eyeFrameColor = base.eyeFrameColor;
             this.eyeBallColor = base.eyeBallColor;
             this.patternStyle = base.patternStyle;
+            this.eyeFrameStrokeMultiplier = base.eyeFrameStrokeMultiplier;
+            this.eyeFrameSizeScale = base.eyeFrameSizeScale;
             this.foregroundGradientColors = base.foregroundGradientColors;
             this.backgroundGradientColors = base.backgroundGradientColors;
             this.foregroundGradientOrientation = base.foregroundGradientOrientation;
@@ -142,6 +152,8 @@ public class QRCodeOptions {
         public Builder setEyeFrameColor(int color) { this.eyeFrameColor = color; return this; }
         public Builder setEyeBallColor(int color) { this.eyeBallColor = color; return this; }
         public Builder setPatternStyle(QRStyles.PatternStyle patternStyle) { this.patternStyle = patternStyle; return this; }
+        public Builder setEyeFrameStrokeMultiplier(float multiplier) { this.eyeFrameStrokeMultiplier = multiplier; return this; }
+        public Builder setEyeFrameSizeScale(float scale) { this.eyeFrameSizeScale = scale; return this; }
         public Builder setForegroundGradient(int[] colors, GradientOrientation orientation) {
             this.foregroundGradientColors = colors;
             this.foregroundGradientOrientation = orientation;

@@ -7,7 +7,7 @@ import android.graphics.RectF;
 
 class QRFinderFrameRenderer {
 
-    public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
+    public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, float strokeWidth, int color) {
         float radius = (multiple / 2f) * 5f;
 
         // start with all rounded
@@ -18,19 +18,19 @@ class QRFinderFrameRenderer {
                 radius, radius    // bottom-left
         };
 
-        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, strokeWidth, color, radii);
     }
 
-    public void drawSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
-        int stroke = size / 7;
+    public void drawSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, float strokeWidth, int color) {
 
         if (paint.getShader() == null) {
             paint.setColor(color);
         }
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(stroke);
-        canvas.drawRoundRect(new RectF(x, y, x + size, y + size), 0, 0, paint);
+        paint.setStrokeWidth(strokeWidth);
+        float inset = strokeWidth / 2f;
+        canvas.drawRoundRect(new RectF(x + inset, y + inset, x + size - inset, y + size - inset), 0, 0, paint);
     }
 
     public void drawHexStyle(Canvas canvas, Paint paint, int x, int y, int size, int color) {
@@ -60,7 +60,7 @@ class QRFinderFrameRenderer {
 
 
 
-    public void drawOneSharpCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
+    public void drawOneSharpCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, float strokeWidth, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 5f;
 
         // start with all rounded
@@ -83,10 +83,10 @@ class QRFinderFrameRenderer {
                 break;
         }
 
-        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, strokeWidth, color, radii);
     }
 
-    public void drawTechEyeStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
+    public void drawTechEyeStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, float strokeWidth, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 5f;
 
         // start with all rounded
@@ -112,10 +112,10 @@ class QRFinderFrameRenderer {
                 break;
         }
 
-        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, strokeWidth, color, radii);
     }
 
-    public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition sharpCorner) {
+    public void drawSoftRoundedStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, float strokeWidth, int color, CommonShapeUtils.CornerPosition sharpCorner) {
         float radius = (multiple / 2f) * 5f;
 
         // start with all rounded
@@ -144,7 +144,7 @@ class QRFinderFrameRenderer {
                 break;
         }
 
-        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, color, radii);
+        CommonShapeUtils.drawMultiRoundCornerStyleFrame(canvas, paint, x, y, size, strokeWidth, color, radii);
     }
 
     public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int color, CommonShapeUtils.CornerPosition pos) {
