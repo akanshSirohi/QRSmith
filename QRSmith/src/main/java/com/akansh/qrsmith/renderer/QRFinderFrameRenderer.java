@@ -46,16 +46,16 @@ class QRFinderFrameRenderer {
         CommonShapeUtils.drawHexagon(canvas, paint, centerX, centerY, size/2f);
     }
 
-    public void drawCircleStyle(Canvas canvas, Paint paint, int x, int y, int circleDiameter, int foregroundColor) {
-        int WHITE_CIRCLE_OFFSET = circleDiameter / 7;
+    public void drawCircleStyle(Canvas canvas, Paint paint, int x, int y, int circleDiameter, float strokeWidth, int foregroundColor) {
+        float inset = strokeWidth / 2f;
 
         // Draw the outer circle
         if (paint.getShader() == null) paint.setColor(foregroundColor);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(WHITE_CIRCLE_OFFSET);
+        paint.setStrokeWidth(strokeWidth);
 
-        canvas.drawOval(new RectF(x, y, (x + circleDiameter), (y + circleDiameter)), paint);
+        canvas.drawOval(new RectF(x + inset, y + inset, x + circleDiameter - inset, y + circleDiameter - inset), paint);
     }
 
 

@@ -216,9 +216,9 @@ public class QRRenderer {
                 qrFinderFrameRenderer.drawHexStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color);
                 break;
             case CIRCLE:
-                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, color);
-                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, color);
-                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, color);
+                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, strokeWidth, color);
+                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentY[0], EyeAlignmentY[1], patternSize, strokeWidth, color);
+                qrFinderFrameRenderer.drawCircleStyle(canvas, paint, EyeAlignmentZ[0], EyeAlignmentZ[1], patternSize, strokeWidth, color);
                 break;
             case ONE_SHARP_CORNER:
                 qrFinderFrameRenderer.drawOneSharpCornerStyle(canvas, paint, EyeAlignmentX[0], EyeAlignmentX[1], patternSize, multiple, strokeWidth, color, CommonShapeUtils.CornerPosition.TOP_LEFT);
