@@ -53,7 +53,7 @@ public class QRFinderBallRenderer {
 
     public void drawCircleStyle(Canvas canvas, Paint paint, int x, int y, int circleDiameter, int multiple, int foregroundColor) {
 
-        float gapModules = 1.6f;
+        float gapModules = 2.0f;
         float MIDDLE_DOT_OFFSET = multiple * gapModules;
         float MIDDLE_DOT_DIAMETER = circleDiameter - (MIDDLE_DOT_OFFSET * 2f);
 
