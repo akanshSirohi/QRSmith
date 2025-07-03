@@ -23,8 +23,6 @@ public class QRCodeOptions {
     private final Integer eyeFrameColor;
     private final Integer eyeBallColor;
     private final QRStyles.PatternStyle patternStyle;
-    private final float eyeFrameStrokeMultiplier;
-    private final float eyeFrameSizeScale;
     private final int[] foregroundGradientColors;
     private final int[] backgroundGradientColors;
     private final GradientOrientation foregroundGradientOrientation;
@@ -58,8 +56,6 @@ public class QRCodeOptions {
         this.eyeFrameColor = builder.eyeFrameColor;
         this.eyeBallColor = builder.eyeBallColor;
         this.patternStyle = builder.patternStyle;
-        this.eyeFrameStrokeMultiplier = builder.eyeFrameStrokeMultiplier;
-        this.eyeFrameSizeScale = builder.eyeFrameSizeScale;
         this.foregroundGradientColors = builder.foregroundGradientColors;
         this.backgroundGradientColors = builder.backgroundGradientColors;
         this.foregroundGradientOrientation = builder.foregroundGradientOrientation;
@@ -85,8 +81,6 @@ public class QRCodeOptions {
     public int[] getBackgroundGradientColors() { return backgroundGradientColors; }
     public GradientOrientation getForegroundGradientOrientation() { return foregroundGradientOrientation; }
     public GradientOrientation getBackgroundGradientOrientation() { return backgroundGradientOrientation; }
-    public float getEyeFrameStrokeMultiplier() { return eyeFrameStrokeMultiplier; }
-    public float getEyeFrameSizeScale() { return eyeFrameSizeScale; }
 
     public static class Builder {
         private int width = 500;
@@ -129,8 +123,6 @@ public class QRCodeOptions {
             this.eyeFrameColor = base.eyeFrameColor;
             this.eyeBallColor = base.eyeBallColor;
             this.patternStyle = base.patternStyle;
-            this.eyeFrameStrokeMultiplier = base.eyeFrameStrokeMultiplier;
-            this.eyeFrameSizeScale = base.eyeFrameSizeScale;
             this.foregroundGradientColors = base.foregroundGradientColors;
             this.backgroundGradientColors = base.backgroundGradientColors;
             this.foregroundGradientOrientation = base.foregroundGradientOrientation;

@@ -8,7 +8,7 @@ import android.graphics.RectF;
 class QRFinderFrameRenderer {
 
     public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, float strokeWidth, int color) {
-        float radius = (multiple / 2f) * 5f;
+        float radius = (multiple / 2f) * 3f;
 
         // start with all rounded
         float[] radii = {

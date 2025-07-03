@@ -111,9 +111,9 @@ public class QRRenderer {
             }
         }
 
-        float strokeWidth = multiple * qrOptions.getEyeFrameStrokeMultiplier();
+        float strokeWidth = multiple;
         int unscaledSize = multiple * FINDER_PATTERN_SIZE;
-        int patternSize = Math.round(unscaledSize * qrOptions.getEyeFrameSizeScale());
+        int patternSize = Math.round(unscaledSize);
         int delta = Math.round((unscaledSize - patternSize) / 2f);
 
         // Eye Alignment Config
