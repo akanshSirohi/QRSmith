@@ -116,19 +116,26 @@ class CommonShapeUtils {
         canvas.drawPath(path, paint);
     }
 
-    public static void drawMultiRoundCornerStyleFrame(Canvas canvas, Paint paint, int x, int y, int size, int color, float[] radii) {
+    public static void drawMultiRoundCornerStyleFrame(Canvas canvas, Paint paint, int x, int y, int size, float strokeWidth, int color, float[] radii) {
         // stroke and radius follow the library’s own math
-        int stroke = size / 7;
+        float inset = strokeWidth / 2f;
 
         if (paint.getShader() == null) {
             paint.setColor(color);
         }
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(stroke);
+        paint.setStrokeWidth(strokeWidth);
+
+        RectF rect = new RectF(
+                x + inset,
+                y + inset,
+                x + size - inset,
+                y + size - inset
+        );
 
         Path path = new Path();
-        path.addRoundRect(new RectF(x, y, x + size, y + size), radii, Path.Direction.CW);
+        path.addRoundRect(rect, radii, Path.Direction.CW);
         canvas.drawPath(path, paint);
     }
 

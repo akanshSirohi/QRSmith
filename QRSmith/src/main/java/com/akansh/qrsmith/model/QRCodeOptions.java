@@ -96,6 +96,8 @@ public class QRCodeOptions {
         private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.SQUARE;
         private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.SQUARE;
         private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.SQUARE;
+        private float eyeFrameStrokeMultiplier = 1f;
+        private float eyeFrameSizeScale = 1f;
         private int[] foregroundGradientColors = null;
         private int[] backgroundGradientColors = null;
         private GradientOrientation foregroundGradientOrientation = GradientOrientation.LEFT_RIGHT;
@@ -142,6 +144,8 @@ public class QRCodeOptions {
         public Builder setEyeFrameColor(int color) { this.eyeFrameColor = color; return this; }
         public Builder setEyeBallColor(int color) { this.eyeBallColor = color; return this; }
         public Builder setPatternStyle(QRStyles.PatternStyle patternStyle) { this.patternStyle = patternStyle; return this; }
+        public Builder setEyeFrameStrokeMultiplier(float multiplier) { this.eyeFrameStrokeMultiplier = multiplier; return this; }
+        public Builder setEyeFrameSizeScale(float scale) { this.eyeFrameSizeScale = scale; return this; }
         public Builder setForegroundGradient(int[] colors, GradientOrientation orientation) {
             this.foregroundGradientColors = colors;
             this.foregroundGradientOrientation = orientation;
