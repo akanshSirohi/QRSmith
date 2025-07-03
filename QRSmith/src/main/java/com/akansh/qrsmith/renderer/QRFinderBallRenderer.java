@@ -8,7 +8,7 @@ import java.util.Collections;
 public class QRFinderBallRenderer {
 
     public void drawRoundedSquaredStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color) {
-        float radius = (multiple / 2f) * 2f; // Tweak as needed
+        float radius = (multiple / 2f) * 1.5f; // Tweak as needed
 
         if (paint.getShader() == null) {
             paint.setColor(color);
