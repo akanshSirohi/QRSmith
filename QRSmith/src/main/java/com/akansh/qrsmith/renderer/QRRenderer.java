@@ -2,6 +2,7 @@ package com.akansh.qrsmith.renderer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.LinearGradient;
 import android.graphics.RadialGradient;
@@ -68,6 +69,27 @@ public class QRRenderer {
 
         int inputWidth = input.getWidth();
         int inputHeight = input.getHeight();
+//        boolean[][] isAlign = new boolean[inputWidth][inputHeight];
+//        int[] alignmentCenters = qrCode.getVersion().getAlignmentPatternCenters();
+//        for (int cy : alignmentCenters) {
+//            for (int cx : alignmentCenters) {
+//
+//                // skip finder corners
+//                if ((cx == 6 && cy == 6) ||
+//                        (cx == 6 && cy == inputHeight - 7) ||
+//                        (cx == inputWidth  - 7 && cy == 6))
+//                    continue;
+//
+//                for (int dy = -2; dy <= 2; dy++) {
+//                    for (int dx = -2; dx <= 2; dx++) {
+//                        int ax = cx + dx;
+//                        int ay = cy + dy;
+//                        if (ax >= 0 && ax < inputWidth && ay >= 0 && ay < inputHeight)
+//                            isAlign[ax][ay] = true;
+//                    }
+//                }
+//            }
+//        }
         int qrWidth = inputWidth + qrOptions.getQuietZone() * 2;
         int qrHeight = inputHeight + qrOptions.getQuietZone() * 2;
         int outputWidth = Math.max(qrOptions.getWidth(), qrWidth);
@@ -103,6 +125,18 @@ public class QRRenderer {
                     boolean isInLogoArea = logo != null &&
                             outputX >= logoX && outputX < (logoX + logoWidth) - multiple &&
                             outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
+
+
+//                    int FINDER_SIZE      = 7;   // 7×7 modules
+//                    int TIMING_OFFSET    = 6;   // Row/col index of timing stripe
+//                    int FINDER_GAP_AFTER = FINDER_SIZE;          // first gap module
+//                    int FINDER_GAP_BEFORE = TIMING_OFFSET - 1;   // last finder module
+//                    int dimension = qrCode.getMatrix().getWidth();
+//                    boolean isTimingPattern =
+//                            (inputY == TIMING_OFFSET && inputX > FINDER_GAP_AFTER && inputX < dimension - FINDER_GAP_AFTER - 1) ||
+//                                    (inputX == TIMING_OFFSET && inputY > FINDER_GAP_AFTER && inputY < dimension - FINDER_GAP_AFTER - 1);
+//
+//                    boolean isAlignmentPattern = isAlign[inputX][inputY];
 
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.isClearLogoBackground())) {
                         drawDataPattern(qrOptions.getPatternStyle(), canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
