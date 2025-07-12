@@ -87,8 +87,9 @@ public class QRRenderer {
         if (logo != null && qrOptions.isClearLogoBackground() && qrOptions.getBackground() == null) {
             Paint clearPaint = new Paint();
             clearPaint.setStyle(Paint.Style.FILL);
-            clearPaint.setColor(qrOptions.getBackgroundColor());
+            clearPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.CLEAR));
             canvas.drawRect(logoX, logoY, logoX + logoWidth, logoY + logoHeight, clearPaint);
+            clearPaint.setXfermode(null);
         }
 
         for (int inputY = 0; inputY < inputHeight; inputY++) {

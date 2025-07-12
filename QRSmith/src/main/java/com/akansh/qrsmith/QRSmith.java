@@ -71,14 +71,8 @@ public class QRSmith {
         int newWidth = originalBitmap.getWidth() + paddingPx * 2;
         int newHeight = originalBitmap.getHeight() + paddingPx * 2;
 
-        // Fallback to ARGB_8888 if the original config is null
-        Bitmap.Config bitmapConfig = originalBitmap.getConfig();
-        if (bitmapConfig == null) {
-            bitmapConfig = Bitmap.Config.ARGB_8888;
-        }
-
-        // Create a new bitmap
-        Bitmap paddedBitmap = Bitmap.createBitmap(newWidth, newHeight, bitmapConfig);
+        // Always use ARGB_8888 to preserve transparency in the padding area
+        Bitmap paddedBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
 
         // Important: match the density, in case you use the density for scaling
         paddedBitmap.setDensity(originalBitmap.getDensity());
