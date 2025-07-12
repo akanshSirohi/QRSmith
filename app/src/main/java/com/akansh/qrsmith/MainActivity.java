@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView qrView = findViewById(R.id.qrView);
 
-//        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
-//        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.bg_img);
+        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
+        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.bg_img);
 
         int[] fgColors = new int[]{Color.RED, Color.BLACK};
         int[] bgColors = new int[]{Color.WHITE, Color.LTGRAY};
@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
                 .setForegroundColor(Color.BLACK)
                 .setErrorCorrectionLevel(QRErrorCorrectionLevel.H)
                 .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
-//                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
-//                .setLogo(logo)
+                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
+                .setLogo(logo)
 //                .setBackground(bg)
                 .setClearLogoBackground(true)
                 .setQuietZone(1)
-                .setLogoPadding(2)
+                .setLogoPadding(0)
                 .setPatternStyle(QRStyles.PatternStyle.HEART)
                 .setEyeBallShape(QRStyles.EyeBallShape.HEART)
                 .setEyeFrameShape(QRStyles.EyeFrameShape.CIRCLE)
