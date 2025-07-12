@@ -84,7 +84,7 @@ public class QRRenderer {
         int logoX = (qrOptions.getWidth() - logoWidth) / 2;
         int logoY = (qrOptions.getHeight() - logoHeight) / 2;
 
-        if (logo != null && qrOptions.isClearLogoBackground() && qrOptions.getBackground() == null) {
+        if (logo != null && qrOptions.isClearLogoBackground()) {
             Paint clearPaint = new Paint();
             clearPaint.setStyle(Paint.Style.FILL);
             clearPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.CLEAR));

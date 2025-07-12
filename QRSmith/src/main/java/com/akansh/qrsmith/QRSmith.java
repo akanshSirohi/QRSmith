@@ -71,8 +71,11 @@ public class QRSmith {
         int newWidth = originalBitmap.getWidth() + paddingPx * 2;
         int newHeight = originalBitmap.getHeight() + paddingPx * 2;
 
-        // Always use ARGB_8888 to preserve transparency in the padding area
+        // Always use ARGB_8888 so padding stays transparent
         Bitmap paddedBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        // Ensure the background starts fully transparent
+        paddedBitmap.eraseColor(android.graphics.Color.TRANSPARENT);
 
         // Important: match the density, in case you use the density for scaling
         paddedBitmap.setDensity(originalBitmap.getDensity());
