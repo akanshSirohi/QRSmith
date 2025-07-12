@@ -165,41 +165,41 @@ public class QRFinderBallRenderer {
 
     public void drawPinchedSquircleStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = { -1, 1, 1, 1, -1, -1 };
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.PinchedSquircle_Ball_SVG), 0f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.PinchedSquircle_Ball_SVG), 0f, 2.0f);
     }
 
     public void drawBlobCornerStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = {1, 1, -1, 1, 1, -1};
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.BlobCorner_Ball_SVG), 0f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.BlobCorner_Ball_SVG), 0f, 2.0f);
     }
 
     public void drawCornerWarpStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = {1, 1, -1, 1, 1, -1};
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.CornerWarp_Ball_SVG), 0f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.CornerWarp_Ball_SVG), 0f, 2.0f);
     }
 
     public void drawPillStackHStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = {1, 1, 1, 1, 1, 1};
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, EyesShapesSVGContants.PillStack_Ball_SVG, 90f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, EyesShapesSVGContants.PillStack_Ball_SVG, 90f, 2.0f);
     }
 
     public void drawPillStackVStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = {1, 1, 1, 1, 1, 1};
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, EyesShapesSVGContants.PillStack_Ball_SVG, 0f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, EyesShapesSVGContants.PillStack_Ball_SVG, 0f, 2.1f);
     }
 
     public void drawIncurveStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = {1, 1, 1, 1, 1, 1};
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Incurve_Ball_SVG), 0f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Incurve_Ball_SVG), 0f, 2.0f);
     }
 
     public void drawChiselStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = {1, 1, 1, -1, 1, -1};
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Chisel_Ball_SVG), 0f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Chisel_Ball_SVG), 0f, 2.0f);
     }
 
     public void drawHeartStyle(Canvas canvas, Paint paint, int x, int y, int size, int multiple, int color, CommonShapeUtils.CornerPosition pos) {
         int[] orientation = {1, 1, 1, 1, 1, 1};
-        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y + 10, size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Heart_Ball_SVG), 0f);
+        CommonShapeUtils.drawCommonSVGStyleEyeBall(canvas, paint, x, y + ((int)(multiple / 3f)), size, multiple, color, orientation, pos, Collections.singleton(EyesShapesSVGContants.Heart_Ball_SVG), 0f, 1.6f);
     }
 }

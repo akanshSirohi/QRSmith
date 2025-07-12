@@ -92,7 +92,7 @@ public class QRCodeOptions {
         private int foregroundColor = Color.BLACK;
         private QRErrorCorrectionLevel errorCorrectionLevel = QRErrorCorrectionLevel.H;
         private boolean clearLogoBackground = true;
-        private int logoPadding = 0;
+        private int logoPadding = 1;
         private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.SQUARE;
         private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.SQUARE;
         private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.SQUARE;

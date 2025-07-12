@@ -84,12 +84,6 @@ public class QRRenderer {
         int logoX = (qrOptions.getWidth() - logoWidth) / 2;
         int logoY = (qrOptions.getHeight() - logoHeight) / 2;
 
-        if (logo != null && qrOptions.isClearLogoBackground() && qrOptions.getBackground() == null) {
-            Paint clearPaint = new Paint();
-            clearPaint.setStyle(Paint.Style.FILL);
-            clearPaint.setColor(qrOptions.getBackgroundColor());
-            canvas.drawRect(logoX, logoY, logoX + logoWidth, logoY + logoHeight, clearPaint);
-        }
 
         for (int inputY = 0; inputY < inputHeight; inputY++) {
             int outputY = topPadding + (multiple * inputY);
