@@ -30,13 +30,35 @@ public class QRRenderer {
         Map<EncodeHintType, Object> hints = new HashMap<>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         QRCode qrCode = Encoder.encode(content, errorCorrectionLevel, hints);
+        ByteMatrix input = qrCode.getMatrix();
+        if (input == null) throw new IllegalStateException();
+
+        int inputWidth = input.getWidth();
+        int inputHeight = input.getHeight();
+        int qrWidth = inputWidth + qrOptions.getQuietZone() * 2;
+        int qrHeight = inputHeight + qrOptions.getQuietZone() * 2;
+        int outputWidth = Math.max(qrOptions.getWidth(), qrWidth);
+        int outputHeight = Math.max(qrOptions.getHeight(), qrHeight);
+
+        int multiple = Math.min(outputWidth / qrWidth, outputHeight / qrHeight);
+        int leftPadding = (outputWidth - (inputWidth * multiple)) / 2;
+        int topPadding = (outputHeight - (inputHeight * multiple)) / 2;
+        int bodyW = inputWidth  * multiple;           // width  of the module area
+        int bodyH = inputHeight * multiple;           // height of the module area
+        int FINDER_PATTERN_SIZE = 7;
+
 
         Bitmap bitmap = Bitmap.createBitmap(qrOptions.getWidth(), qrOptions.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
+//        canvas.drawColor(Color.WHITE);
+//        canvas.clipRect(leftPadding, topPadding, leftPadding + bodyW, topPadding + bodyH);
+
         if (qrOptions.getBackground() != null) {
             Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.getBackground(), qrOptions.getWidth(), qrOptions.getHeight(), true);
             canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+//            Bitmap bg = Bitmap.createScaledBitmap(qrOptions.getBackground(), bodyW, bodyH, true);
+//            canvas.drawBitmap(bg, leftPadding, topPadding, null);
         } else {
             Paint bgPaint = new Paint();
             bgPaint.setStyle(Paint.Style.FILL);
@@ -46,10 +68,15 @@ public class QRRenderer {
                         qrOptions.getBackgroundGradientOrientation(),
                         qrOptions.getWidth(),
                         qrOptions.getHeight()));
+//               bgPaint.setShader(buildGradient(
+//                        qrOptions.getBackgroundGradientColors(),
+//                        qrOptions.getBackgroundGradientOrientation(),
+//                        bodyW, bodyH));
             } else {
                 bgPaint.setColor(qrOptions.getBackgroundColor());
             }
             canvas.drawRect(0, 0, qrOptions.getWidth(), qrOptions.getHeight(), bgPaint);
+//           canvas.drawRect(leftPadding, topPadding, leftPadding + bodyW, topPadding + bodyH, bgPaint);
         }
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -64,20 +91,9 @@ public class QRRenderer {
             paint.setColor(qrOptions.getForegroundColor());
         }
 
-        ByteMatrix input = qrCode.getMatrix();
-        if (input == null) throw new IllegalStateException();
 
-        int inputWidth = input.getWidth();
-        int inputHeight = input.getHeight();
-        int qrWidth = inputWidth + qrOptions.getQuietZone() * 2;
-        int qrHeight = inputHeight + qrOptions.getQuietZone() * 2;
-        int outputWidth = Math.max(qrOptions.getWidth(), qrWidth);
-        int outputHeight = Math.max(qrOptions.getHeight(), qrHeight);
 
-        int multiple = Math.min(outputWidth / qrWidth, outputHeight / qrHeight);
-        int leftPadding = (outputWidth - (inputWidth * multiple)) / 2;
-        int topPadding = (outputHeight - (inputHeight * multiple)) / 2;
-        int FINDER_PATTERN_SIZE = 7;
+
 
         Bitmap logo = qrOptions.getLogo();
         int logoWidth = qrOptions.getWidth() / 5;
@@ -142,10 +158,9 @@ public class QRRenderer {
                         }else{
                             Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
                             p.setStyle(Paint.Style.FILL);
-                            p.setColor(Color.parseColor("#b2ffffff"));
+                            p.setColor(Color.parseColor("#4cffffff"));
                             if(isAlignmentPattern || isTimingPattern) {
                                 drawDataPattern(QRStyles.PatternStyle.SQUARE, canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
-//                                drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                             }else{
                                 drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                             }
@@ -153,7 +168,7 @@ public class QRRenderer {
                     }else{
                         Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
                         p.setStyle(Paint.Style.FILL);
-                        p.setColor(Color.parseColor("#b2ffffff"));
+                        p.setColor(Color.parseColor("#4cffffff"));
 //                        drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                         drawDataPattern(QRStyles.PatternStyle.SQUARE, canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                     }

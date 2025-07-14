@@ -93,12 +93,12 @@ class QRDataPatternRenderer {
 
     public void drawBigDotStyle(Canvas canvas, Paint paint, int outputX, int outputY, int multiple) {
         int circleSize = (int) (multiple * 0.98);
-        CommonShapeUtils.drawDottedStylePattern(canvas, paint, outputX, outputY, circleSize);
+        CommonShapeUtils.drawDottedStylePattern(canvas, paint, outputX, outputY, circleSize, multiple);
     }
 
     public void drawSmallDotStyle(Canvas canvas, Paint paint, int outputX, int outputY, int multiple) {
-        int circleSize = (int) (multiple * 0.45);
-        CommonShapeUtils.drawDottedStylePattern(canvas, paint, outputX, outputY, circleSize);
+        int circleSize = (int) (multiple * 0.40f);
+        CommonShapeUtils.drawDottedStylePattern(canvas, paint, outputX, outputY, circleSize, multiple);
     }
 
     public void drawHexStyle(Canvas canvas, Paint paint, int outputX, int outputY, int multiple) {

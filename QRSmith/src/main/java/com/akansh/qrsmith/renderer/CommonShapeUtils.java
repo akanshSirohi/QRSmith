@@ -173,7 +173,8 @@ class CommonShapeUtils {
     }
 
 
-    public static void drawDottedStylePattern(Canvas canvas, Paint paint, int outputX, int outputY, int circleSize) {
-        canvas.drawOval(new RectF(outputX, outputY, (outputX + circleSize), (outputY + circleSize)), paint);
+    public static void drawDottedStylePattern(Canvas canvas, Paint paint, int outputX, int outputY, int circleSize, int multiple) {
+        int offset = (multiple - circleSize) / 2;
+        canvas.drawOval(new RectF(outputX + offset, outputY + offset, (outputX + circleSize + offset), (outputY + circleSize + offset)), paint);
     }
 }

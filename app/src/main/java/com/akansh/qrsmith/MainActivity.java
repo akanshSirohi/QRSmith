@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
                 .setWidth(720)
                 .setHeight(720)
                 .setBackgroundColor(Color.WHITE)
-                .setForegroundColor(Color.BLACK)
+                .setForegroundColor(Color.parseColor("#b2000000"))
                 .setErrorCorrectionLevel(QRErrorCorrectionLevel.H)
 //                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
 //                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
 //                .setLogo(logo)
                 .setBackground(bg)
                 .setClearLogoBackground(true)
-                .setQuietZone(2)
+                .setQuietZone(1)
                 .setLogoPadding(0)
                 .setPatternStyle(QRStyles.PatternStyle.S_DOT)
                 .setEyeBallShape(QRStyles.EyeBallShape.SQUARE)
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 //                .setEyeBallColor(Color.parseColor("#e60808"))
                 .build();
 
-        Bitmap bitmap = QRSmith.generateQRCode("Https://www.akanshsirohi.dev", options);
+        Bitmap bitmap = QRSmith.generateQRCode("https://akanshsirohi.dev", options);
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         dr.setCornerRadius(15f);
         qrView.setImageDrawable(dr);
