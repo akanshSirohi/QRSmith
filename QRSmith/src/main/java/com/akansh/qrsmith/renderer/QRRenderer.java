@@ -2,6 +2,7 @@ package com.akansh.qrsmith.renderer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.LinearGradient;
 import android.graphics.RadialGradient;
@@ -99,7 +100,14 @@ public class QRRenderer {
                             outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
 
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.isClearLogoBackground())) {
-                        drawDataPattern(qrOptions.getPatternStyle(), canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                        if(input.get(inputX, inputY) == 1) {
+                            drawDataPattern(qrOptions.getPatternStyle(), canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                        }else{
+                            Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
+                            p.setStyle(Paint.Style.FILL);
+                            p.setColor(Color.WHITE);
+                            drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                        }
                     }
                 }
             }
