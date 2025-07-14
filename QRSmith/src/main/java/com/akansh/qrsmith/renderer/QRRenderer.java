@@ -86,30 +86,78 @@ public class QRRenderer {
         int logoY = (qrOptions.getHeight() - logoHeight) / 2;
 
 
+        boolean[][] isAlign = new boolean[inputWidth][inputHeight];
+        int[] alignmentCenters = qrCode.getVersion().getAlignmentPatternCenters();
+        for (int cy : alignmentCenters) {
+            for (int cx : alignmentCenters) {
+                if ((cx == 6 && cy == 6) ||
+                        (cx == 6 && cy == inputHeight - 7) ||
+                        (cx == inputWidth  - 7 && cy == 6))
+                    continue;
+
+                for (int dy = -2; dy <= 2; dy++) {
+                    for (int dx = -2; dx <= 2; dx++) {
+                        int ax = cx + dx;
+                        int ay = cy + dy;
+                        if (ax >= 0 && ax < inputWidth && ay >= 0 && ay < inputHeight)
+                            isAlign[ax][ay] = true;
+                    }
+                }
+            }
+        }
+
+
         for (int inputY = 0; inputY < inputHeight; inputY++) {
             int outputY = topPadding + (multiple * inputY);
             for (int inputX = 0; inputX < inputWidth; inputX++) {
                 int outputX = leftPadding + (multiple * inputX);
-                if (input.get(inputX, inputY) == 1) {
-                    boolean isInFinderPattern = (inputX <= FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
-                            inputX >= inputWidth - FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE ||
-                            inputX <= FINDER_PATTERN_SIZE && inputY >= inputHeight - FINDER_PATTERN_SIZE);
+//                if (input.get(inputX, inputY) == 1) {
+                     boolean isInFinderPattern = (inputX <= FINDER_PATTERN_SIZE && inputY <= FINDER_PATTERN_SIZE) || // Top-left
+                                (inputX >= inputWidth - FINDER_PATTERN_SIZE - 1 && inputY <= FINDER_PATTERN_SIZE) || // Top-right
+                                (inputX <= FINDER_PATTERN_SIZE && inputY >= inputHeight - FINDER_PATTERN_SIZE - 1);  // Bottom-left
 
-                    boolean isInLogoArea = logo != null &&
+
+                boolean isInLogoArea = logo != null &&
                             outputX >= logoX && outputX < (logoX + logoWidth) - multiple &&
                             outputY >= logoY && outputY < (logoY + logoHeight) - multiple;
 
+
+                    int FINDER_SIZE      = 7;   // 7×7 modules
+                    int TIMING_OFFSET    = 6;   // Row/col index of timing stripe
+                    int dimension = qrCode.getMatrix().getWidth();
+                    boolean isTimingPattern =
+                            (inputY == TIMING_OFFSET && inputX > FINDER_SIZE && inputX < dimension - FINDER_SIZE - 1) ||
+                                    (inputX == TIMING_OFFSET && inputY > FINDER_SIZE && inputY < dimension - FINDER_SIZE - 1);
+
+                    boolean isAlignmentPattern = isAlign[inputX][inputY];
+
+
                     if (!isInFinderPattern && (!isInLogoArea || !qrOptions.isClearLogoBackground())) {
                         if(input.get(inputX, inputY) == 1) {
-                            drawDataPattern(qrOptions.getPatternStyle(), canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            if(isAlignmentPattern || isTimingPattern) {
+                                drawDataPattern(QRStyles.PatternStyle.SQUARE, canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            }else{
+                                drawDataPattern(qrOptions.getPatternStyle(), canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            }
                         }else{
                             Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
                             p.setStyle(Paint.Style.FILL);
-                            p.setColor(Color.WHITE);
-                            drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            p.setColor(Color.parseColor("#b2ffffff"));
+                            if(isAlignmentPattern || isTimingPattern) {
+                                drawDataPattern(QRStyles.PatternStyle.SQUARE, canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+//                                drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            }else{
+                                drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            }
                         }
+                    }else{
+                        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
+                        p.setStyle(Paint.Style.FILL);
+                        p.setColor(Color.parseColor("#b2ffffff"));
+//                        drawDataPattern(qrOptions.getPatternStyle(), canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                        drawDataPattern(QRStyles.PatternStyle.SQUARE, canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                     }
-                }
+//                }
             }
         }
 
