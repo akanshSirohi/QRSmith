@@ -27,6 +27,9 @@ public class QRCodeOptions {
     private final int[] backgroundGradientColors;
     private final GradientOrientation foregroundGradientOrientation;
     private final GradientOrientation backgroundGradientOrientation;
+    private final boolean maxTolerance;
+    private final float toleranceMaskOpacity;
+    private final boolean clipBackgroundToQR;
 
     /**
      * Orientation for gradients. The first four values are used for
@@ -60,6 +63,9 @@ public class QRCodeOptions {
         this.backgroundGradientColors = builder.backgroundGradientColors;
         this.foregroundGradientOrientation = builder.foregroundGradientOrientation;
         this.backgroundGradientOrientation = builder.backgroundGradientOrientation;
+        this.maxTolerance = builder.maxTolerance;
+        this.toleranceMaskOpacity = builder.toleranceMaskOpacity;
+        this.clipBackgroundToQR = builder.clipBackgroundToQR;
     }
 
     public int getWidth() { return width; }
@@ -81,6 +87,9 @@ public class QRCodeOptions {
     public int[] getBackgroundGradientColors() { return backgroundGradientColors; }
     public GradientOrientation getForegroundGradientOrientation() { return foregroundGradientOrientation; }
     public GradientOrientation getBackgroundGradientOrientation() { return backgroundGradientOrientation; }
+    public boolean isMaxTolerance() { return maxTolerance; }
+    public float getToleranceMaskOpacity() { return toleranceMaskOpacity; }
+    public boolean isClipBackgroundToQR() { return clipBackgroundToQR; }
 
     public static class Builder {
         private int width = 500;
@@ -96,14 +105,15 @@ public class QRCodeOptions {
         private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.SQUARE;
         private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.SQUARE;
         private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.SQUARE;
-        private float eyeFrameStrokeMultiplier = 1f;
-        private float eyeFrameSizeScale = 1f;
         private int[] foregroundGradientColors = null;
         private int[] backgroundGradientColors = null;
         private GradientOrientation foregroundGradientOrientation = GradientOrientation.LEFT_RIGHT;
         private GradientOrientation backgroundGradientOrientation = GradientOrientation.LEFT_RIGHT;
         private Integer eyeFrameColor = null;
         private Integer eyeBallColor = null;
+        private boolean maxTolerance = false;
+        private float toleranceMaskOpacity = 0.5f;
+        private boolean clipBackgroundToQR = false;
 
         public Builder() {}
 
@@ -127,6 +137,9 @@ public class QRCodeOptions {
             this.backgroundGradientColors = base.backgroundGradientColors;
             this.foregroundGradientOrientation = base.foregroundGradientOrientation;
             this.backgroundGradientOrientation = base.backgroundGradientOrientation;
+            this.maxTolerance = base.maxTolerance;
+            this.toleranceMaskOpacity = base.toleranceMaskOpacity;
+            this.clipBackgroundToQR = base.clipBackgroundToQR;
         }
 
         public Builder setWidth(int width) { this.width = width; return this; }
@@ -144,8 +157,6 @@ public class QRCodeOptions {
         public Builder setEyeFrameColor(int color) { this.eyeFrameColor = color; return this; }
         public Builder setEyeBallColor(int color) { this.eyeBallColor = color; return this; }
         public Builder setPatternStyle(QRStyles.PatternStyle patternStyle) { this.patternStyle = patternStyle; return this; }
-        public Builder setEyeFrameStrokeMultiplier(float multiplier) { this.eyeFrameStrokeMultiplier = multiplier; return this; }
-        public Builder setEyeFrameSizeScale(float scale) { this.eyeFrameSizeScale = scale; return this; }
         public Builder setForegroundGradient(int[] colors, GradientOrientation orientation) {
             this.foregroundGradientColors = colors;
             this.foregroundGradientOrientation = orientation;
@@ -157,6 +168,12 @@ public class QRCodeOptions {
             this.backgroundGradientOrientation = orientation;
             return this;
         }
+
+        public Builder setMaxTolerance(boolean maxTolerance) { this.maxTolerance = maxTolerance; return this; }
+        public Builder setToleranceMaskOpacity(float opacity) { this.toleranceMaskOpacity = opacity; return this; }
+
+        public Builder setClipBackgroundToQR(boolean clipBackgroundToQR) { this.clipBackgroundToQR = clipBackgroundToQR; return this; }
+
         public QRCodeOptions build() { return new QRCodeOptions(this); }
     }
 }
