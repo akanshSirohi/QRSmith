@@ -68,6 +68,7 @@ public class QRRenderer {
 
         if (qrOptions.getBackground() != null) {
             Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.getBackground(), bgDrawXLength, bgDrawYLength, true);
+            backgroundBitmap = BlurUtil.blur(backgroundBitmap, 12f, 0.5f); // 1f to 25f radius px
             canvas.drawBitmap(backgroundBitmap, bgDrawXStart, bgDrawYStart, null);
         } else {
             Paint bgPaint = new Paint();
