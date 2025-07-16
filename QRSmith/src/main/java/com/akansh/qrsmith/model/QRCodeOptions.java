@@ -29,6 +29,7 @@ public class QRCodeOptions {
     private final GradientOrientation backgroundGradientOrientation;
     private final boolean maxTolerance;
     private final float toleranceMaskOpacity;
+    private final float toleranceModuleSize;
     private final boolean clipBackgroundToQR;
 
     /**
@@ -65,6 +66,7 @@ public class QRCodeOptions {
         this.backgroundGradientOrientation = builder.backgroundGradientOrientation;
         this.maxTolerance = builder.maxTolerance;
         this.toleranceMaskOpacity = builder.toleranceMaskOpacity;
+        this.toleranceModuleSize = builder.toleranceModuleSize;
         this.clipBackgroundToQR = builder.clipBackgroundToQR;
     }
 
@@ -89,6 +91,7 @@ public class QRCodeOptions {
     public GradientOrientation getBackgroundGradientOrientation() { return backgroundGradientOrientation; }
     public boolean isMaxTolerance() { return maxTolerance; }
     public float getToleranceMaskOpacity() { return toleranceMaskOpacity; }
+    public float getToleranceModuleSize() { return toleranceModuleSize; }
     public boolean isClipBackgroundToQR() { return clipBackgroundToQR; }
 
     public static class Builder {
@@ -113,6 +116,7 @@ public class QRCodeOptions {
         private Integer eyeBallColor = null;
         private boolean maxTolerance = false;
         private float toleranceMaskOpacity = 0.5f;
+        private float toleranceModuleSize = 0.4f;
         private boolean clipBackgroundToQR = false;
 
         public Builder() {}
@@ -139,6 +143,7 @@ public class QRCodeOptions {
             this.backgroundGradientOrientation = base.backgroundGradientOrientation;
             this.maxTolerance = base.maxTolerance;
             this.toleranceMaskOpacity = base.toleranceMaskOpacity;
+            this.toleranceModuleSize = base.toleranceModuleSize;
             this.clipBackgroundToQR = base.clipBackgroundToQR;
         }
 
@@ -171,6 +176,7 @@ public class QRCodeOptions {
 
         public Builder setMaxTolerance(boolean maxTolerance) { this.maxTolerance = maxTolerance; return this; }
         public Builder setToleranceMaskOpacity(float opacity) { this.toleranceMaskOpacity = opacity; return this; }
+        public Builder setToleranceModuleSize(float size) { this.toleranceModuleSize = size; return this; }
 
         public Builder setClipBackgroundToQR(boolean clipBackgroundToQR) { this.clipBackgroundToQR = clipBackgroundToQR; return this; }
 

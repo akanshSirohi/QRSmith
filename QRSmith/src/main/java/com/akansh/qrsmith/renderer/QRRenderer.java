@@ -161,13 +161,13 @@ public class QRRenderer {
                             drawDataPattern(qrOptions.getPatternStyle(), canvas, paint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                         }
                     }else if(qrOptions.isMaxTolerance()) {
-                        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-                        p.setStyle(Paint.Style.FILL);
-                        p.setColor(toleranceMaskColor);
+                        Paint tolerancePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                        tolerancePaint.setStyle(Paint.Style.FILL);
+                        tolerancePaint.setColor(toleranceMaskColor);
                         if(isAlignmentPattern || isTimingPattern) {
-                            drawDataPattern(QRStyles.PatternStyle.SQUARE, canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            drawDataPattern(QRStyles.PatternStyle.SQUARE, canvas, tolerancePaint, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
                         }else{
-                            drawDataPattern(QRStyles.PatternStyle.XS_DOT, canvas, p, inputX, inputY, input, inputWidth, inputHeight, outputX, outputY, multiple);
+                            CommonShapeUtils.drawDottedStylePattern(canvas, tolerancePaint, outputX, outputY, (int) (multiple * qrOptions.getToleranceModuleSize()), multiple);
                         }
                     }
                 }else if(qrOptions.isMaxTolerance()) {
