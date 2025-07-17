@@ -164,6 +164,10 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
           <td>FLUID</td>
         </tr>
         <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/XSDOT.png?raw=true" width="70" /></td>
+          <td>XS_DOT</td>
+        </tr>
+        <tr>
           <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/SDOT.png?raw=true" width="70" /></td>
           <td>S_DOT</td>
         </tr>
