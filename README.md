@@ -344,7 +344,9 @@ Bitmap qrCode = QRSmith.generateQRCode("https://example.com", options);
 ```
 
 ### Tolerance Mode
-When enabled, Tolerance Mode adds a subtle overlay to preserve the structural integrity of essential QR modules. This ensures optimal scan reliability, especially when using complex or decorative data patterns. It also enhances compatibility with negative dot styles by reinforcing critical areas of the code. You can adjust `toleranceMaskOpacity` and `toleranceModuleSize` to fine-tune the visual balance between aesthetics and functionality.
+When enabled, Tolerance Mode adds a subtle overlay to preserve the structural integrity of essential QR modules. This ensures optimal scan reliability, especially when using complex or decorative data patterns. It also enhances compatibility with negative dot styles by reinforcing critical areas of the code. You can adjust `toleranceMaskOpacity` and `toleranceModuleSize` to fine-tune the visual balance between aesthetics and functionality. Below is an example QR code with tolerance mode enabled.
+
+<img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr7.png?raw=true" width="210" />
 
 ## Customization Options
 
