@@ -9,6 +9,11 @@
 
 QRSmith is a powerful and versatile Android library for generating advanced, customizable QR codes. It supports logos, backgrounds, and various error correction levels, making it an essential tool for developers looking to add unique QR code functionalities to their apps.
 
+## Available on PlayStore
+<b><i>With the QRSmith app, you can take full control of these features like a pro!</i></b><br/><br/>
+<a href="https://play.google.com/store/apps/details?id=com.akansh.qrsmithapp"><img width="300" alt="Google_Play_Store_badge_EN svg" src="https://github.com/user-attachments/assets/0578c32e-2fad-4e9d-ac4f-c1870d45bb29" /></a>
+
+
 ## Key Features
 
 - **Customizable Patterns and Finder Shapes**: Use data patterns and finder shapes such as **heart**, **star**, **hexagon**, and more.
