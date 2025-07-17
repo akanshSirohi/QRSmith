@@ -17,6 +17,8 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 - **Full Customization**: Adjust size, colors, quiet zones, and more.
 - **Customizable Finder Patterns**: Choose separate shapes for the finder frame and ball, including options like `SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, and `CORNER_WARP`.
 - **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
+- **Tolerance Mode**: Optional mask that preserves alignment and timing patterns to improve scan reliability when using decorative styles.
+- **Blurred Backgrounds**: Apply a fast blur to background images for a polished look.
 - **Developer-Friendly API**: Easy-to-use interface with robust customization options.
 
 ## Available Eye Frame Designs
@@ -311,7 +313,12 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .setEyeBallColor(Color.RED)
         .setLogo(logo)
         .setBackground(background) // Set custom background
+        .setBgBlur(true) // Optional background blur
+        .setBgBlurRadius(16f)
         .setErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
+        .setMaxTolerance(true) // Enable tolerance mode
+        .setToleranceMaskOpacity(0.5f)
+        .setToleranceModuleSize(0.4f)
         .setQuietZone(2)
         .build();
 
@@ -334,6 +341,11 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .build();
 Bitmap qrCode = QRSmith.generateQRCode("https://example.com", options);
 ```
+
+### Tolerance Mode
+Enabling tolerance mode overlays a semi-transparent mask and forces crucial QR modules to remain square.
+This increases scanning reliability when using decorative data patterns. Adjust `toleranceMaskOpacity`
+and `toleranceModuleSize` to fine tune the look while keeping the code readable.
 
 ## Customization Options
 
@@ -358,8 +370,14 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
-| `logoPadding`          | Padding around the logo                           | `0`           |
-| `quietZone`            | Quiet zone size around the QR code                | `1`           |
+| `logoPadding`          | Padding around the logo *(0–100)*              | `1`           |
+| `quietZone`            | Quiet zone size around the QR code *(0–20)*       | `1`           |
+| `maxTolerance`         | Enables tolerance mode                            | `false`       |
+| `toleranceMaskOpacity` | Opacity of the tolerance mask *(0.1–1.0)*         | `0.5`         |
+| `toleranceModuleSize`  | Dot size for the tolerance pattern *(0.1–1.0)*   | `0.4`         |
+| `clipBackgroundToQR`   | Clip the background to the QR bounds              | `false`       |
+| `bgBlur`               | Apply blur effect to the background               | `false`       |
+| `bgBlurRadius`         | Background blur radius *(1–25)*                 | `12`          |
 
 ## Contributing
 
