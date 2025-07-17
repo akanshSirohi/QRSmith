@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView qrView = findViewById(R.id.qrView);
 
-//        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android);
-        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.sample_forest_landscape);
+//        Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.sample_android_logo);
+//        Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.sample_forest_landscape);
 
         int[] fgColors = new int[]{Color.RED, Color.BLACK};
         int[] bgColors = new int[]{Color.WHITE, Color.LTGRAY};
@@ -49,18 +49,21 @@ public class MainActivity extends AppCompatActivity {
 //                .setForegroundGradient(fgColors, QRCodeOptions.GradientOrientation.RADIAL)
 //                .setBackgroundGradient(bgColors, QRCodeOptions.GradientOrientation.TOP_BOTTOM)
 //                .setLogo(logo)
-                .setBackground(bg)
+//                .setBackground(bg)
+                .setClearLogoBackground(false)
 //                .setClearLogoBackground(true)
                 .setQuietZone(1)
-                .setLogoPadding(0)
+                .setLogoPadding(10)
                 .setPatternStyle(QRStyles.PatternStyle.XS_DOT)
 //                .setEyeBallShape(QRStyles.EyeBallShape.HEART)
 //                .setEyeFrameShape(QRStyles.EyeFrameShape.SOFT_ROUNDED)
 //                .setEyeFrameColor(Color.parseColor("#000000"))
 //                .setEyeBallColor(Color.parseColor("#e60808"))
-                .setMaxTolerance(true)
+//                .setMaxTolerance(true)
                 .setToleranceMaskOpacity(0.4f)
                 .setToleranceModuleSize(0.4f)
+//                .setBgBlur(true)
+//                .setBgBlurRadius(25f)
 //                .setClipBackgroundToQR(true)
                 .build();
 
