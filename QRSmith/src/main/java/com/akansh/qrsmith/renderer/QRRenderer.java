@@ -68,7 +68,9 @@ public class QRRenderer {
 
         if (qrOptions.getBackground() != null) {
             Bitmap backgroundBitmap = Bitmap.createScaledBitmap(qrOptions.getBackground(), bgDrawXLength, bgDrawYLength, true);
-            backgroundBitmap = BlurUtil.blur(backgroundBitmap, 12f, 0.5f); // 1f to 25f radius px
+            if(qrOptions.isBgBlur()) {
+                backgroundBitmap = BlurUtil.blur(backgroundBitmap, qrOptions.getBgBlurRadius(), 0.5f);
+            }
             canvas.drawBitmap(backgroundBitmap, bgDrawXStart, bgDrawYStart, null);
         } else {
             Paint bgPaint = new Paint();
@@ -171,7 +173,7 @@ public class QRRenderer {
                             CommonShapeUtils.drawDottedStylePattern(canvas, tolerancePaint, outputX, outputY, (int) (multiple * qrOptions.getToleranceModuleSize()), multiple);
                         }
                     }
-                }else if(qrOptions.isMaxTolerance()) {
+                }else if(!isInLogoArea && qrOptions.isMaxTolerance()) {
                     Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
                     p.setStyle(Paint.Style.FILL);
                     p.setColor(toleranceMaskColor);
