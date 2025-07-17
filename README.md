@@ -215,6 +215,7 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
     <tr>
         <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr5.png?raw=true" width="200" /></td>
         <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr6.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr7.png?raw=true" width="200" /></td>
     </tr>
 </table>
 
@@ -343,9 +344,7 @@ Bitmap qrCode = QRSmith.generateQRCode("https://example.com", options);
 ```
 
 ### Tolerance Mode
-Enabling tolerance mode overlays a semi-transparent mask and forces crucial QR modules to remain square.
-This increases scanning reliability when using decorative data patterns. Adjust `toleranceMaskOpacity`
-and `toleranceModuleSize` to fine tune the look while keeping the code readable.
+When enabled, Tolerance Mode adds a subtle overlay to preserve the structural integrity of essential QR modules. This ensures optimal scan reliability, especially when using complex or decorative data patterns. It also enhances compatibility with negative dot styles by reinforcing critical areas of the code. You can adjust `toleranceMaskOpacity` and `toleranceModuleSize` to fine-tune the visual balance between aesthetics and functionality.
 
 ## Customization Options
 
@@ -361,7 +360,7 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `backgroundGradientColors` | Colors for the background gradient | `null` |
 | `foregroundGradientOrientation` | Gradient orientation (`LEFT_RIGHT`, `TOP_BOTTOM`, `TL_BR`, `BL_TR`, `RADIAL`) | `LEFT_RIGHT` |
 | `backgroundGradientOrientation` | Orientation for the background gradient (`LEFT_RIGHT`, `TOP_BOTTOM`, `TL_BR`, `BL_TR`, `RADIAL`) | `LEFT_RIGHT` |
-| `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `S_DOT`, `L_DOT`, `HEXAGON`, `X_AXIS_FLUID`, `Y_AXIS_FLUID`, `DIAMOND`, `STAR`, `HEART`) | `SQUARE`     |
+| `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `XS_DOT`, `S_DOT`, `L_DOT`, `HEXAGON`, `X_AXIS_FLUID`, `Y_AXIS_FLUID`, `DIAMOND`, `STAR`, `HEART`) | `SQUARE`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
 | `eyeFrameShape`      | Shape of the finder frame (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
 | `eyeBallShape`       | Shape of the finder ball (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`, `PILL_STACK_H`, `PILL_STACK_V`, `INCURVE`, `CHISEL`, `HEART`) | `SQUARE`     |
