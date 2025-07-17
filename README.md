@@ -380,14 +380,14 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
-| `logoPadding`          | Padding around the logo *(0–100)*              | `1`           |
-| `quietZone`            | Quiet zone size around the QR code *(0–20)*       | `1`           |
+| `logoPadding`          | Padding around the logo *(0-100)*              | `1`           |
+| `quietZone`            | Quiet zone size around the QR code *(0-20)*       | `1`           |
 | `maxTolerance`         | Enables tolerance mode                            | `false`       |
-| `toleranceMaskOpacity` | Opacity of the tolerance mask *(0.1–1.0)*         | `0.5`         |
-| `toleranceModuleSize`  | Dot size for the tolerance pattern *(0.1–1.0)*   | `0.4`         |
+| `toleranceMaskOpacity` | Opacity of the tolerance mask *(0.1-1.0)*         | `0.5`         |
+| `toleranceModuleSize`  | Dot size for the tolerance pattern *(0.1-1.0)*   | `0.4`         |
 | `clipBackgroundToQR`   | Clip the background to the QR bounds              | `false`       |
 | `bgBlur`               | Apply blur effect to the background               | `false`       |
-| `bgBlurRadius`         | Background blur radius *(1–25)*                 | `12`          |
+| `bgBlurRadius`         | Background blur radius *(1-25)*                 | `12`          |
 
 ## Contributing
 
