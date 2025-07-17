@@ -101,16 +101,37 @@ public class QRCodeOptions {
     public float getBgBlurRadius() { return bgBlurRadius; }
 
     public static class Builder {
-        private int width = 500;
-        private int height = 500;
-        private int quietZone = 1; // min: 0, max: 20
+        // Default values
+        private static final int DEFAULT_WIDTH = 500;
+        private static final int DEFAULT_HEIGHT = 500;
+        private static final int DEFAULT_QUIET_ZONE = 1;
+        private static final int DEFAULT_LOGO_PADDING = 1;
+        private static final float DEFAULT_TOLERANCE_MASK_OPACITY = 0.5f;
+        private static final float DEFAULT_TOLERANCE_MODULE_SIZE = 0.4f;
+        private static final float DEFAULT_BG_BLUR_RADIUS = 12f;
+
+        // Allowed ranges
+        private static final int MIN_QUIET_ZONE = 0;
+        private static final int MAX_QUIET_ZONE = 20;
+        private static final int MIN_LOGO_PADDING = 0;
+        private static final int MAX_LOGO_PADDING = 100;
+        private static final float MIN_TOLERANCE_MASK_OPACITY = 0.1f;
+        private static final float MAX_TOLERANCE_MASK_OPACITY = 1f;
+        private static final float MIN_TOLERANCE_MODULE_SIZE = 0.1f;
+        private static final float MAX_TOLERANCE_MODULE_SIZE = 1f;
+        private static final float MIN_BG_BLUR_RADIUS = 1f;
+        private static final float MAX_BG_BLUR_RADIUS = 25f;
+
+        private int width = DEFAULT_WIDTH;
+        private int height = DEFAULT_HEIGHT;
+        private int quietZone = DEFAULT_QUIET_ZONE; // min: 0, max: 20
         private Bitmap logo = null;
         private Bitmap background = null;
         private int backgroundColor = Color.WHITE;
         private int foregroundColor = Color.BLACK;
         private QRErrorCorrectionLevel errorCorrectionLevel = QRErrorCorrectionLevel.H;
         private boolean clearLogoBackground = true;
-        private int logoPadding = 1; // min: 0, max: 100
+        private int logoPadding = DEFAULT_LOGO_PADDING; // min: 0, max: 100
         private QRStyles.EyeFrameShape eyeFrameShape = QRStyles.EyeFrameShape.SQUARE;
         private QRStyles.EyeBallShape eyeBallShape = QRStyles.EyeBallShape.SQUARE;
         private QRStyles.PatternStyle patternStyle = QRStyles.PatternStyle.SQUARE;
@@ -121,11 +142,11 @@ public class QRCodeOptions {
         private Integer eyeFrameColor = null;
         private Integer eyeBallColor = null;
         private boolean maxTolerance = false;
-        private float toleranceMaskOpacity = 0.5f; // min: 0.1f, max: 1f
-        private float toleranceModuleSize = 0.4f; // min: 0.1f, max: 1f
+        private float toleranceMaskOpacity = DEFAULT_TOLERANCE_MASK_OPACITY; // min: 0.1f, max: 1f
+        private float toleranceModuleSize = DEFAULT_TOLERANCE_MODULE_SIZE; // min: 0.1f, max: 1f
         private boolean clipBackgroundToQR = false;
         private boolean bgBlur = false;
-        private float bgBlurRadius = 12f; // min: 1f, max: 25f
+        private float bgBlurRadius = DEFAULT_BG_BLUR_RADIUS; // min: 1f, max: 25f
 
         public Builder() {}
 
@@ -159,14 +180,28 @@ public class QRCodeOptions {
 
         public Builder setWidth(int width) { this.width = width; return this; }
         public Builder setHeight(int height) { this.height = height; return this; }
-        public Builder setQuietZone(int quietZone) { this.quietZone = quietZone; return this; }
+        public Builder setQuietZone(int quietZone) {
+            if (quietZone < MIN_QUIET_ZONE || quietZone > MAX_QUIET_ZONE) {
+                this.quietZone = DEFAULT_QUIET_ZONE;
+            } else {
+                this.quietZone = quietZone;
+            }
+            return this;
+        }
         public Builder setLogo(Bitmap logo) { this.logo = logo; return this; }
         public Builder setBackground(Bitmap background) { this.background = background; return this; }
         public Builder setBackgroundColor(int backgroundColor) { this.backgroundColor = backgroundColor; return this; }
         public Builder setForegroundColor(int foregroundColor) { this.foregroundColor = foregroundColor; return this; }
         public Builder setErrorCorrectionLevel(QRErrorCorrectionLevel level) { this.errorCorrectionLevel = level; return this; }
         public Builder setClearLogoBackground(boolean clearLogoBackground) { this.clearLogoBackground = clearLogoBackground; return this; }
-        public Builder setLogoPadding(int logoPadding) { this.logoPadding = logoPadding; return this; }
+        public Builder setLogoPadding(int logoPadding) {
+            if (logoPadding < MIN_LOGO_PADDING || logoPadding > MAX_LOGO_PADDING) {
+                this.logoPadding = DEFAULT_LOGO_PADDING;
+            } else {
+                this.logoPadding = logoPadding;
+            }
+            return this;
+        }
         public Builder setEyeFrameShape(QRStyles.EyeFrameShape eyeFrameShape) { this.eyeFrameShape = eyeFrameShape; return this; }
         public Builder setEyeBallShape(QRStyles.EyeBallShape eyeBallShape) { this.eyeBallShape = eyeBallShape; return this; }
         public Builder setEyeFrameColor(int color) { this.eyeFrameColor = color; return this; }
@@ -185,14 +220,56 @@ public class QRCodeOptions {
         }
 
         public Builder setMaxTolerance(boolean maxTolerance) { this.maxTolerance = maxTolerance; return this; }
-        public Builder setToleranceMaskOpacity(float opacity) { this.toleranceMaskOpacity = opacity; return this; }
-        public Builder setToleranceModuleSize(float size) { this.toleranceModuleSize = size; return this; }
+        public Builder setToleranceMaskOpacity(float opacity) {
+            if (opacity < MIN_TOLERANCE_MASK_OPACITY || opacity > MAX_TOLERANCE_MASK_OPACITY) {
+                this.toleranceMaskOpacity = DEFAULT_TOLERANCE_MASK_OPACITY;
+            } else {
+                this.toleranceMaskOpacity = opacity;
+            }
+            return this;
+        }
+        public Builder setToleranceModuleSize(float size) {
+            if (size < MIN_TOLERANCE_MODULE_SIZE || size > MAX_TOLERANCE_MODULE_SIZE) {
+                this.toleranceModuleSize = DEFAULT_TOLERANCE_MODULE_SIZE;
+            } else {
+                this.toleranceModuleSize = size;
+            }
+            return this;
+        }
 
         public Builder setBgBlur(boolean bgBlur) { this.bgBlur = bgBlur; return this; }
-        public Builder setBgBlurRadius(float radius) { this.bgBlurRadius = radius; return this; }
+        public Builder setBgBlurRadius(float radius) {
+            if (radius < MIN_BG_BLUR_RADIUS || radius > MAX_BG_BLUR_RADIUS) {
+                this.bgBlurRadius = DEFAULT_BG_BLUR_RADIUS;
+            } else {
+                this.bgBlurRadius = radius;
+            }
+            return this;
+        }
 
         public Builder setClipBackgroundToQR(boolean clipBackgroundToQR) { this.clipBackgroundToQR = clipBackgroundToQR; return this; }
 
-        public QRCodeOptions build() { return new QRCodeOptions(this); }
+        private void validate() {
+            if (quietZone < MIN_QUIET_ZONE || quietZone > MAX_QUIET_ZONE) {
+                quietZone = DEFAULT_QUIET_ZONE;
+            }
+            if (logoPadding < MIN_LOGO_PADDING || logoPadding > MAX_LOGO_PADDING) {
+                logoPadding = DEFAULT_LOGO_PADDING;
+            }
+            if (toleranceMaskOpacity < MIN_TOLERANCE_MASK_OPACITY || toleranceMaskOpacity > MAX_TOLERANCE_MASK_OPACITY) {
+                toleranceMaskOpacity = DEFAULT_TOLERANCE_MASK_OPACITY;
+            }
+            if (toleranceModuleSize < MIN_TOLERANCE_MODULE_SIZE || toleranceModuleSize > MAX_TOLERANCE_MODULE_SIZE) {
+                toleranceModuleSize = DEFAULT_TOLERANCE_MODULE_SIZE;
+            }
+            if (bgBlurRadius < MIN_BG_BLUR_RADIUS || bgBlurRadius > MAX_BG_BLUR_RADIUS) {
+                bgBlurRadius = DEFAULT_BG_BLUR_RADIUS;
+            }
+        }
+
+        public QRCodeOptions build() {
+            validate();
+            return new QRCodeOptions(this);
+        }
     }
 }
