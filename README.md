@@ -22,6 +22,8 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
 - **Full Customization**: Adjust size, colors, quiet zones, and more.
 - **Customizable Finder Patterns**: Choose separate shapes for the finder frame and ball, including options like `SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, and `CORNER_WARP`.
 - **Error Correction**: Supports error correction levels (L, M, Q, H) for data reliability.
+- **Tolerance Mode**: Optional mask that preserves alignment and timing patterns to improve scan reliability when using decorative styles.
+- **Blurred Backgrounds**: Apply a fast blur to background images for a polished look.
 - **Developer-Friendly API**: Easy-to-use interface with robust customization options.
 
 ## Available Eye Frame Designs
@@ -167,6 +169,10 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
           <td>FLUID</td>
         </tr>
         <tr>
+          <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/XSDOT.png?raw=true" width="70" /></td>
+          <td>XS_DOT</td>
+        </tr>
+        <tr>
           <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/DATA_PATTERN/SDOT.png?raw=true" width="70" /></td>
           <td>S_DOT</td>
         </tr>
@@ -218,6 +224,7 @@ QRSmith is a powerful and versatile Android library for generating advanced, cus
     <tr>
         <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr5.png?raw=true" width="200" /></td>
         <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr6.png?raw=true" width="200" /></td>
+        <td><img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr7.png?raw=true" width="200" /></td>
     </tr>
 </table>
 
@@ -316,7 +323,12 @@ QRCodeOptions options = new QRCodeOptions.Builder()
         .setEyeBallColor(Color.RED)
         .setLogo(logo)
         .setBackground(background) // Set custom background
+        .setBgBlur(true) // Optional background blur
+        .setBgBlurRadius(16f)
         .setErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
+        .setMaxTolerance(true) // Enable tolerance mode
+        .setToleranceMaskOpacity(0.5f)
+        .setToleranceModuleSize(0.4f)
         .setQuietZone(2)
         .build();
 
@@ -340,6 +352,11 @@ QRCodeOptions options = new QRCodeOptions.Builder()
 Bitmap qrCode = QRSmith.generateQRCode("https://example.com", options);
 ```
 
+### Tolerance Mode
+When enabled, Tolerance Mode adds a subtle overlay to preserve the structural integrity of essential QR modules. This ensures optimal scan reliability, especially when using complex or decorative data patterns. It also enhances compatibility with negative dot styles by reinforcing critical areas of the code. You can adjust `toleranceMaskOpacity` and `toleranceModuleSize` to fine-tune the visual balance between aesthetics and functionality. Below is an example QR code with tolerance mode enabled.
+
+<img src="https://github.com/akanshSirohi/QRSmith/blob/dev/readme_assets/qr7.png?raw=true" width="210" />
+
 ## Customization Options
 
 QRSmith offers extensive customization through the `QRCodeOptions` class:
@@ -354,7 +371,7 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `backgroundGradientColors` | Colors for the background gradient | `null` |
 | `foregroundGradientOrientation` | Gradient orientation (`LEFT_RIGHT`, `TOP_BOTTOM`, `TL_BR`, `BL_TR`, `RADIAL`) | `LEFT_RIGHT` |
 | `backgroundGradientOrientation` | Orientation for the background gradient (`LEFT_RIGHT`, `TOP_BOTTOM`, `TL_BR`, `BL_TR`, `RADIAL`) | `LEFT_RIGHT` |
-| `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `S_DOT`, `L_DOT`, `HEXAGON`, `X_AXIS_FLUID`, `Y_AXIS_FLUID`, `DIAMOND`, `STAR`, `HEART`) | `SQUARE`     |
+| `patternStyle` | Pattern style (`SQUARE`, `FLUID`, `XS_DOT`, `S_DOT`, `L_DOT`, `HEXAGON`, `X_AXIS_FLUID`, `Y_AXIS_FLUID`, `DIAMOND`, `STAR`, `HEART`) | `SQUARE`     |
 | `logo`                 | Bitmap for the logo to overlay on the QR code     | `null`        |
 | `eyeFrameShape`      | Shape of the finder frame (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`) | `SQUARE`     |
 | `eyeBallShape`       | Shape of the finder ball (`SQUARE`, `ROUND_SQUARE`, `CIRCLE`, `HEXAGON`, `ONE_SHARP_CORNER`, `TECH_EYE`, `SOFT_ROUNDED`, `PINCHED_SQUIRCLE`, `BLOB_CORNER`, `CORNER_WARP`, `PILL_STACK_H`, `PILL_STACK_V`, `INCURVE`, `CHISEL`, `HEART`) | `SQUARE`     |
@@ -363,8 +380,14 @@ QRSmith offers extensive customization through the `QRCodeOptions` class:
 | `errorCorrectionLevel` | Error correction level (`L`, `M`, `Q`, `H`)       | `H`           |
 | `clearLogoBackground`  | Clears the background under the logo              | `true`        |
 | `background`           | Bitmap for the QR code background                 | `null`        |
-| `logoPadding`          | Padding around the logo                           | `0`           |
-| `quietZone`            | Quiet zone size around the QR code                | `1`           |
+| `logoPadding`          | Padding around the logo *(0–100)*              | `1`           |
+| `quietZone`            | Quiet zone size around the QR code *(0–20)*       | `1`           |
+| `maxTolerance`         | Enables tolerance mode                            | `false`       |
+| `toleranceMaskOpacity` | Opacity of the tolerance mask *(0.1–1.0)*         | `0.5`         |
+| `toleranceModuleSize`  | Dot size for the tolerance pattern *(0.1–1.0)*   | `0.4`         |
+| `clipBackgroundToQR`   | Clip the background to the QR bounds              | `false`       |
+| `bgBlur`               | Apply blur effect to the background               | `false`       |
+| `bgBlurRadius`         | Background blur radius *(1–25)*                 | `12`          |
 
 ## Contributing
 

@@ -65,7 +65,7 @@ public class QRSmith {
             return null;
         }
 
-        paddingPx = paddingPx * 100;
+        paddingPx = paddingPx * 50;
 
         // Calculate the size of the new bitmap
         int newWidth = originalBitmap.getWidth() + paddingPx * 2;
